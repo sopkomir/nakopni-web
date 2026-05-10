@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { hero } from "../data/hero";
 import { articles } from "../data/articles";
 import Link from "next/link";
@@ -27,11 +26,9 @@ export default function Hero() {
   
           </div>
   
-          <Image
-            src={featured.image}
+          <img
+            src={hero.image}
             alt={hero.title}
-            width={1200}
-            height={800}
             className="w-full h-full object-cover min-h-[420px]"
             />
   
