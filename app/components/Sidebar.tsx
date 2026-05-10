@@ -16,6 +16,8 @@ export default function Sidebar() {
         title={video.title}
         youtubeId={video.youtubeId}
         views={video.views}
+        slug={video.slug}
+        date={video.date}
         />
         ))}
 
