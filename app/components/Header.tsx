@@ -15,9 +15,11 @@ export default function Header() {
         <div className="flex items-center gap-10">
         <Link href="/">
           <h1 className="text-4xl md:text-5xl">
-            Nakopni
-            <span className="text-orange-500">.</span>
-            sk
+          <img
+            src="/logoN.svg"
+            alt="Nakopni.sk"
+            className="h-16 w-auto"
+          />
           </h1>
         </Link>
           <nav className="hidden md:block">
