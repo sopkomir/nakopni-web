@@ -14,11 +14,7 @@ export default async function VideoDetailPage({
   if (!video) {
     return (
       <div>
-        <p>Slug z URL: {params.slug}</p>
-  
-        <pre>
-          {JSON.stringify(videos, null, 2)}
-        </pre>
+        
       </div>
     );
   }
