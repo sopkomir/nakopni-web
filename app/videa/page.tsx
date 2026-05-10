@@ -1,5 +1,4 @@
-import Sidebar from "../components/Sidebar";
-
+import Videos from "../components/Videos";
 export default function VideaPage() {
   return (
     <main className="mt-10">
@@ -21,7 +20,7 @@ export default function VideaPage() {
 
       </div>
 
-      <Sidebar />
+      <Videos />
 
     </main>
   );

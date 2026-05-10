@@ -14,7 +14,7 @@ export default function Sidebar() {
         <VideoCard
         key={video.title}
         title={video.title}
-        image={video.image}
+        youtubeId={video.youtubeId}
         views={video.views}
         />
         ))}
