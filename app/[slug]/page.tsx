@@ -3,8 +3,7 @@ import { urlFor } from "../lib/image";
 import { client } from "../lib/sanity";
 import { PortableText } from '@portabletext/react';
 import { articles } from "../data/articles";
-import Videos from "../components/Videos";
-
+import Sidebar from "../components/Sidebar";
 type Props = {
   params: Promise<{
     slug: string;
@@ -125,7 +124,7 @@ export default async function ArticlePage({ params }: Props) {
       <aside className="hidden lg:block">
 
         <div className="sticky top-28">
-          <Videos />
+          <Sidebar />
         </div>
 
       </aside>
