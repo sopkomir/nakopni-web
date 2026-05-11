@@ -71,5 +71,5 @@ export async function getLatestVideos() {
 
     });
 
-  return filteredVideos;
+    return filteredVideos || [];
 }
