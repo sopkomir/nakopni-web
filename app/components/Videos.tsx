@@ -1,19 +1,23 @@
-import { videos } from "../data/videos";
 import VideoCard from "./VideoCard";
 
-export default function Videos() {
+import { getLatestVideos } from "../lib/youtube";
+
+export default async function Videos() {
+
+  const videos = await getLatestVideos();
+
   return (
     <section className="grid md:grid-cols-1 gap-10">
 
-      {videos.map((video) => (
+      {videos.map((video: any) => (
 
         <VideoCard
-          key={video.slug}
-          slug={video.slug}
-          title={video.title}
-          youtubeId={video.youtubeId}
-          views={video.views}
-          date={video.date}
+          key={video.id.videoId}
+          slug={video.id.videoId}
+          title={video.snippet.title}
+          youtubeId={video.id.videoId}
+          views=""
+          date={new Date(video.snippet.publishedAt).toLocaleDateString("sk-SK")}
         />
 
       ))}

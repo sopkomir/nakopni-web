@@ -16,7 +16,10 @@ export default function VideoCard({
   date,
 }: VideoCardProps) {
   return (
-    <Link href={`/videa/${slug}`}>
+    <Link
+      href={`https://www.youtube.com/watch?v=${youtubeId}`}
+      target="_blank"
+    >
       <article className="border-b pb-6 group cursor-pointer">
 
       <img
@@ -30,7 +33,7 @@ export default function VideoCard({
         </h3>
 
         <p className="text-sm text-gray-500">
-          {views} • {date}
+        {date}
         </p>
 
       </article>
