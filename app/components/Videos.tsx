@@ -3,7 +3,7 @@ import VideoCard from "./VideoCard";
 
 export default function Videos() {
   return (
-    <section className="grid md:grid-cols-2 gap-10">
+    <section className="grid md:grid-cols-1 gap-10">
 
       {videos.map((video) => (
 

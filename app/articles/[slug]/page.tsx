@@ -1,5 +1,7 @@
 import Link from "next/link";
-
+import { urlFor } from "../../lib/image";
+import { client } from "../../lib/sanity";
+import { PortableText } from '@portabletext/react';
 import { articles } from "../../data/articles";
 import Videos from "../../components/Videos";
 
@@ -12,10 +14,8 @@ type Props = {
 export default async function ArticlePage({ params }: Props) {
 
   const { slug } = await params;
-
-  const article = articles.find(
-    (item) => item.slug === slug
-  );
+  const query = `*[_type == "article" && slug.current == $slug][0] { title, image, excerpt, content }`;
+  const article = await client.fetch(query, { slug });
 
   if (!article) {
     return (
@@ -55,17 +55,26 @@ export default async function ArticlePage({ params }: Props) {
         </h1>
 
         <img
-          src={article.image}
-          alt={article.title}
-          className="w-full max-h-[520px] object-cover mb-8"
+        src={urlFor(article.image).url()}
+        alt={article.title}
+        className="w-full max-h-[520px] object-cover mb-8"
         />
 
         <p className="text-2xl text-gray-700 leading-relaxed mb-10">
           {article.excerpt}
         </p>
 
-        <div className="prose prose-lg max-w-none prose-p:text-[22px] prose-p:leading-relaxed">
-          <p>{article.content}</p>
+        <div
+          className="
+            max-w-none
+            text-[20px]
+            leading-[1.95]
+            text-gray-900
+            font-light
+            space-y-8
+          "
+        >
+          <PortableText value={article.content} />
         </div>
 
       </article>

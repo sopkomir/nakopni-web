@@ -6,7 +6,7 @@ export const comments = [
         "Nechcem byť zase pesimistický, ale to sucho úplne zmení všetko.",
   
       image:
-        "https://images.unsplash.com/photo-1504257432389-52343af06ae3?q=80&w=900&auto=format&fit=crop",
+        "{https://images.unsplash.com/photo-1504257432389-52343af06ae3?q=80&w=900&auto=format&fit=crop}",
     },
   
     {

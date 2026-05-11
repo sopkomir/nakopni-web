@@ -7,5 +7,5 @@ export const hero = {
       "Redizajn newsroomu inšpirovaný Denník N. Dominantný headline, silná typografia a moderný magazínový layout.",
   
     image:
-      "image5.png",
+      "/image5.png",
   };
