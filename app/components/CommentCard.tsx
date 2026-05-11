@@ -1,9 +1,9 @@
 import Link from "next/link";
-
+import { urlFor } from "../lib/image";
 type CommentCardProps = {
   title: string;
   description: string;
-  image: string;
+  image: any;
   slug: string;
   author: string;
   date: string;
@@ -18,12 +18,12 @@ export default function CommentCard({
   date,
 }: CommentCardProps) {
   return (
-    <Link href={`/articles/${slug}`}>
+    <Link href={`/${slug}`}>
 
 <article className="group grid grid-cols-[110px_1fr] md:grid-cols-[160px_1fr] gap-4 md:gap-6 border-b border-gray-200 pb-8 transition-opacity hover:opacity-80">
 
         <img
-          src={image}
+          src={urlFor(image).url()}
           alt={title}
           className="w-[110px] h-[110px] md:w-[160px] md:h-[160px] object-cover flex-shrink-0"
         />

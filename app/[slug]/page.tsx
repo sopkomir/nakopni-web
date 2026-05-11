@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { urlFor } from "../../lib/image";
-import { client } from "../../lib/sanity";
+import { urlFor } from "../lib/image";
+import { client } from "../lib/sanity";
 import { PortableText } from '@portabletext/react';
-import { articles } from "../../data/articles";
-import Videos from "../../components/Videos";
+import { articles } from "../data/articles";
+import Videos from "../components/Videos";
 
 type Props = {
   params: Promise<{
@@ -14,7 +14,14 @@ type Props = {
 export default async function ArticlePage({ params }: Props) {
 
   const { slug } = await params;
-  const query = `*[_type == "article" && slug.current == $slug][0] { title, image, excerpt, content }`;
+  const query = `*[_type == "article" && slug.current == $slug][0] {
+    title,
+    image,
+    excerpt,
+    content,
+    author,
+    publishedAt
+  }`;
   const article = await client.fetch(query, { slug });
 
   if (!article) {
@@ -33,6 +40,19 @@ export default async function ArticlePage({ params }: Props) {
       </div>
     );
   }
+
+  const plainText =
+  article.content
+    ?.map((block: any) =>
+      block.children
+        ?.map((child: any) => child.text)
+        .join("")
+    )
+    .join(" ") || "";
+
+  const words = plainText.split(" ").length;
+
+  const readingTime = Math.ceil(words / 200);
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_300px] gap-12 xl:gap-14 mt-10">
@@ -63,6 +83,29 @@ export default async function ArticlePage({ params }: Props) {
         <p className="text-2xl text-gray-700 leading-relaxed mb-10">
           {article.excerpt}
         </p>
+
+        <div className="flex items-center gap-3 text-sm text-gray-500 mb-10">
+
+          {article.author && (
+            <>
+              <span>{article.author}</span>
+              <span>•</span>
+            </>
+          )}
+
+          {article.publishedAt && (
+            <>
+              <span>
+                {new Date(article.publishedAt).toLocaleDateString("sk-SK")}
+              </span>
+
+              <span>•</span>
+            </>
+          )}
+
+          <span>{readingTime} min čítania</span>
+
+        </div>
 
         <div
           className="

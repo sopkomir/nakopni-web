@@ -1,14 +1,14 @@
 export const articlesQuery = `
-*[_type == "article"] | order(publishedAt desc) {
+*[_type == "article"] | order(_createdAt desc) {
   _id,
   title,
   slug,
   excerpt,
+  content,
+  image,
   category,
-  publishedAt,
-  image{
-    asset->
-  },
-  content
+  featured,
+  author,
+  publishedAt
 }
 `;

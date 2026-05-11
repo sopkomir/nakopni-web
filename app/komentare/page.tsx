@@ -1,23 +1,54 @@
 import Comments from "../components/Comments";
+import Sidebar from "../components/Sidebar";
 
-export default function KomentarePage() {
+import { client } from "../lib/sanity";
+import { articlesQuery } from "../lib/queries";
+
+export default async function KomentarePage() {
+
+  const articles = await client.fetch(articlesQuery);
+
+  const comments = articles.filter(
+    (article: any) =>
+      article.category === "komentar"
+  );
+
   return (
-    <main className="mt-10">
+    <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-10 mt-10">
 
-      <div className="mb-12">
+      <main>
 
-        <div className="text-sm uppercase tracking-[0.3em] text-gray-500 font-bold mb-4">
-          Komentáre
+        <a
+          href="/"
+          className="inline-block text-sm uppercase tracking-wide font-bold text-gray-500 hover:text-orange-500 mb-10"
+        >
+          ← Späť na homepage
+        </a>
+
+        <div className="mb-12">
+
+          <div className="text-sm uppercase tracking-[0.3em] text-gray-500 font-bold mb-4">
+            Komentáre
+          </div>
+
+          <h1 className="text-5xl md:text-7xl font-black leading-none">
+            Komentáre a analýzy
+          </h1>
+
         </div>
 
-        <h1 className="text-5xl md:text-7xl font-black leading-none">
-          Komentáre a analýzy
-        </h1>
+        <Comments articles={comments} />
 
-      </div>
+      </main>
 
-      <Comments />
+      <aside className="hidden lg:block">
 
-    </main>
+        <div className="sticky top-28">
+          <Sidebar />
+        </div>
+
+      </aside>
+
+    </div>
   );
 }
