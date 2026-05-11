@@ -2,24 +2,22 @@ import VideoCard from "./VideoCard";
 
 import { getLatestVideos } from "../lib/youtube";
 
-type Props = {
-  limit?: number;
-};
-
-export default async function Videos({
-  limit,
-}: Props) {
+export default async function Videos() {
 
   const videos = await getLatestVideos();
 
-  const displayedVideos = limit
-    ? videos.slice(0, limit)
-    : videos;
+  if (!videos || videos.length === 0) {
+    return (
+      <div className="text-gray-500">
+        Žiadne videá.
+      </div>
+    );
+  }
 
   return (
     <section className="grid grid-cols-1 md:grid-cols-2 gap-10">
 
-      {displayedVideos.map((video: any) => (
+      {videos.slice(0, 10).map((video: any) => (
 
         <VideoCard
           key={video.id.videoId}
