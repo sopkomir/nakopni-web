@@ -116,7 +116,29 @@ export default async function ArticlePage({ params }: Props) {
             space-y-8
           "
         >
-          <PortableText value={article.content} />
+          <PortableText
+            value={article.content}
+            components={{
+              marks: {
+                link: ({ children, value }: any) => (
+                  <a
+                    href={value.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="
+                      text-orange-500
+                      underline
+                      underline-offset-4
+                      hover:text-orange-600
+                      transition-colors
+                    "
+                  >
+                    {children}
+                  </a>
+                ),
+              },
+            }}
+          />
         </div>
 
       </article>
