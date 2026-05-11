@@ -5,6 +5,15 @@ import { getLatestVideos } from "../lib/youtube";
 export default async function VideaPage() {
 
   const videos = await getLatestVideos() || [];
+  if (videos.length === 0) {
+    return (
+      <main className="mt-10">
+        <h1 className="text-4xl font-black">
+          Videá sa nepodarilo načítať
+        </h1>
+      </main>
+    );
+  }
 
   return (
     <main className="mt-10">
@@ -27,15 +36,8 @@ export default async function VideaPage() {
         </h1>
 
       </div>
-      if (videos.length === 0) {
-      return (
-        <main className="mt-10">
-          <h1 className="text-4xl font-black">
-            Videá sa nepodarilo načítať
-          </h1>
-        </main>
-      );
-}
+      
+
       <section className="grid grid-cols-1 md:grid-cols-2 gap-10">
 
         {videos.slice(0, 10).map((video: any) => (
