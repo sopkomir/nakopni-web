@@ -28,17 +28,17 @@ export default async function VideaPage() {
       <div className="mb-12">
 
         <div className="text-sm uppercase tracking-[0.3em] text-gray-500 font-bold mb-4">
-          Videá
+          Zemplínsky dialóg
         </div>
 
         <h1 className="text-5xl md:text-7xl font-black leading-none">
-          Video rozhovory
+          Rozhovory a diskusie
         </h1>
 
       </div>
       
 
-      <section className="grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+      <section className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 items-start">
 
         {videos.slice(0, 10).map((video: any) => (
 

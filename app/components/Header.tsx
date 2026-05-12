@@ -32,7 +32,7 @@ export default function Header() {
                 Rozhovory: "/rozhovory",
                 Komentáre: "/komentare",
                 Blogy: "/blogy",
-                Videá: "/videa",
+                "Zemplínsky dialóg": "/videa",
               };
 
               return (

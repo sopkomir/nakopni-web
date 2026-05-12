@@ -38,6 +38,7 @@ export default function VideoCard({
         className="
           mb-4
           w-full
+          rounded-xl
           aspect-video
           object-cover
           animate-imageReveal

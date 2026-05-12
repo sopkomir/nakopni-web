@@ -3,5 +3,5 @@ export const navigation = [
     "Rozhovory",
     "Komentáre",
     "Blogy",
-    "Videá",
+    "Zemplínsky dialóg",
   ];
