@@ -49,8 +49,7 @@ export default function Hero({ article }: Props) {
               h-full
               object-cover
               min-h-[420px]
-              opacity-0
-              animate-fadeIn
+              animate-imageReveal
             "
           />
 

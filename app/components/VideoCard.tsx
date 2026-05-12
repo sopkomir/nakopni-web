@@ -30,7 +30,7 @@ export default function VideoCard({
       ">
 
       <Image
-        src={`https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`}
+        src={`https://i.ytimg.com/vi/${youtubeId}/maxresdefault.jpg`}
         alt={title}
         width={640}
         height={360}
@@ -40,8 +40,7 @@ export default function VideoCard({
           w-full
           aspect-video
           object-cover
-          opacity-0
-          animate-fadeIn
+          animate-imageReveal
         "
       />
 

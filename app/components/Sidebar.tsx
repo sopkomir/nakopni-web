@@ -10,7 +10,7 @@ export default async function Sidebar() {
     <aside className="sticky top-10">
 
       <div className="uppercase text-xs tracking-widest text-gray-500 font-bold mb-6">
-        Video rozhovory
+        Zemplínsky dialóg
       </div>
 
       <div className="space-y-6">

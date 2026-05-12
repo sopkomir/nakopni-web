@@ -35,8 +35,7 @@ export default function CommentCard({
             md:h-[160px]
             object-cover
             flex-shrink-0
-            opacity-0
-            animate-fadeIn
+            animate-imageReveal
           "
         />
 

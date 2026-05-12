@@ -38,7 +38,7 @@ export default async function VideaPage() {
       </div>
       
 
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-10">
+      <section className="grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
 
         {videos.slice(0, 10).map((video: any) => (
 
