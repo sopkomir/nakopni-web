@@ -1,5 +1,5 @@
 import Link from "next/link";
-
+import Image from "next/image";
 type VideoCardProps = {
   slug: string;
   title: string;
@@ -20,12 +20,29 @@ export default function VideoCard({
       href={`https://www.youtube.com/watch?v=${youtubeId}`}
       target="_blank"
     >
-      <article className="border-b pb-6 group cursor-pointer">
+      <article className="
+        border-b
+        pb-6
+        group
+        cursor-pointer
+        transition-transform
+        hover:-translate-y-[2px]
+      ">
 
-      <img
+      <Image
         src={`https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`}
         alt={title}
-        className="mb-4 w-full aspect-video object-cover"
+        width={640}
+        height={360}
+        loading="lazy"
+        className="
+          mb-4
+          w-full
+          aspect-video
+          object-cover
+          opacity-0
+          animate-fadeIn
+        "
       />
 
         <h3 className="text-2xl font-black leading-snug mb-2 transition-colors group-hover:text-orange-500">
@@ -33,7 +50,7 @@ export default function VideoCard({
         </h3>
 
         <p className="text-sm text-gray-500">
-        {date}
+        {views} • {date}
         </p>
 
       </article>

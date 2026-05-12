@@ -1,8 +1,8 @@
+import Image from "next/image";
 import Link from "next/link";
 import { urlFor } from "../lib/image";
 import { client } from "../lib/sanity";
 import { PortableText } from '@portabletext/react';
-import { articles } from "../data/articles";
 import Sidebar from "../components/Sidebar";
 type Props = {
   params: Promise<{
@@ -49,7 +49,7 @@ export default async function ArticlePage({ params }: Props) {
     )
     .join(" ") || "";
 
-  const words = plainText.split(" ").length;
+  const words = plainText.trim().split(/\s+/).length;
 
   const readingTime = Math.ceil(words / 200);
 
@@ -73,10 +73,13 @@ export default async function ArticlePage({ params }: Props) {
           {article.title}
         </h1>
 
-        <img
-        src={urlFor(article.image).url()}
-        alt={article.title}
-        className="w-full max-h-[520px] object-cover mb-8"
+        <Image
+          src={urlFor(article.image).url()}
+          alt={article.title}
+          width={1400}
+          height={800}
+          priority
+          className="w-full max-h-[520px] object-cover mb-8"
         />
 
         <p className="text-2xl text-gray-700 leading-relaxed mb-10">
@@ -109,16 +112,30 @@ export default async function ArticlePage({ params }: Props) {
         <div
           className="
             max-w-none
-            text-[20px]
-            leading-[1.95]
+            text-[21px]
+            leading-[2]
             text-gray-900
-            font-light
+            font-normal
             space-y-8
+            tracking-[0.01em]
           "
         >
           <PortableText
             value={article.content}
             components={{
+              block: {
+                h2: ({ children }: any) => (
+                  <h2 className="text-4xl font-black mt-16 mb-6">
+                    {children}
+                  </h2>
+                ),
+
+                h3: ({ children }: any) => (
+                  <h3 className="text-3xl font-bold mt-12 mb-5">
+                    {children}
+                  </h3>
+                ),
+            },
               marks: {
                 link: ({ children, value }: any) => (
                   <a

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { urlFor } from "../lib/image";
 type CommentCardProps = {
   title: string;
@@ -20,12 +21,23 @@ export default function CommentCard({
   return (
     <Link href={`/${slug}`}>
 
-<article className="group grid grid-cols-[110px_1fr] md:grid-cols-[160px_1fr] gap-4 md:gap-6 border-b border-gray-200 pb-8 transition-opacity hover:opacity-80">
+<article className="group grid grid-cols-[110px_1fr] md:grid-cols-[160px_1fr] gap-4 md:gap-6 border-b border-gray-200 pb-8 transition-opacity hover:opacity-90">
 
-        <img
+        <Image
           src={urlFor(image).url()}
           alt={title}
-          className="w-[110px] h-[110px] md:w-[160px] md:h-[160px] object-cover flex-shrink-0"
+          width={160}
+          height={160}
+          className="
+            w-[110px]
+            h-[110px]
+            md:w-[160px]
+            md:h-[160px]
+            object-cover
+            flex-shrink-0
+            opacity-0
+            animate-fadeIn
+          "
         />
 
         <div>

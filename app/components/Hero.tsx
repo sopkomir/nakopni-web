@@ -1,4 +1,6 @@
+
 import Link from "next/link";
+import Image from "next/image";
 import { urlFor } from "../lib/image";
 
 type Props = {
@@ -36,10 +38,20 @@ export default function Hero({ article }: Props) {
 
         {article.image && (
 
-          <img
+          <Image
             src={urlFor(article.image).url()}
             alt={article.title}
-            className="w-full h-full object-cover min-h-[420px]"
+            width={1200}
+            height={800}
+            priority
+            className="
+              w-full
+              h-full
+              object-cover
+              min-h-[420px]
+              opacity-0
+              animate-fadeIn
+            "
           />
 
         )}
