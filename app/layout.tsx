@@ -1,12 +1,12 @@
 import "./globals.css";
-import { Anton } from "next/font/google";
+import { Oswald } from "next/font/google";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
-const anton = Anton({
+const oswald = Oswald({
   subsets: ["latin"],
   weight: "400",
-  variable: "--font-anton",
+  variable: "--font-oswald",
 });
 
 export default function RootLayout({
@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="sk">
-      <body className={anton.variable}>
+      <body className={oswald.variable}>
 
       <div className="max-w-[1400px] mx-auto px-4 md:px-6 py-6">
 
