@@ -24,9 +24,17 @@ export default function Hero({ article }: Props) {
 
           <h2 className="text-4xl lg:text-5xl leading-[0.95] leading-tight mb-6 group-hover:text-orange-500 transition-colors">
 
-            <Link href={`/${article.slug.current}`}>
-              {article.title}
-            </Link>
+            {article.slug?.current ? (
+
+              <Link href={`/${article.slug.current}`}>
+                {article.title}
+              </Link>
+
+            ) : (
+
+              <span>{article.title}</span>
+
+            )}
 
           </h2>
 
