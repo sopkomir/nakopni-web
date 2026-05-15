@@ -20,7 +20,7 @@
 }
 
 h1, h2, h3, h4 {
-  letter-spacing: -0.04em;
+  letter-spacing: -0.06em;
 }
 
 body {
@@ -47,4 +47,13 @@ body {
 
 .animate-imageReveal {
   animation: smoothImageReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
 }
