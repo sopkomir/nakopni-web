@@ -16,6 +16,7 @@ export async function getLatestVideos() {
     );
 
     const data = await res.json();
+    console.log(data);
 
     return (data.items || []).map((video: any) => ({
       ...video,
