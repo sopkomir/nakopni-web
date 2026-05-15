@@ -43,8 +43,9 @@ export async function getLatestVideos() {
       }
 
       const ids = searchData.items
-        .map((item: any) => item.id.videoId)
-        .join(",");
+      .filter((item: any) => item.id?.videoId)
+      .map((item: any) => item.id.videoId)
+      .join(",");
 
       const detailsRes = await fetch(
         `https://www.googleapis.com/youtube/v3/videos?key=${API_KEY}&part=contentDetails,statistics&id=${ids}`,
@@ -71,25 +72,26 @@ export async function getLatestVideos() {
       });
 
       const filteredVideos = searchData.items
-        .filter((video: any) => {
+      .filter((video: any) => video.id?.videoId)
+      .filter((video: any) => {
 
-          const details =
-            detailsMap.get(video.id.videoId);
+        const details =
+          detailsMap.get(video.id.videoId);
 
-          return details?.duration > 90;
+        return details?.duration > 90;
 
-        })
-        .map((video: any) => {
+      })
+      .map((video: any) => {
 
-          const details =
-            detailsMap.get(video.id.videoId);
+        const details =
+          detailsMap.get(video.id.videoId);
 
-          return {
-            ...video,
-            views: details?.views || "0",
-          };
+        return {
+          ...video,
+          views: details?.views || "0",
+        };
 
-        });
+      });
 
       allVideos = [
         ...allVideos,
