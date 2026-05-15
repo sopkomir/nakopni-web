@@ -1,45 +1,23 @@
 import Comments from "../components/Comments";
 import Sidebar from "../components/Sidebar";
-import Pagination from "../components/Pagination";
+
 import { client } from "../lib/sanity";
 import { articlesQuery } from "../lib/queries";
 
-type Props = {
-  searchParams: Promise<{
-    page?: string;
-  }>;
-};
+export default async function KomentarePage() {
 
-export default async function KomentarePage({
-  searchParams,
-}: Props) {
+  const articles = await client.fetch(articlesQuery);
 
-  const params = await searchParams;
-
-  const currentPage =
-    Number(params.page) || 1;
-
-  const articlesPerPage = 12;
-
-  const articles =
-    await client.fetch(articlesQuery);
-
-  const comments = articles.filter(
-    (article: any) =>
-      article.category === "komentar"
-  );
-
-  const totalPages = Math.ceil(
-    comments.length / articlesPerPage
-  );
-
-  const start =
-    (currentPage - 1) * articlesPerPage;
-
-  const paginatedComments =
-    comments.slice(
-      start,
-      start + articlesPerPage
+  const comments = articles
+    .filter(
+      (article: any) =>
+        article.category === "komentar" &&
+        article.publishedAt
+    )
+    .sort(
+      (a: any, b: any) =>
+        new Date(b.publishedAt).getTime() -
+        new Date(a.publishedAt).getTime()
     );
 
   return (
@@ -49,48 +27,24 @@ export default async function KomentarePage({
 
         <a
           href="/"
-          className="
-            inline-block
-            text-sm
-            uppercase
-            tracking-wide
-            font-bold
-            text-gray-500
-            hover:text-orange-500
-            mb-10
-          "
+          className="inline-block text-sm uppercase tracking-wide font-bold text-gray-500 hover:text-orange-500 mb-10"
         >
           ← Späť na homepage
         </a>
 
         <div className="mb-12">
 
-          <div
-            className="
-              text-sm
-              uppercase
-              tracking-[0.3em]
-              text-gray-500
-              font-bold
-              mb-4
-            "
-          >
+          <div className="text-sm uppercase tracking-[0.3em] text-gray-500 font-bold mb-4">
             Komentáre
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-black leading-none">
+          <h1 className="text-5xl md:text-7xl leading-none">
             Komentáre a analýzy
           </h1>
 
         </div>
 
-        <Comments articles={paginatedComments} />
-
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          basePath="/komentare"
-        />
+        <Comments articles={comments} />
 
       </main>
 
