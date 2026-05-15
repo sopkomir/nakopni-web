@@ -1,21 +1,17 @@
 import CommentCard from "./CommentCard";
 
-import { client } from "../lib/sanity";
-import { articlesQuery } from "../lib/queries";
+type Props = {
+  articles: any[];
+};
 
-export default async function Interviews() {
-
-  const articles = await client.fetch(articlesQuery);
-
-  const interviews = articles.filter(
-    (article: any) =>
-      article.category === "rozhovor"
-  );
+export default function Interviews({
+  articles,
+}: Props) {
 
   return (
     <section className="space-y-10">
 
-      {interviews.map((article: any) => (
+      {articles.map((article: any) => (
 
         <CommentCard
           key={article._id}

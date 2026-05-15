@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Pagination from "../components/Pagination";
 import VideoCard from "../components/VideoCard";
 import { getLatestVideos } from "../lib/youtube";
 
@@ -116,38 +117,11 @@ export default async function VideaPage({
         ))}
 
       </section>
-
-      <div className="flex justify-center gap-3 mt-16 flex-wrap">
-
-        {Array.from(
-          { length: totalPages },
-          (_, i) => i + 1
-        ).map((page) => (
-
-          <Link
-            key={page}
-            href={`/videa?page=${page}`}
-            className={`
-              px-4
-              py-2
-              border
-              text-sm
-              font-bold
-              transition-colors
-
-              ${
-                currentPage === page
-                  ? "bg-black text-white border-black"
-                  : "border-gray-300 hover:border-black"
-              }
-            `}
-          >
-            {page}
-          </Link>
-
-        ))}
-
-      </div>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        basePath="/videa"
+      />  
 
     </main>
   );

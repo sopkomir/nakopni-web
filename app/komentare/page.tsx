@@ -1,17 +1,46 @@
 import Comments from "../components/Comments";
 import Sidebar from "../components/Sidebar";
-
+import Pagination from "../components/Pagination";
 import { client } from "../lib/sanity";
 import { articlesQuery } from "../lib/queries";
 
-export default async function KomentarePage() {
+type Props = {
+  searchParams: Promise<{
+    page?: string;
+  }>;
+};
 
-  const articles = await client.fetch(articlesQuery);
+export default async function KomentarePage({
+  searchParams,
+}: Props) {
+
+  const params = await searchParams;
+
+  const currentPage =
+    Number(params.page) || 1;
+
+  const articlesPerPage = 12;
+
+  const articles =
+    await client.fetch(articlesQuery);
 
   const comments = articles.filter(
     (article: any) =>
       article.category === "komentar"
   );
+
+  const totalPages = Math.ceil(
+    comments.length / articlesPerPage
+  );
+
+  const start =
+    (currentPage - 1) * articlesPerPage;
+
+  const paginatedComments =
+    comments.slice(
+      start,
+      start + articlesPerPage
+    );
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-10 mt-10">
@@ -20,14 +49,32 @@ export default async function KomentarePage() {
 
         <a
           href="/"
-          className="inline-block text-sm uppercase tracking-wide font-bold text-gray-500 hover:text-orange-500 mb-10"
+          className="
+            inline-block
+            text-sm
+            uppercase
+            tracking-wide
+            font-bold
+            text-gray-500
+            hover:text-orange-500
+            mb-10
+          "
         >
           ← Späť na homepage
         </a>
 
         <div className="mb-12">
 
-          <div className="text-sm uppercase tracking-[0.3em] text-gray-500 font-bold mb-4">
+          <div
+            className="
+              text-sm
+              uppercase
+              tracking-[0.3em]
+              text-gray-500
+              font-bold
+              mb-4
+            "
+          >
             Komentáre
           </div>
 
@@ -37,7 +84,13 @@ export default async function KomentarePage() {
 
         </div>
 
-        <Comments articles={comments} />
+        <Comments articles={paginatedComments} />
+
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          basePath="/komentare"
+        />
 
       </main>
 
