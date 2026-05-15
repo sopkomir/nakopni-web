@@ -18,7 +18,8 @@ export default async function Layout() {
   .filter(
     (article: any) =>
       article.category === "komentar" &&
-      !article.featured
+      !article.featured &&
+      article.publishedAt
   )
   .sort(
     (a: any, b: any) =>
@@ -27,12 +28,13 @@ export default async function Layout() {
   )
   .slice(0, 3);
   
-  const blogs = articles.filter(
+  const blogs = articles
+  .filter(
     (article: any) =>
       article.category === "blog" &&
-      !article.featured
+      !article.featured &&
+      article.publishedAt
   );
-
   return (
     <section className="grid grid-cols-1 lg:grid-cols-[1.7fr_0.8fr] gap-6 mt-10">
 
