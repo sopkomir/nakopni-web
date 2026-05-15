@@ -9,7 +9,9 @@ export default function Comments({ articles }: Props) {
   return (
     <section className="space-y-10">
 
-      {articles.map((article) => (
+      {articles
+      .filter((article) => article.slug?.current)
+      .map((article) => (
 
         <CommentCard
           key={article._id}
