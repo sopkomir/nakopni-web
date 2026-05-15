@@ -14,11 +14,18 @@ export default async function Layout() {
     (article: any) => article.featured
   );
 
-  const comments = articles.filter(
+  const comments = articles
+  .filter(
     (article: any) =>
       article.category === "komentar" &&
       !article.featured
-  );
+  )
+  .sort(
+    (a: any, b: any) =>
+      new Date(b.publishedAt).getTime() -
+      new Date(a.publishedAt).getTime()
+  )
+  .slice(0, 3);
   
   const blogs = articles.filter(
     (article: any) =>
