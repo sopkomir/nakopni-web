@@ -41,7 +41,7 @@ export default function CommentCard({
 
         <div>
 
-          <h3 className="text-2xl md:text-4xl font-black leading-tight mb-2 transition-colors group-hover:text-orange-500">
+          <h3 className="text-2xl md:text-4xl leading-tight mb-2 transition-colors group-hover:text-orange-500">
             {title}
           </h3>
 

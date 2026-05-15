@@ -45,7 +45,7 @@ export default function VideoCard({
         "
       />
 
-        <h3 className="text-2xl font-black leading-snug mb-2 transition-colors group-hover:text-orange-500">
+        <h3 className="text-2xl leading-snug mb-2 transition-colors group-hover:text-orange-500">
           {title}
         </h3>
 

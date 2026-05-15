@@ -53,4 +53,6 @@ h4,
 h5,
 h6 {
   font-family: Impact, Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  letter-spacing: -0.02em;
 }

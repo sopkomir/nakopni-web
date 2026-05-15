@@ -22,7 +22,7 @@ export default function Hero({ article }: Props) {
             {article.category}
           </div>
 
-          <h2 className="text-4xl lg:text-5xl leading-[0.95] font-black leading-tight mb-6 group-hover:text-orange-500 transition-colors">
+          <h2 className="text-4xl lg:text-5xl leading-[0.95] leading-tight mb-6 group-hover:text-orange-500 transition-colors">
 
             <Link href={`/${article.slug.current}`}>
               {article.title}
