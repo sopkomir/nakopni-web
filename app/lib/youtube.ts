@@ -17,7 +17,10 @@ export async function getLatestVideos() {
 
     const data = await res.json();
 
-    return data.items || [];
+    return (data.items || []).map((video: any) => ({
+      ...video,
+      views: "0",
+    }));
 
   } catch (error) {
 
