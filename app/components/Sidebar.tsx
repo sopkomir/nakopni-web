@@ -6,6 +6,10 @@ export default async function Sidebar() {
 
   const videos = await getLatestVideos();
 
+  if (!videos || videos.length === 0) {
+    return null;
+  }
+
   return (
     <aside className="sticky top-10">
 
@@ -15,20 +19,30 @@ export default async function Sidebar() {
 
       <div className="space-y-6">
 
-        {videos.slice(0, 5).map((video: any) => (
+        {videos
+          .slice(0, 5)
+          .filter(
+            (video: any) =>
+              video?.id?.videoId &&
+              video?.snippet?.title &&
+              video?.snippet?.publishedAt
+          )
+          .map((video: any) => (
 
-          <VideoCard
-            key={video.id.videoId}
-            slug={video.id.videoId}
-            title={video.snippet.title}
-            youtubeId={video.id.videoId}
-            views={`${Number(video.views).toLocaleString("sk-SK")} zhliadnutí`}
-            date={new Date(
-              video.snippet.publishedAt
-            ).toLocaleDateString("sk-SK")}
-          />
+            <VideoCard
+              key={video.id.videoId}
+              slug={video.id.videoId}
+              title={video.snippet.title}
+              youtubeId={video.id.videoId}
+              views={`${Number(
+                video.views || 0
+              ).toLocaleString("sk-SK")} zhliadnutí`}
+              date={new Date(
+                video.snippet.publishedAt
+              ).toLocaleDateString("sk-SK")}
+            />
 
-        ))}
+          ))}
 
       </div>
 
