@@ -3,6 +3,7 @@ const API_KEY = process.env.YOUTUBE_API_KEY;
 const CHANNEL_ID = "UCVOUBbjW-Mp0jAzamXzP7Jg";
 
 async function getUploadsPlaylistId() {
+
   const res = await fetch(
     `https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id=${CHANNEL_ID}&key=${API_KEY}`,
     {
@@ -16,7 +17,9 @@ async function getUploadsPlaylistId() {
 }
 
 export async function getLatestVideos() {
+
   try {
+
     const uploadsPlaylistId =
       await getUploadsPlaylistId();
 
@@ -25,6 +28,7 @@ export async function getLatestVideos() {
     }
 
     let allItems: any[] = [];
+
     let nextPageToken = "";
 
     do {
@@ -37,9 +41,12 @@ export async function getLatestVideos() {
         `&pageToken=${nextPageToken}` +
         `&key=${API_KEY}`;
 
-      const playlistRes = await fetch(url, {
-        cache: "no-store",
-      });
+      const playlistRes = await fetch(
+        url,
+        {
+          cache: "no-store",
+        }
+      );
 
       const playlistData =
         await playlistRes.json();
@@ -66,28 +73,42 @@ export async function getLatestVideos() {
       }
     );
 
-    const videoIds = filteredItems
-      .map(
-        (item: any) =>
-          item.snippet.resourceId.videoId
-      )
-      .join(",");
+    const allStats: any[] = [];
 
-    const statsRes = await fetch(
-      `https://www.googleapis.com/youtube/v3/videos?part=statistics,contentDetails&id=${videoIds}&key=${API_KEY}`,
-      {
-        cache: "no-store",
-      }
-    );
+    for (
+      let i = 0;
+      i < filteredItems.length;
+      i += 50
+    ) {
 
-    const statsData =
-      await statsRes.json();
+      const chunk = filteredItems
+        .slice(i, i + 50)
+        .map(
+          (item: any) =>
+            item.snippet.resourceId.videoId
+        )
+        .join(",");
+
+      const statsRes = await fetch(
+        `https://www.googleapis.com/youtube/v3/videos?part=statistics,contentDetails&id=${chunk}&key=${API_KEY}`,
+        {
+          cache: "no-store",
+        }
+      );
+
+      const statsData =
+        await statsRes.json();
+
+      allStats.push(
+        ...(statsData.items || [])
+      );
+    }
 
     return filteredItems
       .map((item: any) => {
 
         const stats =
-          statsData.items.find(
+          allStats.find(
             (stat: any) =>
               stat.id ===
               item.snippet.resourceId.videoId
@@ -123,6 +144,7 @@ export async function getLatestVideos() {
         }
 
         return {
+
           id: {
             videoId:
               item.snippet.resourceId.videoId,
