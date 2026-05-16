@@ -38,11 +38,11 @@ export default async function Layout() {
         </section>
 
       </div>
-
+      {/* 
       <aside id="videa">
         <Sidebar />
       </aside>
-
+        */}
     </section>
   );
 }
