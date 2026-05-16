@@ -15,7 +15,7 @@ export default async function Sidebar() {
 
       <div className="space-y-6">
 
-        {videos.slice(0, 5).map((video: any) => (
+        {videos.slice(0, 8).map((video: any) => (
 
           <VideoCard
             key={video.id.videoId}
