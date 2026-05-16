@@ -1,42 +1,27 @@
+export const revalidate = 60;
 import Hero from "./Hero";
 import Sidebar from "./Sidebar";
 import Comments from "./Comments";
 import MiniArticles from "./MiniArticles";
 
 import { client } from "../lib/sanity";
-import { articlesQuery } from "../lib/queries";
+
+import {
+  featuredQuery,
+  commentsQuery,
+  blogsQuery,
+} from "../lib/queries";
 
 export default async function Layout() {
 
-  const articles = await client.fetch(articlesQuery);
+  const featured = await client.fetch(featuredQuery);
 
-  const featured = articles.find(
-    (article: any) => article.featured
-  );
+  const comments = await client.fetch(commentsQuery);
 
-  const comments = articles
-  .filter(
-    (article: any) =>
-      article.category === "komentar" &&
-      !article.featured &&
-      article.publishedAt
-  )
-  .sort(
-    (a: any, b: any) =>
-      new Date(b.publishedAt).getTime() -
-      new Date(a.publishedAt).getTime()
-  )
-  .slice(0, 3);
-  
-  const blogs = articles
-  .filter(
-    (article: any) =>
-      article.category === "blog" &&
-      !article.featured &&
-      article.publishedAt
-  );
+  const blogs = await client.fetch(blogsQuery);
+
   return (
-    <section className="grid grid-cols-1 lg:grid-cols-[1.7fr_0.8fr] gap-6 mt-10">
+    <section className="grid grid-cols-1 xl:grid-cols-[1.7fr_0.8fr] gap-6 mt-10">
 
       <div className="space-y-16">
 
@@ -45,7 +30,7 @@ export default async function Layout() {
         </section>
 
         <section id="komentare">
-          <Comments articles={comments} />
+          <Comments articles={comments.slice(0, 3)} />
         </section>
 
         <section id="blogy">
