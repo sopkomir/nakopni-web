@@ -16,6 +16,28 @@ async function getUploadsPlaylistId() {
   return data.items?.[0]?.contentDetails?.relatedPlaylists?.uploads;
 }
 
+function parseDuration(duration: string) {
+
+  const match = duration.match(
+    /PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/
+  );
+
+  const hours =
+    parseInt(match?.[1] || "0");
+
+  const minutes =
+    parseInt(match?.[2] || "0");
+
+  const seconds =
+    parseInt(match?.[3] || "0");
+
+  return (
+    hours * 3600 +
+    minutes * 60 +
+    seconds
+  );
+}
+
 export async function getLatestVideos() {
 
   try {
@@ -60,37 +82,29 @@ export async function getLatestVideos() {
 
     } while (nextPageToken);
 
-    const filteredItems = allItems.filter(
-      (item: any) => {
-
-        const title =
-          item?.snippet?.title?.toLowerCase() || "";
-
-        return (
-          !title.includes("#shorts") &&
-          !title.includes("#short")
-        );
-      }
-    );
-
     const allStats: any[] = [];
 
     for (
       let i = 0;
-      i < filteredItems.length;
+      i < allItems.length;
       i += 50
     ) {
 
-      const chunk = filteredItems
+      const chunk = allItems
         .slice(i, i + 50)
         .map(
           (item: any) =>
-            item.snippet.resourceId.videoId
+            item?.snippet?.resourceId?.videoId
         )
+        .filter(Boolean)
         .join(",");
 
+      if (!chunk) {
+        continue;
+      }
+
       const statsRes = await fetch(
-        `https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${chunk}&key=${API_KEY}`,
+        `https://www.googleapis.com/youtube/v3/videos?part=statistics,contentDetails&id=${chunk}&key=${API_KEY}`,
         {
           cache: "no-store",
         }
@@ -104,21 +118,50 @@ export async function getLatestVideos() {
       );
     }
 
-    return filteredItems
+    return allItems
       .map((item: any) => {
+
+        const videoId =
+          item?.snippet?.resourceId?.videoId;
+
+        if (!videoId) {
+          return null;
+        }
 
         const stats =
           allStats.find(
             (stat: any) =>
-              stat.id ===
-              item.snippet.resourceId.videoId
+              stat.id === videoId
           );
+
+        if (!stats) {
+          return null;
+        }
+
+        const duration =
+          stats?.contentDetails?.duration || "";
+
+        const totalSeconds =
+          parseDuration(duration);
+
+        const title =
+          item?.snippet?.title?.toLowerCase() || "";
+
+        const isShort =
+          totalSeconds < 90;
+
+        const hasShortTag =
+          title.includes("#shorts") ||
+          title.includes("#short");
+
+        if (isShort || hasShortTag) {
+          return null;
+        }
 
         return {
 
           id: {
-            videoId:
-              item.snippet.resourceId.videoId,
+            videoId,
           },
 
           snippet: item.snippet,

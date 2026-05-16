@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { urlFor } from "../lib/image";
+
 type Props = {
   articles?: any[];
 };
@@ -10,64 +12,95 @@ export default function MiniArticles({
 
   return (
 
-    <div className="space-y-10">
+    <section className="mt-16">
 
-      {articles.map((article: any) => (
+      <div className="grid md:grid-cols-2 gap-x-10 gap-y-10">
 
-        <Link
-          key={article._id}
-          href={`/${article.slug.current}`}
-          className="
-            block
-            border-b
-            pb-8
-            hover:opacity-80
-            transition
-          "
-        >
+        {articles
+          .filter(
+            (article) =>
+              article?.slug?.current
+          )
+          .map((article: any) => (
 
-          <div className="
-            text-xs
-            uppercase
-            tracking-widest
-            text-gray-500
-            font-bold
-            mb-2
-          ">
-            Blog
-          </div>
+            <Link
+              key={article._id}
+              href={`/${article.slug.current}`}
+              className="
+                flex
+                gap-4
+                border-b
+                pb-6
+                hover:opacity-80
+                transition
+              "
+            >
 
-          <h2 className="
-            text-2xl
-            md:text-3xl
-            leading-tight
-            mb-3
-          ">
-            {article.title}
-          </h2>
+              {article?.image && (
 
-          <div className="
-            text-sm
-            text-gray-500
-            mb-3
-          ">
-            {article.author} •{" "}
-            {new Date(
-              article.publishedAt
-            ).toLocaleDateString("sk-SK")}
-          </div>
+                <img
+                  src={urlFor(article.image).url()}
+                  alt={article.title}
+                  className="
+                    w-28
+                    h-28
+                    object-cover
+                    flex-shrink-0
+                  "
+                />
 
-          <p className="
-            text-gray-700
-            leading-relaxed
-          ">
-            {article.excerpt}
-          </p>
+              )}
 
-        </Link>
+              <div className="flex-1">
 
-      ))}
+                <div className="
+                  text-xs
+                  uppercase
+                  tracking-widest
+                  text-gray-500
+                  font-bold
+                  mb-2
+                ">
+                  Blog
+                </div>
 
-    </div>
+                <h2 className="
+                  text-xl
+                  leading-tight
+                  mb-2
+                ">
+                  {article.title}
+                </h2>
+
+                <div className="
+                  text-sm
+                  text-gray-500
+                  mb-2
+                ">
+                  {article.author} •{" "}
+                  {article.publishedAt
+                    ? new Date(
+                        article.publishedAt
+                      ).toLocaleDateString("sk-SK")
+                    : ""}
+                </div>
+
+                <p className="
+                  text-gray-700
+                  text-sm
+                  leading-relaxed
+                ">
+                  {article.excerpt}
+                </p>
+
+              </div>
+
+            </Link>
+
+          ))}
+
+      </div>
+
+    </section>
   );
 }

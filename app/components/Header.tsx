@@ -3,84 +3,145 @@
 import { useState } from "react";
 import { navigation } from "../data/navigation";
 import Link from "next/link";
+
 export default function Header() {
 
   const [open, setOpen] = useState(false);
 
+  const links: Record<string, string> = {
+    Domov: "/",
+    Rozhovory: "/rozhovory",
+    Komentáre: "/komentare",
+    Blogy: "/blogy",
+    "Zemplínsky dialóg": "/videa",
+  };
+
   return (
-    <header className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-gray-200">
+    <header className="border-b border-gray-200 bg-white">
 
-      <div className="flex items-center justify-between gap-10 py-6">
+      <div className="py-4">
 
-        <div className="flex items-center gap-10">
-        <Link href="/">
-          <h1 className="text-4xl md:text-5xl">
-          <img
-            src="/logo_nakopni.png"
-            alt="Nakopni.sk"
-            className="h-16 w-auto"
-          />
-          </h1>
-        </Link>
-          <nav className="hidden md:block">
-            <ul className="flex gap-7 text-sm font-bold uppercase tracking-wide">
+        <div className="grid lg:grid-cols-[260px_1fr] gap-10 items-end">
 
-            {navigation.map((item) => {
+          {/* LOGO */}
+          <div>
 
-              const links: Record<string, string> = {
-                Domov: "/",
-                Rozhovory: "/rozhovory",
-                Komentáre: "/komentare",
-                Blogy: "/blogy",
-                "Zemplínsky dialóg": "/videa",
-              };
+            <Link href="/">
 
-              return (
+              <img
+                src="/logo_nakopni.png"
+                alt="Nakopni.sk"
+                className="h-32 w-auto"
+              />
+
+            </Link>
+
+          </div>
+
+          {/* RIGHT SIDE */}
+          <div className="flex flex-col justify-end">
+
+            {/* SLOGAN */}
+            <div
+              className="
+                uppercase
+                leading-[0.9]
+                tracking-tight
+                mb-4
+                text-[#8e8e93]
+              "
+              style={{
+               fontFamily: "'Anton', sans-serif",
+               fontSize: "clamp(1.5rem, 2.2vw, 2.8rem)",
+              }}
+            >
+              Hľadáme riešenia ako nakopnúť Slovensko
+            </div>
+
+            {/* DESKTOP MENU */}
+            <nav className="hidden md:block">
+
+              <ul
+                className="
+                  flex
+                  flex-wrap
+                  gap-8
+                  text-lg
+                  uppercase
+                  tracking-wide
+                "
+                style={{
+                  fontFamily: "'Oswald', sans-serif",
+                }}
+              >
+
+                {navigation.map((item) => (
+
+                  <li key={item}>
+
+                    <Link
+                      href={links[item]}
+                      className="
+                        hover:text-orange-500
+                        transition-colors
+                      "
+                    >
+                      {item}
+                    </Link>
+
+                  </li>
+
+                ))}
+
+              </ul>
+
+            </nav>
+
+          </div>
+
+        </div>
+
+        {/* MOBILE BUTTON */}
+        <div className="flex justify-end md:hidden mt-6">
+
+          <button
+            className="text-3xl font-black"
+            onClick={() => setOpen(!open)}
+          >
+            ☰
+          </button>
+
+        </div>
+
+        {/* MOBILE MENU */}
+        {open && (
+
+          <nav className="md:hidden mt-6 border-t border-gray-200 pt-6">
+
+            <ul className="flex flex-col gap-4 text-sm font-bold uppercase">
+
+              {navigation.map((item) => (
+
                 <li key={item}>
+
                   <Link
                     href={links[item]}
                     className="hover:text-orange-500 transition-colors"
                   >
                     {item}
                   </Link>
+
                 </li>
-              );
-              })}
+
+              ))}
 
             </ul>
+
           </nav>
 
-        </div>
-
-        <button
-          className="md:hidden text-3xl font-black"
-          onClick={() => setOpen(!open)}
-        >
-          ☰
-        </button>
+        )}
 
       </div>
-
-      {open && (
-        <nav className="md:hidden mt-6 border-t border-gray-200 pt-6">
-
-          <ul className="flex flex-col gap-4 text-sm font-bold uppercase">
-
-            {navigation.map((item) => (
-              <li key={item}>
-                <a
-                  href="#"
-                  className="hover:text-orange-500 transition-colors"
-                >
-                  {item}
-                </a>
-              </li>
-            ))}
-
-          </ul>
-
-        </nav>
-      )}
 
     </header>
   );
