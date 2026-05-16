@@ -1,31 +1,73 @@
-import MiniArticleCard from "./MiniArticleCard";
+import Link from "next/link";
 
 type Props = {
-  articles: any[];
+  articles?: any[];
 };
 
-export default function MiniArticles({ articles }: Props) {
+export default function MiniArticles({
+  articles = [],
+}: Props) {
 
   return (
-    <section className="mt-16">
 
-      <div className="grid md:grid-cols-2 gap-x-10 gap-y-8">
+    <div className="space-y-10">
 
-        {articles.map((article) => (
+      {articles.map((article: any) => (
 
-          <MiniArticleCard
+        <Link
           key={article._id}
-          title={article.title}
-          category={article.category}
-          slug={article.slug.current}
-          author={article.author}
-          publishedAt={article.publishedAt}
-          />
+          href={`/${article.slug.current}`}
+          className="
+            block
+            border-b
+            pb-8
+            hover:opacity-80
+            transition
+          "
+        >
 
-        ))}
+          <div className="
+            text-xs
+            uppercase
+            tracking-widest
+            text-gray-500
+            font-bold
+            mb-2
+          ">
+            Blog
+          </div>
 
-      </div>
+          <h2 className="
+            text-2xl
+            md:text-3xl
+            leading-tight
+            mb-3
+          ">
+            {article.title}
+          </h2>
 
-    </section>
+          <div className="
+            text-sm
+            text-gray-500
+            mb-3
+          ">
+            {article.author} •{" "}
+            {new Date(
+              article.publishedAt
+            ).toLocaleDateString("sk-SK")}
+          </div>
+
+          <p className="
+            text-gray-700
+            leading-relaxed
+          ">
+            {article.excerpt}
+          </p>
+
+        </Link>
+
+      ))}
+
+    </div>
   );
 }

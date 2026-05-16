@@ -4,11 +4,8 @@ import { getLatestVideos } from "../lib/youtube";
 
 export default async function Sidebar() {
 
-  const videos = await getLatestVideos();
-
-  if (!videos || videos.length === 0) {
-    return null;
-  }
+  const videos =
+    await getLatestVideos() || [];
 
   return (
     <aside className="sticky top-10">
@@ -19,7 +16,7 @@ export default async function Sidebar() {
 
       <div className="space-y-6">
 
-        {videos
+        {(videos || [])
           .slice(0, 5)
           .filter(
             (video: any) =>
@@ -37,9 +34,13 @@ export default async function Sidebar() {
               views={`${Number(
                 video.views || 0
               ).toLocaleString("sk-SK")} zhliadnutí`}
-              date={new Date(
-                video.snippet.publishedAt
-              ).toLocaleDateString("sk-SK")}
+              date={
+                video?.snippet?.publishedAt
+                  ? new Date(
+                      video.snippet.publishedAt
+                    ).toLocaleDateString("sk-SK")
+                  : ""
+              }
             />
 
           ))}
