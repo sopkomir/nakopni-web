@@ -55,7 +55,7 @@ export async function getLatestVideos() {
       `https://www.googleapis.com/youtube/v3/videos?part=statistics,contentDetails&id=${videoIds}&key=${API_KEY}`,
       {
         next: {
-          revalidate: 3600,
+          revalidate: 60,
         },
       }
     );
