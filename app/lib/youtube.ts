@@ -25,8 +25,8 @@ export async function getLatestVideos() {
       return [];
     }
 
-    const res = await fetch(
-      `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsPlaylistId}&maxResults=12&key=${API_KEY}`,
+    const playlistRes = await fetch(
+      `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsPlaylistId}&maxResults=20&key=${API_KEY}`,
       {
         next: {
           revalidate: 3600,
@@ -34,15 +34,50 @@ export async function getLatestVideos() {
       }
     );
 
-    const data = await res.json();
+    const playlistData = await playlistRes.json();
 
-    return (data.items || []).map((item: any) => ({
-      id: {
-        videoId: item.snippet.resourceId.videoId,
-      },
-      snippet: item.snippet,
-      views: "0",
-    }));
+    const filteredItems = (playlistData.items || []).filter(
+      (item: any) => {
+        const title = item.snippet.title.toLowerCase();
+
+        return (
+          !title.includes("#shorts") &&
+          !title.includes("#short") &&
+          item.snippet.thumbnails?.high?.height > item.snippet.thumbnails?.high?.width
+            ? false
+            : true
+        );
+      }
+    );
+
+    const videoIds = filteredItems
+      .map((item: any) => item.snippet.resourceId.videoId)
+      .join(",");
+
+    const statsRes = await fetch(
+      `https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${videoIds}&key=${API_KEY}`,
+      {
+        next: {
+          revalidate: 3600,
+        },
+      }
+    );
+
+    const statsData = await statsRes.json();
+
+    return filteredItems.map((item: any) => {
+      const stats = statsData.items.find(
+        (stat: any) => stat.id === item.snippet.resourceId.videoId
+      );
+
+      return {
+        id: {
+          videoId: item.snippet.resourceId.videoId,
+        },
+        snippet: item.snippet,
+        views: stats?.statistics?.viewCount || "0",
+      };
+    });
 
   } catch (error) {
     console.error(error);
