@@ -16,7 +16,7 @@ export default function Header() {
         <Link href="/">
           <h1 className="text-4xl md:text-5xl">
           <img
-            src="/logoN.svg"
+            src="/logo-nakopni.png"
             alt="Nakopni.sk"
             className="h-16 w-auto"
           />
