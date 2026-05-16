@@ -21,9 +21,9 @@ export default async function KomentarePage() {
     );
 
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-[1fr_360px] gap-10 mt-10">
+    <div className="flex flex-col xl:flex-row gap-10 mt-10">
 
-      <main>
+      <main className="flex-1">
 
         <a
           href="/"
@@ -48,7 +48,7 @@ export default async function KomentarePage() {
 
       </main>
 
-      <aside className="block">
+      <aside className="w-full xl:w-[360px]">
 
         <div className="sticky top-28">
           <Sidebar />
