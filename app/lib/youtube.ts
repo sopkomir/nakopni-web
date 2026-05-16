@@ -6,7 +6,9 @@ async function getUploadsPlaylistId() {
   const res = await fetch(
     `https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id=${CHANNEL_ID}&key=${API_KEY}`,
     {
-      cache: "no-store",
+      next: {
+        revalidate: 3600,
+      },
     }
   );
 
@@ -23,16 +25,18 @@ export async function getLatestVideos() {
       return [];
     }
 
-    const res = await fetch(
+    const playlistRes = await fetch(
       `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsPlaylistId}&maxResults=50&key=${API_KEY}`,
       {
-        cache: "no-store",
+        next: {
+          revalidate: 3600,
+        },
       }
     );
 
-    const data = await res.json();
+    const playlistData = await playlistRes.json();
 
-    return (data.items || []).map((item: any) => ({
+    return (playlistData.items || []).map((item: any) => ({
       id: {
         videoId: item.snippet.resourceId.videoId,
       },
