@@ -48,7 +48,7 @@ export default async function KomentarePage() {
 
       </main>
 
-      <aside className="hidden xl:block hidden">
+      <aside className="block">
 
         <div className="sticky top-28">
           <Sidebar />
