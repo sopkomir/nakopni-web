@@ -104,6 +104,8 @@ export async function getLatestVideos() {
       );
     }
 
+    console.log("FILTERED VIDEOS:", filteredItems.length);
+    console.log("ALL ITEMS:", allItems.length);
     return filteredItems
       .map((item: any) => {
 
