@@ -1,6 +1,7 @@
+
+export const revalidate = 60;
 import Comments from "../components/Comments";
 import Sidebar from "../components/Sidebar";
-
 import { client } from "../lib/sanity";
 import { commentsQuery } from "../lib/queries";
 
