@@ -6,9 +6,7 @@ async function getUploadsPlaylistId() {
   const res = await fetch(
     `https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id=${CHANNEL_ID}&key=${API_KEY}`,
     {
-      next: {
-        revalidate: 3600,
-      },
+      cache: "no-store",
     }
   );
 
@@ -17,81 +15,131 @@ async function getUploadsPlaylistId() {
   return data.items?.[0]?.contentDetails?.relatedPlaylists?.uploads;
 }
 
-function parseDuration(duration: string) {
-  const match = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
-
-  const hours = parseInt(match?.[1] || "0");
-  const minutes = parseInt(match?.[2] || "0");
-  const seconds = parseInt(match?.[3] || "0");
-
-  return hours * 3600 + minutes * 60 + seconds;
-}
-
 export async function getLatestVideos() {
   try {
-    const uploadsPlaylistId = await getUploadsPlaylistId();
+    const uploadsPlaylistId =
+      await getUploadsPlaylistId();
 
     if (!uploadsPlaylistId) {
       return [];
     }
 
-    const playlistRes = await fetch(
-      `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsPlaylistId}&maxResults=20&key=${API_KEY}`,
-      {
-        next: {
-          revalidate: 3600,
-        },
+    let allItems: any[] = [];
+    let nextPageToken = "";
+
+    do {
+
+      const url =
+        `https://www.googleapis.com/youtube/v3/playlistItems` +
+        `?part=snippet` +
+        `&playlistId=${uploadsPlaylistId}` +
+        `&maxResults=50` +
+        `&pageToken=${nextPageToken}` +
+        `&key=${API_KEY}`;
+
+      const playlistRes = await fetch(url, {
+        cache: "no-store",
+      });
+
+      const playlistData =
+        await playlistRes.json();
+
+      allItems.push(
+        ...(playlistData.items || [])
+      );
+
+      nextPageToken =
+        playlistData.nextPageToken || "";
+
+    } while (nextPageToken);
+
+    const filteredItems = allItems.filter(
+      (item: any) => {
+
+        const title =
+          item.snippet.title.toLowerCase();
+
+        return (
+          !title.includes("#shorts") &&
+          !title.includes("#short")
+        );
       }
     );
 
-    const playlistData = await playlistRes.json();
-
-    const videoIds = (playlistData.items || [])
-      .map((item: any) => item.snippet.resourceId.videoId)
+    const videoIds = filteredItems
+      .map(
+        (item: any) =>
+          item.snippet.resourceId.videoId
+      )
       .join(",");
 
-    const detailsRes = await fetch(
-      `https://www.googleapis.com/youtube/v3/videos?part=contentDetails,statistics&id=${videoIds}&key=${API_KEY}`,
+    const statsRes = await fetch(
+      `https://www.googleapis.com/youtube/v3/videos?part=statistics,contentDetails&id=${videoIds}&key=${API_KEY}`,
       {
-        next: {
-          revalidate: 3600,
-        },
+        cache: "no-store",
       }
     );
 
-    const detailsData = await detailsRes.json();
+    const statsData =
+      await statsRes.json();
 
-    return (playlistData.items || [])
+    return filteredItems
       .map((item: any) => {
-        const details = detailsData.items.find(
-          (video: any) =>
-            video.id === item.snippet.resourceId.videoId
-        );
 
-        if (!details) {
+        const stats =
+          statsData.items.find(
+            (stat: any) =>
+              stat.id ===
+              item.snippet.resourceId.videoId
+          );
+
+        if (!stats) {
           return null;
         }
 
-        const duration = parseDuration(
-          details.contentDetails.duration
+        const duration =
+          stats.contentDetails?.duration || "";
+
+        const match = duration.match(
+          /PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/
         );
 
-        // odstráni Shorts pod 60 sekúnd
-        if (duration < 60) {
+        const hours =
+          parseInt(match?.[1] || "0");
+
+        const minutes =
+          parseInt(match?.[2] || "0");
+
+        const seconds =
+          parseInt(match?.[3] || "0");
+
+        const totalSeconds =
+          hours * 3600 +
+          minutes * 60 +
+          seconds;
+
+        if (totalSeconds < 61) {
           return null;
         }
 
         return {
           id: {
-            videoId: item.snippet.resourceId.videoId,
+            videoId:
+              item.snippet.resourceId.videoId,
           },
+
           snippet: item.snippet,
-          views: details.statistics?.viewCount || "0",
+
+          views:
+            stats.statistics?.viewCount || "0",
+
+          duration: totalSeconds,
         };
       })
       .filter(Boolean);
 
   } catch (error) {
+
     console.error(error);
 
     return [];
