@@ -7,6 +7,15 @@ export default async function Sidebar() {
   const videos =
     await getLatestVideos() || [];
 
+  const validVideos = (videos || [])
+    .filter(
+      (video: any) =>
+        video?.id?.videoId &&
+        video?.snippet?.title &&
+        video?.snippet?.publishedAt
+    )
+    .slice(0, 5);
+
   return (
     <aside className="sticky top-10">
 
@@ -16,34 +25,26 @@ export default async function Sidebar() {
 
       <div className="space-y-6">
 
-        {(videos || [])
-          .slice(0, 5)
-          .filter(
-            (video: any) =>
-              video?.id?.videoId &&
-              video?.snippet?.title &&
+        {validVideos.map((video: any) => (
+
+          <VideoCard
+            key={video.id.videoId}
+            slug={video.id.videoId}
+            title={video.snippet.title}
+            youtubeId={video.id.videoId}
+            views={`${Number(
+              video.views || 0
+            ).toLocaleString("sk-SK")} zhliadnutí`}
+            date={
               video?.snippet?.publishedAt
-          )
-          .map((video: any) => (
+                ? new Date(
+                    video.snippet.publishedAt
+                  ).toLocaleDateString("sk-SK")
+                : ""
+            }
+          />
 
-            <VideoCard
-              key={video.id.videoId}
-              slug={video.id.videoId}
-              title={video.snippet.title}
-              youtubeId={video.id.videoId}
-              views={`${Number(
-                video.views || 0
-              ).toLocaleString("sk-SK")} zhliadnutí`}
-              date={
-                video?.snippet?.publishedAt
-                  ? new Date(
-                      video.snippet.publishedAt
-                    ).toLocaleDateString("sk-SK")
-                  : ""
-              }
-            />
-
-          ))}
+        ))}
 
       </div>
 
