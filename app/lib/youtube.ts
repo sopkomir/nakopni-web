@@ -26,7 +26,7 @@ export async function getLatestVideos() {
     }
 
     const playlistRes = await fetch(
-      `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsPlaylistId}&maxResults=20&key=${API_KEY}`,
+      `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsPlaylistId}&maxResults=50&key=${API_KEY}`,
       {
         next: {
           revalidate: 3600,
