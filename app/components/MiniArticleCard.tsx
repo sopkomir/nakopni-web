@@ -24,7 +24,7 @@ export default function MiniArticles({
             transition
           "
         >
-
+        {article.image && (
           <img
             src={urlFor(article.image).url()}
             alt={article.title}
@@ -35,6 +35,7 @@ export default function MiniArticles({
               flex-shrink-0
             "
           />
+        )}
 
           <div className="flex-1">
 
