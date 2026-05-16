@@ -64,7 +64,7 @@ export async function getLatestVideos() {
       (item: any) => {
 
         const title =
-          item.snippet.title.toLowerCase();
+          item?.snippet?.title?.toLowerCase() || "";
 
         return (
           !title.includes("#shorts") &&
@@ -90,7 +90,7 @@ export async function getLatestVideos() {
         .join(",");
 
       const statsRes = await fetch(
-        `https://www.googleapis.com/youtube/v3/videos?part=statistics,contentDetails&id=${chunk}&key=${API_KEY}`,
+        `https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${chunk}&key=${API_KEY}`,
         {
           cache: "no-store",
         }
@@ -104,8 +104,6 @@ export async function getLatestVideos() {
       );
     }
 
-    console.log("FILTERED VIDEOS:", filteredItems.length);
-    console.log("ALL ITEMS:", allItems.length);
     return filteredItems
       .map((item: any) => {
 
@@ -115,35 +113,6 @@ export async function getLatestVideos() {
               stat.id ===
               item.snippet.resourceId.videoId
           );
-
-        if (!stats) {
-          return null;
-        }
-
-        const duration =
-          stats.contentDetails?.duration || "";
-
-        const match = duration.match(
-          /PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/
-        );
-
-        const hours =
-          parseInt(match?.[1] || "0");
-
-        const minutes =
-          parseInt(match?.[2] || "0");
-
-        const seconds =
-          parseInt(match?.[3] || "0");
-
-        const totalSeconds =
-          hours * 3600 +
-          minutes * 60 +
-          seconds;
-
-        if (totalSeconds < 61) {
-          return null;
-        }
 
         return {
 
@@ -155,9 +124,8 @@ export async function getLatestVideos() {
           snippet: item.snippet,
 
           views:
-            stats.statistics?.viewCount || "0",
+            stats?.statistics?.viewCount || "0",
 
-          duration: totalSeconds,
         };
       })
       .filter(Boolean);
