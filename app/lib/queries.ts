@@ -1,5 +1,8 @@
 export const featuredQuery = `
-*[_type == "article" && featured == true] 
+*[
+  _type == "article" &&
+  featured == true
+]
 | order(publishedAt desc)[0] {
   _id,
   title,
@@ -39,6 +42,25 @@ export const blogsQuery = `
   _type == "article" &&
   category == "blog" &&
   featured != true
+]
+| order(publishedAt desc) {
+  _id,
+  title,
+  slug,
+  excerpt,
+  content,
+  image,
+  category,
+  featured,
+  author,
+  publishedAt
+}
+`;
+
+export const rozhovoryQuery = `
+*[
+  _type == "article" &&
+  category == "rozhovor"
 ]
 | order(publishedAt desc) {
   _id,

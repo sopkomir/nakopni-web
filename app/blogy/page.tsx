@@ -1,9 +1,11 @@
+export const revalidate = 60;
+
 import MiniArticles from "../components/MiniArticles";
 import Sidebar from "../components/Sidebar";
 import Pagination from "../components/Pagination";
 
 import { client } from "../lib/sanity";
-import { articlesQuery } from "../lib/queries";
+import { blogsQuery } from "../lib/queries";
 
 type Props = {
   searchParams: Promise<{
@@ -22,13 +24,8 @@ export default async function BlogyPage({
 
   const articlesPerPage = 12;
 
-  const articles =
-    await client.fetch(articlesQuery);
-
-  const blogs = articles.filter(
-    (article: any) =>
-      article.category === "blog"
-  );
+  const blogs =
+    await client.fetch(blogsQuery);
 
   const totalPages = Math.ceil(
     blogs.length / articlesPerPage

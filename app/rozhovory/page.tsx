@@ -1,9 +1,11 @@
+export const revalidate = 60;
+
 import Interviews from "../components/Interviews";
 import Sidebar from "../components/Sidebar";
 import Pagination from "../components/Pagination";
 
 import { client } from "../lib/sanity";
-import { articlesQuery } from "../lib/queries";
+import { rozhovoryQuery } from "../lib/queries";
 
 type Props = {
   searchParams: Promise<{
@@ -22,13 +24,8 @@ export default async function RozhovoryPage({
 
   const articlesPerPage = 9;
 
-  const articles =
-    await client.fetch(articlesQuery);
-
-  const interviews = articles.filter(
-    (article: any) =>
-      article.category === "rozhovor"
-  );
+  const interviews =
+    await client.fetch(rozhovoryQuery);
 
   const totalPages = Math.ceil(
     interviews.length / articlesPerPage
