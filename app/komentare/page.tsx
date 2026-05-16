@@ -2,23 +2,11 @@ import Comments from "../components/Comments";
 import Sidebar from "../components/Sidebar";
 
 import { client } from "../lib/sanity";
-import { articlesQuery } from "../lib/queries";
+import { commentsQuery } from "../lib/queries";
 
 export default async function KomentarePage() {
 
-  const articles = await client.fetch(articlesQuery);
-
-  const comments = articles
-    .filter(
-      (article: any) =>
-        article.category === "komentar" &&
-        article.publishedAt
-    )
-    .sort(
-      (a: any, b: any) =>
-        new Date(b.publishedAt).getTime() -
-        new Date(a.publishedAt).getTime()
-    );
+  const comments = await client.fetch(commentsQuery);
 
   return (
     <div className="flex flex-col xl:flex-row gap-10 mt-10">
