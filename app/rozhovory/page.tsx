@@ -93,7 +93,7 @@ export default async function RozhovoryPage({
         />
 
       </main>
-      {/* 
+      
       <aside className="hidden lg:block">
 
         <div className="sticky top-28">
@@ -101,7 +101,7 @@ export default async function RozhovoryPage({
         </div>
 
       </aside>
-        */}
+        
     </div>
   );
 }

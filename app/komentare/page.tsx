@@ -36,7 +36,7 @@ export default async function KomentarePage() {
         <Comments articles={comments} />
 
       </main>
-      {/* 
+     
       <aside className="w-full xl:w-[360px]">
 
         <div className="sticky top-28">
@@ -44,7 +44,7 @@ export default async function KomentarePage() {
         </div>
 
       </aside>
-        */}  
+    
     </div>
   );
 }
