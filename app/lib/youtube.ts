@@ -42,10 +42,7 @@ export async function getLatestVideos() {
 
         return (
           !title.includes("#shorts") &&
-          !title.includes("#short") &&
-          item.snippet.thumbnails?.high?.height > item.snippet.thumbnails?.high?.width
-            ? false
-            : true
+          !title.includes("#short")
         );
       }
     );
@@ -66,49 +63,37 @@ export async function getLatestVideos() {
     const statsData = await statsRes.json();
 
     return filteredItems
-    .map((item: any) => {
-      const stats = statsData.items.find(
-        (stat: any) => stat.id === item.snippet.resourceId.videoId
-      );
+      .map((item: any) => {
+        const stats = statsData.items.find(
+          (stat: any) => stat.id === item.snippet.resourceId.videoId
+        );
 
-      if (!stats) {
-        return null;
-      }
+        if (!stats) {
+          return null;
+        }
 
-      const duration = stats.contentDetails?.duration || "";
+        const duration = stats.contentDetails?.duration || "";
 
-      const match = duration.match(/PT(?:(\d+)M)?(?:(\d+)S)?/);
+        const match = duration.match(/PT(?:(\d+)M)?(?:(\d+)S)?/);
 
-      const minutes = parseInt(match?.[1] || "0");
-      const seconds = parseInt(match?.[2] || "0");
+        const minutes = parseInt(match?.[1] || "0");
+        const seconds = parseInt(match?.[2] || "0");
 
-      const totalSeconds = minutes * 60 + seconds;
+        const totalSeconds = minutes * 60 + seconds;
 
-      if (totalSeconds < 61) {
-        return null;
-      }
+        if (totalSeconds < 61) {
+          return null;
+        }
 
-      return {
-        id: {
-          videoId: item.snippet.resourceId.videoId,
-        },
-        snippet: item.snippet,
-        views: stats.statistics?.viewCount || "0",
-      };
-    })
-    .filter(Boolean);
-      const stats = statsData.items.find(
-        (stat: any) => stat.id === item.snippet.resourceId.videoId
-      );
-
-      return {
-        id: {
-          videoId: item.snippet.resourceId.videoId,
-        },
-        snippet: item.snippet,
-        views: stats?.statistics?.viewCount || "0",
-      };
-    });
+        return {
+          id: {
+            videoId: item.snippet.resourceId.videoId,
+          },
+          snippet: item.snippet,
+          views: stats.statistics?.viewCount || "0",
+        };
+      })
+      .filter(Boolean);
 
   } catch (error) {
     console.error(error);
