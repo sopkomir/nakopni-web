@@ -56,11 +56,11 @@ export default async function Layout() {
 
       </div>
 
-      {/*
+      
       <aside id="videa">
         <Sidebar />
       </aside>
-      */}
+     
 
     </section>
   );
