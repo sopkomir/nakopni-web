@@ -55,7 +55,7 @@ export async function getLatestVideos() {
       .join(",");
 
     const statsRes = await fetch(
-      `https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${videoIds}&key=${API_KEY}`,
+      `https://www.googleapis.com/youtube/v3/videos?part=statistics,contentDetails&id=${videoIds}&key=${API_KEY}`,
       {
         next: {
           revalidate: 3600,
@@ -65,7 +65,38 @@ export async function getLatestVideos() {
 
     const statsData = await statsRes.json();
 
-    return filteredItems.map((item: any) => {
+    return filteredItems
+    .map((item: any) => {
+      const stats = statsData.items.find(
+        (stat: any) => stat.id === item.snippet.resourceId.videoId
+      );
+
+      if (!stats) {
+        return null;
+      }
+
+      const duration = stats.contentDetails?.duration || "";
+
+      const match = duration.match(/PT(?:(\d+)M)?(?:(\d+)S)?/);
+
+      const minutes = parseInt(match?.[1] || "0");
+      const seconds = parseInt(match?.[2] || "0");
+
+      const totalSeconds = minutes * 60 + seconds;
+
+      if (totalSeconds < 61) {
+        return null;
+      }
+
+      return {
+        id: {
+          videoId: item.snippet.resourceId.videoId,
+        },
+        snippet: item.snippet,
+        views: stats.statistics?.viewCount || "0",
+      };
+    })
+    .filter(Boolean);
       const stats = statsData.items.find(
         (stat: any) => stat.id === item.snippet.resourceId.videoId
       );
