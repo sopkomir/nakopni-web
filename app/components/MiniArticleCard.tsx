@@ -1,47 +1,87 @@
 import Link from "next/link";
 
-type MiniArticleCardProps = {
-  title: string;
-  category: string;
-  slug: string;
-  author: string;
-  publishedAt: string;
-};
+import { urlFor } from "../lib/image";
 
-export default function MiniArticleCard({
-  title,
-  category,
-  slug,
-  author,
-  publishedAt,
-}: MiniArticleCardProps) {
+export default function MiniArticles({
+  articles,
+}: any) {
 
   return (
 
-    <Link href={`/${slug}`}>
+    <div className="space-y-10">
 
-      <article className="border-b border-gray-200 pb-4 group cursor-pointer">
+      {articles.map((article: any) => (
 
-        <div className="text-[11px] uppercase tracking-widest text-gray-500 font-bold mb-2">
-          {category}
-        </div>
+        <Link
+          key={article._id}
+          href={`/${article.slug.current}`}
+          className="
+            flex
+            gap-6
+            border-b
+            pb-8
+            hover:opacity-80
+            transition
+          "
+        >
 
-        <h3 className="text-2xl font-black leading-tight hover:text-orange-500 transition-colors cursor-pointer mb-3">
-          {title}
-        </h3>
+          <img
+            src={urlFor(article.image).url()}
+            alt={article.title}
+            className="
+              w-32
+              h-32
+              object-cover
+              flex-shrink-0
+            "
+          />
 
-        <div className="text-sm text-gray-500">
+          <div className="flex-1">
 
-          {author}
+            <div className="
+              text-xs
+              uppercase
+              tracking-widest
+              text-gray-500
+              font-bold
+              mb-2
+            ">
+              Blog
+            </div>
 
-          <span className="mx-2">•</span>
+            <h2 className="
+              text-2xl
+              md:text-3xl
+              leading-tight
+              mb-3
+            ">
+              {article.title}
+            </h2>
 
-          {new Date(publishedAt).toLocaleDateString("sk-SK")}
+            <div className="
+              text-sm
+              text-gray-500
+              mb-3
+            ">
+              {article.author} •{" "}
+              {new Date(
+                article.publishedAt
+              ).toLocaleDateString("sk-SK")}
+            </div>
 
-        </div>
+            <p className="
+              text-gray-700
+              leading-relaxed
+            ">
+              {article.excerpt}
+            </p>
 
-      </article>
+          </div>
 
-    </Link>
+        </Link>
+
+      ))}
+
+    </div>
   );
 }
