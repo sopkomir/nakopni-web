@@ -12,6 +12,42 @@ type Props = {
   }>;
 };
 
+export async function generateMetadata({
+  params,
+}: Props) {
+
+  const { slug } = await params;
+
+  const query = `*[_type == "article" && slug.current == $slug][0] {
+    title,
+    slug,
+    image,
+    excerpt
+  }`;
+
+  const article =
+    await client.fetch(query, { slug });
+
+  if (!article) {
+    return {
+      title: "Článok",
+    };
+  }
+
+  return {
+    title: article.title,
+    description: article.excerpt,
+
+    openGraph: {
+      title: article.title,
+      description: article.excerpt,
+      images: [urlFor(article.image).url()],
+      url: `https://nakopni-web.vercel.app/${slug}`,
+      type: "article",
+    },
+  };
+}
+
 export default async function ArticlePage({
   params,
 }: Props) {

@@ -6,21 +6,25 @@ type Props = {
 
 export default function FacebookComments({ url }: Props) {
 
-  const encodedUrl = encodeURIComponent(url);
-
   return (
-    <iframe
-      src={`https://www.facebook.com/plugins/comments.php?href=${encodedUrl}&numposts=5&width=100%`}
-      width="100%"
-      height="600"
-      style={{
-        border: "none",
-        overflow: "hidden",
-      }}
-      scrolling="no"
-      frameBorder="0"
-      allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-      allowFullScreen
-    ></iframe>
+    <div className="w-full overflow-hidden">
+
+      <iframe
+        title="Facebook comments"
+        src={`https://www.facebook.com/plugins/comments.php?href=${encodeURIComponent(
+          url
+        )}&width=100%25&numposts=5`}
+        width="100%"
+        height="700"
+        style={{
+          border: "none",
+          background: "white",
+        }}
+        scrolling="no"
+        frameBorder="0"
+        allow="encrypted-media"
+      />
+
+    </div>
   );
 }
