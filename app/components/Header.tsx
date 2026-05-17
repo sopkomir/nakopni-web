@@ -52,7 +52,7 @@ export default function Header() {
               "
               style={{
                fontFamily: "'Anton', sans-serif",
-               fontSize: "clamp(1.5rem, 2.2vw, 2.8rem)",
+                fontSize: "clamp(1.5rem, 2.2vw, 2.8rem)",
               }}
             >
               Hľadáme riešenia ako nakopnúť Slovensko

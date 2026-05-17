@@ -3,7 +3,7 @@ import Image from "next/image";
 import { client } from "../lib/sanity";
 import { articleQuery } from "../lib/queries";
 import { urlFor } from "../lib/image";
-
+import LightboxImage from "../components/LightboxImage";
 import { PortableText } from "@portabletext/react";
 
 import DisqusComments from "../components/DisqusComments";
@@ -76,7 +76,71 @@ export default async function ArticlePage({
       </div>
 
       <div className="prose prose-lg max-w-none">
-        <PortableText value={article.content} />
+
+        <PortableText
+          value={article.content}
+
+          components={{
+
+            types: {
+
+              image: ({ value }) => (
+              <LightboxImage
+              src={urlFor(value).width(1200).url()}
+              alt=""
+              />
+              ),
+
+              gallery: ({ value }) => (
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-10">
+
+                  {value.images?.map(
+                    (image: any, index: number) => (
+
+                      <Image
+                        key={index}
+                        src={urlFor(image).width(800).url()}
+                        alt=""
+                        width={800}
+                        height={600}
+                        className="rounded-2xl object-cover"
+                      />
+
+                    )
+                  )}
+
+                </div>
+
+              ),
+
+              youtube: ({ value }) => {
+
+                const videoId =
+                  value.url.split("v=")[1];
+
+                return (
+
+                  <div className="my-10">
+
+                    <iframe
+                      width="100%"
+                      height="500"
+                      src={`https://www.youtube.com/embed/${videoId}`}
+                      allowFullScreen
+                      className="rounded-2xl"
+                    />
+
+                  </div>
+
+                );
+              },
+
+            },
+
+          }}
+        />
+
       </div>
 
       <section className="mt-20">
