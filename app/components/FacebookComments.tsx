@@ -1,8 +1,4 @@
 "use client";
-console.log(
-  "FB APP ID:",
-  process.env.NEXT_PUBLIC_FACEBOOK_APP_ID
-);
 
 import { useEffect } from "react";
 
@@ -21,6 +17,11 @@ export default function FacebookComments({ url }: Props) {
 
   useEffect(() => {
 
+    console.log(
+      "FB APP ID:",
+      process.env.NEXT_PUBLIC_FACEBOOK_APP_ID
+    );
+
     window.fbAsyncInit = function () {
 
       window.FB.init({
@@ -33,10 +34,7 @@ export default function FacebookComments({ url }: Props) {
       window.FB.XFBML.parse();
     };
 
-    const existingScript =
-      document.getElementById("facebook-jssdk");
-
-    if (!existingScript) {
+    if (!document.getElementById("facebook-jssdk")) {
 
       const script = document.createElement("script");
 
@@ -61,11 +59,15 @@ export default function FacebookComments({ url }: Props) {
   }, [url]);
 
   return (
-    <div
-      className="fb-comments"
-      data-href={url}
-      data-width="100%"
-      data-numposts="5"
-    />
+    <>
+      <div id="fb-root"></div>
+
+      <div
+        className="fb-comments"
+        data-href={url}
+        data-width="100%"
+        data-numposts="5"
+      ></div>
+    </>
   );
 }
