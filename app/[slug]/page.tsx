@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import FacebookComments from "../components/FacebookComments";
 import { urlFor } from "../lib/image";
 import { client } from "../lib/sanity";
 import { PortableText } from '@portabletext/react';
@@ -157,6 +158,17 @@ export default async function ArticlePage({ params }: Props) {
             }}
           />
         </div>
+        <section className="mt-20">
+
+          <h2 className="text-3xl font-black mb-8">
+            Diskusia
+          </h2>
+
+          <FacebookComments
+            url={`https://nakopni.sk/${slug}`}
+          />
+
+        </section>
 
       </article>
 
