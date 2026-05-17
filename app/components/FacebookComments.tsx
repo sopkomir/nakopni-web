@@ -1,4 +1,8 @@
 "use client";
+console.log(
+  "FB APP ID:",
+  process.env.NEXT_PUBLIC_FACEBOOK_APP_ID
+);
 
 import { useEffect } from "react";
 
