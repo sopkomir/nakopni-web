@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 
 declare global {
   interface Window {
@@ -17,70 +17,46 @@ export default function FacebookComments({
   url,
 }: Props) {
 
-  console.log(
-    "FB APP ID:",
-    process.env.NEXT_PUBLIC_FACEBOOK_APP_ID
-  );
-
-  const commentsRef =
-    useRef<HTMLDivElement>(null);
-
   useEffect(() => {
 
-    const renderComments = () => {
+    const initFacebook = () => {
 
-      if (
-        !window.FB ||
-        !commentsRef.current
-      ) {
+      if (!window.FB) {
         return;
       }
 
-      commentsRef.current.innerHTML = `
-        <div
-          class="fb-comments"
-          data-href="${url}"
-          data-width="100%"
-          data-numposts="5">
-        </div>
-      `;
-
-      window.FB.XFBML.parse(
-        commentsRef.current
-      );
+      window.FB.XFBML.parse();
     };
 
     if (window.FB) {
 
-      renderComments();
+      initFacebook();
 
       return;
     }
 
-    window.fbAsyncInit =
-      function () {
+    window.fbAsyncInit = function () {
 
-        window.FB.init({
-          appId:
-            process.env
-              .NEXT_PUBLIC_FACEBOOK_APP_ID,
+      window.FB.init({
+        appId:
+          process.env
+            .NEXT_PUBLIC_FACEBOOK_APP_ID,
 
-          cookie: true,
+        cookie: true,
 
-          xfbml: true,
+        xfbml: true,
 
-          version: "v19.0",
-        });
+        version: "v19.0",
+      });
 
-        renderComments();
-      };
+      initFacebook();
+    };
 
-    const existingScript =
-      document.getElementById(
+    if (
+      !document.getElementById(
         "facebook-jssdk"
-      );
-
-    if (!existingScript) {
+      )
+    ) {
 
       const script =
         document.createElement("script");
@@ -97,9 +73,16 @@ export default function FacebookComments({
       document.body.appendChild(script);
     }
 
-  }, [url]);
+  }, []);
 
   return (
-    <div ref={commentsRef} />
+
+    <div
+      className="fb-comments"
+      data-href={url}
+      data-width="100%"
+      data-numposts="5"
+    />
+
   );
 }
