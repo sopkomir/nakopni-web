@@ -1,73 +1,26 @@
 "use client";
 
-import { useEffect } from "react";
-
 type Props = {
   url: string;
 };
 
-declare global {
-  interface Window {
-    FB: any;
-    fbAsyncInit: () => void;
-  }
-}
-
 export default function FacebookComments({ url }: Props) {
 
-  useEffect(() => {
-
-    console.log(
-      "FB APP ID:",
-      process.env.NEXT_PUBLIC_FACEBOOK_APP_ID
-    );
-
-    window.fbAsyncInit = function () {
-
-      window.FB.init({
-        appId: process.env.NEXT_PUBLIC_FACEBOOK_APP_ID,
-        cookie: true,
-        xfbml: true,
-        version: "v19.0",
-      });
-
-      window.FB.XFBML.parse();
-    };
-
-    if (!document.getElementById("facebook-jssdk")) {
-
-      const script = document.createElement("script");
-
-      script.id = "facebook-jssdk";
-      script.async = true;
-      script.defer = true;
-      script.crossOrigin = "anonymous";
-
-      script.src =
-        "https://connect.facebook.net/en_US/sdk.js";
-
-      document.body.appendChild(script);
-
-    } else {
-
-      if (window.FB) {
-        window.FB.XFBML.parse();
-      }
-
-    }
-
-  }, [url]);
+  const encodedUrl = encodeURIComponent(url);
 
   return (
-    <>
-      <div id="fb-root"></div>
-
-      <div
-        className="fb-comments"
-        data-href={url}
-        data-width="100%"
-        data-numposts="5"
-      ></div>
-    </>
+    <iframe
+      src={`https://www.facebook.com/plugins/comments.php?href=${encodedUrl}&numposts=5&width=100%`}
+      width="100%"
+      height="600"
+      style={{
+        border: "none",
+        overflow: "hidden",
+      }}
+      scrolling="no"
+      frameBorder="0"
+      allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+      allowFullScreen
+    ></iframe>
   );
 }
