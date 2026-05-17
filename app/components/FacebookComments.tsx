@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 declare global {
   interface Window {
     FB: any;
+    fbAsyncInit: () => void;
   }
 }
 
@@ -12,61 +13,54 @@ type Props = {
   url: string;
 };
 
-export default function FacebookComments({
-  url,
-}: Props) {
+export default function FacebookComments({ url }: Props) {
+  const commentsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const renderComments = () => {
+      if (!window.FB || !commentsRef.current) return;
 
-    const loadFacebook = () => {
+      commentsRef.current.innerHTML = `
+        <div
+          class="fb-comments"
+          data-href="${url}"
+          data-width="100%"
+          data-numposts="5">
+        </div>
+      `;
 
-      if (window.FB) {
-
-        window.FB.XFBML.parse();
-
-        return;
-      }
-
-      const script =
-        document.createElement("script");
-
-      script.src =
-        "https://connect.facebook.net/sk_SK/sdk.js#xfbml=1&version=v19.0&appId=1350044847019137";
-
-      script.async = true;
-
-      script.defer = true;
-
-      script.crossOrigin = "anonymous";
-
-      script.onload = () => {
-
-        if (window.FB) {
-          window.FB.XFBML.parse();
-        }
-
-      };
-
-      document.body.appendChild(script);
-
+      window.FB.XFBML.parse(commentsRef.current);
     };
 
-    loadFacebook();
+    if (window.FB) {
+      renderComments();
+      return;
+    }
 
-  }, []);
+    window.fbAsyncInit = function () {
+      window.FB.init({
+        appId: process.env.NEXT_PUBLIC_FACEBOOK_APP_ID,
+        cookie: true,
+        xfbml: true,
+        version: "v19.0",
+      });
 
-  return (
+      renderComments();
+    };
 
-    <div className="mt-10">
+    const existingScript = document.getElementById("facebook-jssdk");
 
-      <div
-        className="fb-comments"
-        data-href={url}
-        data-width="100%"
-        data-numposts="10"
-      />
+    if (!existingScript) {
+      const script = document.createElement("script");
+      script.id = "facebook-jssdk";
+      script.src =
+        "https://connect.facebook.net/en_US/sdk.js";
+      script.async = true;
+      script.defer = true;
 
-    </div>
+      document.body.appendChild(script);
+    }
+  }, [url]);
 
-  );
+  return <div ref={commentsRef} />;
 }

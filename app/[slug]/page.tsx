@@ -3,30 +3,41 @@ import Link from "next/link";
 import FacebookComments from "../components/FacebookComments";
 import { urlFor } from "../lib/image";
 import { client } from "../lib/sanity";
-import { PortableText } from '@portabletext/react';
+import { PortableText } from "@portabletext/react";
 import Sidebar from "../components/Sidebar";
+
 type Props = {
   params: Promise<{
     slug: string;
   }>;
 };
 
-export default async function ArticlePage({ params }: Props) {
+export default async function ArticlePage({
+  params,
+}: Props) {
 
   const { slug } = await params;
+
   const query = `*[_type == "article" && slug.current == $slug][0] {
     title,
+    slug,
     image,
     excerpt,
     content,
     author,
-    publishedAt
+    publishedAt,
+    category
   }`;
-  const article = await client.fetch(query, { slug });
+
+  const article =
+    await client.fetch(query, { slug });
 
   if (!article) {
+
     return (
+
       <div className="py-20">
+
         <h1 className="text-5xl font-black mb-6">
           Článok neexistuje
         </h1>
@@ -37,24 +48,28 @@ export default async function ArticlePage({ params }: Props) {
         >
           ← Späť na homepage
         </Link>
+
       </div>
     );
   }
 
   const plainText =
-  article.content
-    ?.map((block: any) =>
-      block.children
-        ?.map((child: any) => child.text)
-        .join("")
-    )
-    .join(" ") || "";
+    article.content
+      ?.map((block: any) =>
+        block.children
+          ?.map((child: any) => child.text)
+          .join("")
+      )
+      .join(" ") || "";
 
-  const words = plainText.trim().split(/\s+/).length;
+  const words =
+    plainText.trim().split(/\s+/).length;
 
-  const readingTime = Math.ceil(words / 200);
+  const readingTime =
+    Math.ceil(words / 200);
 
   return (
+
     <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_300px] gap-12 xl:gap-14 mt-10">
 
       <article className="max-w-[1220px]">
@@ -99,14 +114,18 @@ export default async function ArticlePage({ params }: Props) {
           {article.publishedAt && (
             <>
               <span>
-                {new Date(article.publishedAt).toLocaleDateString("sk-SK")}
+                {new Date(
+                  article.publishedAt
+                ).toLocaleDateString("sk-SK")}
               </span>
 
               <span>•</span>
             </>
           )}
 
-          <span>{readingTime} min čítania</span>
+          <span>
+            {readingTime} min čítania
+          </span>
 
         </div>
 
@@ -121,10 +140,12 @@ export default async function ArticlePage({ params }: Props) {
             tracking-[0.01em]
           "
         >
+
           <PortableText
             value={article.content}
             components={{
               block: {
+
                 h2: ({ children }: any) => (
                   <h2 className="text-4xl font-black mt-16 mb-6">
                     {children}
@@ -136,9 +157,16 @@ export default async function ArticlePage({ params }: Props) {
                     {children}
                   </h3>
                 ),
-            },
+
+              },
+
               marks: {
-                link: ({ children, value }: any) => (
+
+                link: ({
+                  children,
+                  value,
+                }: any) => (
+
                   <a
                     href={value.href}
                     target="_blank"
@@ -153,11 +181,16 @@ export default async function ArticlePage({ params }: Props) {
                   >
                     {children}
                   </a>
+
                 ),
+
               },
+
             }}
           />
+
         </div>
+
         <section className="mt-20">
 
           <h2 className="text-3xl font-black mb-8">
@@ -165,7 +198,7 @@ export default async function ArticlePage({ params }: Props) {
           </h2>
 
           <FacebookComments
-            url={`https://nakopni.sk/${slug}`}
+            url={`https://nakopni-web.vercel.app/${article.slug.current}`}
           />
 
         </section>
