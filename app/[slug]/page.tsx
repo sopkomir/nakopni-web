@@ -27,7 +27,7 @@ export default async function ArticlePage({
   }
 
   return (
-    <article className="max-w-5xl mx-auto px-4 py-10">
+    <article className="max-w-5xl mx-auto px-4 py-10 bg-white text-black">
 
       <div className="flex flex-col md:flex-row gap-8 items-start mb-12">
 
@@ -75,7 +75,7 @@ export default async function ArticlePage({
 
       </div>
 
-      <div className="prose prose-lg max-w-none">
+      <div className="prose prose-lg max-w-none prose-neutral">
 
         <PortableText
           value={article.content}

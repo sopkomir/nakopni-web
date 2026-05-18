@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="sk">
-      <body className={oswald.variable}>
+      <body className={`${oswald.variable} bg-white text-black`}>
 
       <div className="max-w-[1400px] mx-auto px-4 md:px-6 py-6">
 
