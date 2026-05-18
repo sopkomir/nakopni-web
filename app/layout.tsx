@@ -15,10 +15,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="sk">
+    <html lang="sk" className="bg-white">
       <body className={`${oswald.variable} bg-white text-black`}>
 
-      <div className="max-w-[1400px] mx-auto px-4 md:px-6 py-6">
+      <div className="max-w-[1400px] mx-auto px-4 md:px-6 py-6 bg-white">
 
           <Header />
 

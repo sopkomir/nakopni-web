@@ -58,3 +58,9 @@ h6 {
   font-weight: normal;
   letter-spacing: 0.04em;
 }
+
+html,
+body {
+  background: white !important;
+  color: black !important;
+}
