@@ -1,3 +1,49 @@
+import { groq } from 'next-sanity'
+
+export const allPostsQuery = groq`
+  *[_type == "article"]
+    | order(publishedAt desc) {
+      _id,
+      title,
+      slug,
+      excerpt,
+      publishedAt,
+      category,
+      image
+    }
+`
+export const homepageQuery = groq`
+{
+  "featured": *[
+    _type == "article" &&
+    featured == true
+  ]
+  | order(publishedAt desc)[0] {
+    _id,
+    title,
+    slug,
+    excerpt,
+    image,
+    category,
+    publishedAt,
+    views
+  },
+
+  "posts": *[
+    _type == "article"
+  ]
+  | order(publishedAt desc) {
+    _id,
+    title,
+    slug,
+    excerpt,
+    image,
+    category,
+    publishedAt,
+    views
+  }
+}
+`
 export const featuredQuery = `
 *[
   _type == "article" &&
@@ -90,6 +136,7 @@ export const articleQuery = `
   category,
   featured,
   author,
-  publishedAt
+  publishedAt,
+  views
 }
 `;
