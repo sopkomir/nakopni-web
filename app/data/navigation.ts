@@ -1,5 +1,5 @@
 export const navigation = [
-    "Domov",
+    "Nakopni.sk",
     "Rozhovory",
     "Komentáre",
     "Blogy",

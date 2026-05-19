@@ -1,27 +1,41 @@
 "use client";
 
 import { useState } from "react";
-import { navigation } from "../data/navigation";
 import Link from "next/link";
 
 export default function Header() {
 
   const [open, setOpen] = useState(false);
 
-  const links: Record<string, string> = {
-    Domov: "/",
-    Rozhovory: "/rozhovory",
-    Komentáre: "/komentare",
-    Blogy: "/blogy",
-    "Zemplínsky dialóg": "/videa",
-  };
+  const links = [
+    {
+      label: "Nakopni.sk",
+      href: "/",
+    },
+    {
+      label: "Reportáže",
+      href: "/reportaze",
+    },
+    {
+      label: "Komentáre",
+      href: "/komentare",
+    },
+    {
+      label: "Zemplínsky dialóg",
+      href: "/videa",
+    },
+    {
+      label: "Biznis",
+      href: "/biznis",
+    },
+  ];
 
   return (
     <header className="border-b border-gray-200 bg-white">
 
       <div className="py-4">
 
-        <div className="grid lg:grid-cols-[260px_1fr] gap-10 items-end">
+        <div className="grid items-end gap-10 lg:grid-cols-[260px_1fr]">
 
           {/* LOGO */}
           <div>
@@ -44,14 +58,14 @@ export default function Header() {
             {/* SLOGAN */}
             <div
               className="
+                mb-4
                 uppercase
                 leading-[0.9]
                 tracking-tight
-                mb-4
                 text-[#8e8e93]
               "
               style={{
-               fontFamily: "'Oswald', sans-serif",
+                fontFamily: "'Oswald', sans-serif",
                 fontSize: "clamp(1.5rem, 2.2vw, 2.8rem)",
               }}
             >
@@ -75,18 +89,18 @@ export default function Header() {
                 }}
               >
 
-                {navigation.map((item) => (
+                {links.map((link) => (
 
-                  <li key={item}>
+                  <li key={link.href}>
 
                     <Link
-                      href={links[item]}
+                      href={link.href}
                       className="
-                        hover:text-orange-500
                         transition-colors
+                        hover:text-orange-500
                       "
                     >
-                      {item}
+                      {link.label}
                     </Link>
 
                   </li>
@@ -102,7 +116,7 @@ export default function Header() {
         </div>
 
         {/* MOBILE BUTTON */}
-        <div className="flex justify-end md:hidden mt-6">
+        <div className="mt-6 flex justify-end md:hidden">
 
           <button
             className="text-3xl font-black"
@@ -116,19 +130,19 @@ export default function Header() {
         {/* MOBILE MENU */}
         {open && (
 
-          <nav className="md:hidden mt-6 border-t border-gray-200 pt-6">
+          <nav className="mt-6 border-t border-gray-200 pt-6 md:hidden">
 
             <ul className="flex flex-col gap-4 text-sm font-bold uppercase">
 
-              {navigation.map((item) => (
+              {links.map((link) => (
 
-                <li key={item}>
+                <li key={link.href}>
 
                   <Link
-                    href={links[item]}
-                    className="hover:text-orange-500 transition-colors"
+                    href={link.href}
+                    className="transition-colors hover:text-orange-500"
                   >
-                    {item}
+                    {link.label}
                   </Link>
 
                 </li>
