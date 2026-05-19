@@ -1,6 +1,6 @@
 import { client } from './lib/sanity'
-import { homepageQuery } from './lib/queries'
-
+import { homepageQuery, latestReportazeQuery } from './lib/queries'
+import ReportazeGrid from './components/ReportazeGrid'
 import Sidebar from './components/Sidebar'
 import ArticleCard from './components/ArticleCard'
 import FeaturedHero from './components/FeaturedHero'
@@ -8,7 +8,10 @@ import FeaturedHero from './components/FeaturedHero'
 export const revalidate = 60
 
 export default async function HomePage() {
-  const data = await client.fetch(homepageQuery)
+  const [data, reportaze] = await Promise.all([
+  client.fetch(homepageQuery),
+  client.fetch(latestReportazeQuery),
+  ])
 
   const featured = data.featured
 
@@ -21,7 +24,7 @@ export default async function HomePage() {
 
       {/* HERO */}
       <FeaturedHero post={featured} />
-
+      <ReportazeGrid posts={reportaze} />
       {/* CONTENT */}
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1fr)_360px]">
 

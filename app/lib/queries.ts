@@ -160,3 +160,18 @@ export const reportazeQuery = `
   views
 }
 `;
+
+export const latestReportazeQuery = `
+*[
+  _type == "article" &&
+  category == "reportaze"
+]
+| order(publishedAt desc)[0...3] {
+  _id,
+  title,
+  slug,
+  excerpt,
+  image,
+  publishedAt
+}
+`;
