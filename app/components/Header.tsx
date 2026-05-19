@@ -51,7 +51,7 @@ export default function Header() {
                 text-[#8e8e93]
               "
               style={{
-               fontFamily: "'Anton', sans-serif",
+               fontFamily: "'Oswald', sans-serif",
                 fontSize: "clamp(1.5rem, 2.2vw, 2.8rem)",
               }}
             >
