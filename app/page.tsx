@@ -15,8 +15,13 @@ export default async function HomePage() {
 
   const featured = data.featured
 
+  const excludedIds = [
+  featured?._id,
+  ...reportaze.map((post: any) => post._id),
+  ]
+
   const posts = data.posts.filter(
-    (post: any) => post._id !== featured?._id
+  (post: any) => !excludedIds.includes(post._id)
   )
 
   return (
