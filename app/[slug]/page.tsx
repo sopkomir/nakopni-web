@@ -27,7 +27,7 @@ export default async function ArticlePage({
   }
 
   return (
-    <main className="bg-white text-black dark:bg-black dark:text-white">
+    <main className="bg-white text-black">
 
       <div className="mx-auto max-w-7xl px-4 py-10">
         <Breadcrumbs
@@ -104,7 +104,7 @@ export default async function ArticlePage({
           {/* ARTICLE CONTENT */}
           <div>
 
-            <div className="prose prose-lg max-w-none prose-neutral dark:prose-invert">
+            <div className="prose prose-lg max-w-none prose-neutral text-black">
 
               <PortableText
                 value={article.content}
