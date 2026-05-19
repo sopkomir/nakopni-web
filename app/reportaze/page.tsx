@@ -1,42 +1,44 @@
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
+
 import Comments from "../components/Comments";
 import Sidebar from "../components/Sidebar";
+
 import { client } from "../lib/sanity";
-import { commentsQuery } from "../lib/queries";
+import { reportazeQuery } from "../lib/queries";
 
 export default async function ReportazePage() {
 
-  const comments = await client.fetch(commentsQuery);
+  const reportaze = await client.fetch(reportazeQuery);
 
   return (
-    <div className="flex flex-col xl:flex-row gap-10 mt-10">
+    <div className="mt-10 flex flex-col gap-10 xl:flex-row">
 
       <main className="flex-1">
 
         <a
           href="/"
-          className="inline-block text-sm uppercase tracking-wide font-bold text-gray-500 hover:text-orange-500 mb-10"
+          className="mb-10 inline-block text-sm font-bold uppercase tracking-wide text-gray-500 hover:text-orange-500"
         >
           ← Späť na homepage
         </a>
 
         <div className="mb-12">
 
-          <div className="text-sm uppercase tracking-[0.3em] text-gray-500 font-bold mb-4">
+          <div className="mb-4 text-sm font-bold uppercase tracking-[0.3em] text-gray-500">
             Reportáže
           </div>
 
-          <h1 className="text-5xl md:text-7xl leading-none">
+          <h1 className="text-5xl leading-none md:text-7xl">
             Reportáže z rôznych kútov Slovenska a sveta
           </h1>
 
         </div>
 
-        <Comments articles={comments} />
+        <Comments articles={reportaze} />
 
       </main>
-     
+
       <aside className="w-full xl:w-[360px]">
 
         <div className="sticky top-28">
@@ -44,7 +46,7 @@ export default async function ReportazePage() {
         </div>
 
       </aside>
-    
+
     </div>
   );
 }

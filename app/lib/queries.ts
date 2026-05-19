@@ -140,3 +140,23 @@ export const articleQuery = `
   views
 }
 `;
+
+export const reportazeQuery = `
+*[
+  _type == "article" &&
+  category == "reportaze"
+]
+| order(publishedAt desc) {
+  _id,
+  title,
+  slug,
+  excerpt,
+  content,
+  image,
+  category,
+  featured,
+  author,
+  publishedAt,
+  views
+}
+`;
