@@ -43,6 +43,16 @@ export default async function Sidebar() {
         ))}
 
       </div>
+      {/* PARTNER */}
+      <div className="mt-10">
+
+        <img
+          src="/boka-reklama.JPG"
+          alt="Partner"
+          className="block w-full h-auto rounded-2xl"
+        />
+
+      </div>
 
     </aside>
   );
