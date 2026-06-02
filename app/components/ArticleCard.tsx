@@ -80,11 +80,15 @@ export default function ArticleCard({
           </div>
 
           {/* TITLE */}
-          <h2 className="text-3xl font-bold leading-tight tracking-tight transition-colors group-hover:text-zinc-600 dark:group-hover:text-zinc-300">
+          <div className="flex items-start gap-3">
 
-            {post.title}
+            <span className="mt-3 h-3 w-3 flex-shrink-0 bg-orange-500" />
 
-          </h2>
+            <h2 className="text-3xl font-bold leading-tight tracking-tight transition-colors group-hover:text-zinc-600 dark:group-hover:text-zinc-300">
+              {post.title}
+            </h2>
+
+          </div>
 
           {/* EXCERPT */}
           {post.excerpt && (

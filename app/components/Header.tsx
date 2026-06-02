@@ -33,9 +33,9 @@ export default function Header() {
   return (
     <header className="border-b border-gray-200 bg-white">
 
-      <div className="py-4">
+      <div className="mx-auto max-w-7xl px-4">
 
-        <div className="grid items-end gap-10 lg:grid-cols-[260px_1fr]">
+        <div className="grid items-center gap-10 lg:grid-cols-[320px_1fr]">
 
           {/* LOGO */}
           <div>
@@ -43,9 +43,9 @@ export default function Header() {
             <Link href="/">
 
               <img
-                src="/logo_nakopni.png"
+                src="/logo_nakopni.svg"
                 alt="Nakopni.sk"
-                className="h-32 w-auto"
+                className="h-36 w-auto"
               />
 
             </Link>

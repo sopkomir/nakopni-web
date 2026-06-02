@@ -12,6 +12,7 @@ export const allPostsQuery = groq`
       image
     }
 `
+
 export const homepageQuery = groq`
 {
   "featured": *[
@@ -29,10 +30,12 @@ export const homepageQuery = groq`
     views
   },
 
-  "posts": *[
-    _type == "article"
+  "komentare": *[
+    _type == "article" &&
+    category == "komentar" &&
+    featured != true
   ]
-  | order(publishedAt desc) {
+  | order(publishedAt desc)[0...5] {
     _id,
     title,
     slug,
@@ -41,9 +44,21 @@ export const homepageQuery = groq`
     category,
     publishedAt,
     views
+  },
+
+  "fotoclanok": *[
+    _type == "fotoclanok"
+  ]
+  | order(publishedAt desc)[0] {
+    _id,
+    title,
+    slug,
+    image,
+    publishedAt
   }
 }
 `
+
 export const featuredQuery = `
 *[
   _type == "article" &&

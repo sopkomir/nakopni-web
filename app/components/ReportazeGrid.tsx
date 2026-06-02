@@ -61,18 +61,23 @@ export default function ReportazeGrid({ posts }: Props) {
               </div>
 
               {/* TITLE */}
-              <h3
-                className="
-                  mb-3
-                  text-2xl
-                  font-black
-                  leading-tight
-                  transition-colors
-                  group-hover:text-orange-500
-                "
-              >
-                {post.title}
-              </h3>
+              <div className="mb-3 flex items-start gap-3">
+
+                <span className="mt-2 h-3 w-3 flex-shrink-0 bg-orange-500" />
+
+                <h3
+                  className="
+                    text-2xl
+                    font-black
+                    leading-tight
+                    transition-colors
+                    group-hover:text-orange-500
+                  "
+                >
+                  {post.title}
+                </h3>
+
+              </div>
 
               {/* EXCERPT */}
               {post.excerpt && (

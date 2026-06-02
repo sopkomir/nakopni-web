@@ -38,9 +38,15 @@ export default function FeaturedHero({ post }: Props) {
 
           </div>
 
-          <h1 className="text-4xl font-bold leading-tight tracking-tight text-black md:text-5xl">
-            {post.title}
-          </h1>
+          <div className="flex items-start gap-4">
+
+            <span className="mt-4 h-4 w-4 flex-shrink-0 bg-orange-500" />
+
+            <h1 className="text-4xl font-bold leading-tight tracking-tight text-black md:text-5xl">
+              {post.title}
+            </h1>
+
+          </div>
 
           {post.excerpt && (
             <p className="mt-6 text-lg leading-relaxed text-zinc-600">
