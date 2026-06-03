@@ -1,16 +1,23 @@
 import { NextResponse } from "next/server";
-import { client } from "@/app/lib/sanity";
+import { writeClient } from "@/app/lib/sanity";
 
 export async function POST(req: Request) {
-  const { id } = await req.json();
+  try {
+    const { id } = await req.json();
 
-  await client
-    .patch(id)
-    .setIfMissing({ views: 0 })
-    .inc({ views: 1 })
-    .commit();
+    await writeClient
+      .patch(id)
+      .setIfMissing({ views: 0 })
+      .inc({ views: 1 })
+      .commit();
 
-  return NextResponse.json({
-    success: true,
-  });
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error(error);
+
+    return NextResponse.json(
+      { success: false },
+      { status: 500 }
+    );
+  }
 }
