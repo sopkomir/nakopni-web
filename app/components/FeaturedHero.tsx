@@ -24,7 +24,7 @@ export default function FeaturedHero({ post }: Props) {
         bg-white
       "
     >
-      <div className="grid lg:grid-cols-[1.2fr_0.8fr]">
+      <div className="grid lg:grid-cols-[1.3fr_0.7fr]">
 
         {/* LEFT */}
         <div className="flex flex-col justify-center p-8 md:p-12">
@@ -78,20 +78,19 @@ export default function FeaturedHero({ post }: Props) {
         </div>
 
         {/* RIGHT */}
-        <div className="flex items-center justify-center p-6">
+        <div className="flex items-start justify-center p-8 pt-12">
 
           {post.image && (
             <Image
               src={urlForImage(post.image)
-                .width(900)
+                .width(700)
                 .url()}
               alt={post.title}
-              width={900}
-              height={600}
+              width={700}
+              height={400}
               className="
-                h-auto
-                max-h-[420px]
-                w-auto
+                w-full
+                max-w-[360px]
                 rounded-2xl
                 object-contain
               "
