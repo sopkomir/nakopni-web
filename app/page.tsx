@@ -1,5 +1,6 @@
 import { client } from './lib/sanity'
 import { homepageQuery, latestReportazeQuery } from './lib/queries'
+
 import PhotoArticleSection from './components/PhotoArticleSection'
 import FeaturedHero from './components/FeaturedHero'
 import ReportazeGrid from './components/ReportazeGrid'
@@ -17,20 +18,25 @@ export default async function HomePage() {
   return (
     <main className="mx-auto max-w-7xl px-4 py-10">
 
-      <FeaturedHero post={data.featured} />
+      <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_360px]">
 
-      <ReportazeGrid posts={reportaze} />
+        {/* LEFT COLUMN */}
+        <div>
 
-      <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1fr)_360px]">
+          <FeaturedHero post={data.featured} />
 
-        <div className="space-y-6">
+          <ReportazeGrid posts={reportaze} />
 
-          {data.komentare.map((post: any) => (
-            <ArticleCard
-              key={post._id}
-              post={post}
-            />
-          ))}
+          <div className="space-y-6">
+
+            {data.komentare.map((post: any) => (
+              <ArticleCard
+                key={post._id}
+                post={post}
+              />
+            ))}
+
+          </div>
 
           <PhotoArticleSection
             post={data.fotoclanok}
@@ -38,10 +44,13 @@ export default async function HomePage() {
 
         </div>
 
-        <aside className="hidden lg:block">
+        {/* RIGHT COLUMN */}
+        <aside>
 
-          <div className="sticky top-24">
+          <div className="lg:sticky lg:top-24">
+
             <Sidebar />
+
           </div>
 
         </aside>
