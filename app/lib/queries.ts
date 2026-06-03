@@ -121,7 +121,8 @@ export const blogsQuery = `
 export const rozhovoryQuery = `
 *[
   _type == "article" &&
-  category == "rozhovor"
+  category == "rozhovor" &&
+  featured != true
 ]
 | order(publishedAt desc) {
   _id,
@@ -159,7 +160,8 @@ export const articleQuery = `
 export const reportazeQuery = `
 *[
   _type == "article" &&
-  category == "reportaze"
+  category == "reportaze" &&
+  featured != true
 ]
 | order(publishedAt desc) {
   _id,
@@ -179,7 +181,8 @@ export const reportazeQuery = `
 export const latestReportazeQuery = `
 *[
   _type == "article" &&
-  category == "reportaze"
+  category == "reportaze" &&
+  featured != true
 ]
 | order(publishedAt desc)[0...3] {
   _id,
