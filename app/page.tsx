@@ -16,9 +16,9 @@ export default async function HomePage() {
   ])
 
   return (
-    <main className="mx-auto max-w-7xl px-4 py-10">
+    <main className="mx-auto max-w-[1600px] px-6 py-10">
 
-      <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_360px]">
+      <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1fr)_380px]">
 
         {/* LEFT COLUMN */}
         <div>
