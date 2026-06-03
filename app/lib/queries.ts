@@ -27,6 +27,7 @@ export const homepageQuery = groq`
     image,
     category,
     publishedAt,
+    author,
     views
   },
 

@@ -24,10 +24,10 @@ export default function FeaturedHero({ post }: Props) {
         bg-white
       "
     >
-      <div className="grid lg:grid-cols-[1.3fr_0.7fr]">
+      <div className="grid lg:grid-cols-[2fr_1fr]">
 
-        {/* LEFT */}
-        <div className="flex flex-col justify-center p-8 md:p-12">
+        {/* TEXT */}
+        <div className="p-8 md:p-12">
 
           <div className="mb-4">
             <span className="rounded-full bg-zinc-100 px-4 py-1 text-sm text-black">
@@ -37,16 +37,22 @@ export default function FeaturedHero({ post }: Props) {
 
           <div className="flex items-start gap-4">
 
-            <span className="mt-4 h-4 w-4 shrink-0 bg-orange-500" />
+            <span className="mt-3 h-4 w-4 shrink-0 bg-orange-500" />
 
-            <h1 className="text-4xl font-bold leading-tight tracking-tight text-black md:text-5xl">
+            <h1 className="text-4xl font-bold leading-tight tracking-tight text-black">
               {post.title}
             </h1>
 
           </div>
 
+          {post.author && (
+            <p className="mt-6 text-sm text-zinc-700">
+              {post.author}
+            </p>
+          )}
+
           {post.publishedAt && (
-            <p className="mt-6 text-sm text-zinc-500">
+            <p className="mt-1 text-sm text-zinc-500">
               {new Date(post.publishedAt).toLocaleDateString('sk-SK', {
                 day: 'numeric',
                 month: 'long',
@@ -55,14 +61,8 @@ export default function FeaturedHero({ post }: Props) {
             </p>
           )}
 
-          {post.author && (
-            <p className="mt-2 text-sm font-medium text-zinc-700">
-              Autor: {post.author}
-            </p>
-          )}
-
           {post.excerpt && (
-            <p className="mt-6 text-lg leading-relaxed text-zinc-600">
+            <p className="mt-8 max-w-3xl text-xl leading-relaxed text-zinc-700">
               {post.excerpt}
             </p>
           )}
@@ -77,22 +77,23 @@ export default function FeaturedHero({ post }: Props) {
 
         </div>
 
-        {/* RIGHT */}
+        {/* FOTO */}
         <div className="flex items-start justify-center p-8 pt-12">
 
           {post.image && (
             <Image
               src={urlForImage(post.image)
-                .width(700)
+                .width(600)
+                .height(400)
                 .url()}
               alt={post.title}
-              width={700}
+              width={600}
               height={400}
               className="
                 w-full
-                max-w-[360px]
-                rounded-2xl
-                object-contain
+                max-w-[300px]
+                rounded-xl
+                object-cover
               "
             />
           )}
