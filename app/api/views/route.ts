@@ -1,3 +1,4 @@
+console.log("TOKEN:", !!process.env.SANITY_API_TOKEN);
 import { NextResponse } from "next/server";
 import { writeClient } from "@/app/lib/sanity";
 
