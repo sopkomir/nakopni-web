@@ -24,45 +24,41 @@ export default function FeaturedHero({ post }: Props) {
         bg-white
       "
     >
-
-      <div className="grid gap-0 lg:grid-cols-[2fr_1fr]">
+      <div className="grid lg:grid-cols-[1.2fr_0.8fr]">
 
         {/* LEFT */}
         <div className="flex flex-col justify-center p-8 md:p-12">
 
           <div className="mb-4">
-
             <span className="rounded-full bg-zinc-100 px-4 py-1 text-sm text-black">
               Všimnite si
             </span>
-
           </div>
 
           <div className="flex items-start gap-4">
 
-            <span className="mt-4 h-4 w-4 flex-shrink-0 bg-orange-500" />
+            <span className="mt-4 h-4 w-4 shrink-0 bg-orange-500" />
 
-            <h1 className="text-4xl font-bold leading-tight tracking-tight text-black">
+            <h1 className="text-4xl font-bold leading-tight tracking-tight text-black md:text-5xl">
               {post.title}
             </h1>
 
           </div>
 
-          {(post.author || post.publishedAt) && (
-            <div className="mt-4 text-sm text-zinc-500">
+          {post.publishedAt && (
+            <p className="mt-6 text-sm text-zinc-500">
+              {new Date(post.publishedAt).toLocaleDateString('sk-SK', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric',
+              })}
+            </p>
+          )}
 
-              {post.author}
-
-              {post.author && post.publishedAt && ' • '}
-
-              {post.publishedAt &&
-                new Date(post.publishedAt).toLocaleDateString('sk-SK', {
-                  day: 'numeric',
-                  month: 'long',
-                  year: 'numeric',
-                })}
-
-            </div>
+          {post.author && (
+            <p className="mt-2 text-sm font-medium text-zinc-700">
+              Autor: {post.author}
+            </p>
           )}
 
           {post.excerpt && (
@@ -72,43 +68,39 @@ export default function FeaturedHero({ post }: Props) {
           )}
 
           <div className="mt-8 inline-flex items-center text-sm font-medium text-black">
-
             Čítať článok
 
             <span className="ml-2 transition-transform group-hover:translate-x-1">
               →
             </span>
-
           </div>
 
         </div>
 
         {/* RIGHT */}
-        <div className="relative min-h-[260px] lg:min-h-[320px]">
+        <div className="flex items-center justify-center p-6">
 
           {post.image && (
-
             <Image
               src={urlForImage(post.image)
-                .width(1200)
-                .height(800)
+                .width(900)
                 .url()}
               alt={post.title}
-              fill
+              width={900}
+              height={600}
               className="
-                object-cover
-                transition-transform
-                duration-700
-                group-hover:scale-105
+                h-auto
+                max-h-[420px]
+                w-auto
+                rounded-2xl
+                object-contain
               "
             />
-
           )}
 
         </div>
 
       </div>
-
     </Link>
   )
 }
