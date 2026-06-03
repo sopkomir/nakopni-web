@@ -1,5 +1,5 @@
 import Image from "next/image";
-
+import ViewCounter from "../components/ViewCounter";
 import { client } from "../lib/sanity";
 import { articleQuery } from "../lib/queries";
 import { urlFor } from "../lib/image";
@@ -25,8 +25,12 @@ export default async function ArticlePage({
   if (!article) {
     return <div>Článok neexistuje.</div>;
   }
+  <ViewCounter articleId={article._id} />
 
   return (
+  <>
+    <ViewCounter articleId={article._id} />
+
     <main className="bg-white text-black">
 
       <div className="mx-auto max-w-7xl px-4 py-10">
