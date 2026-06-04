@@ -10,6 +10,11 @@ interface Props {
 export default function FeaturedHero({ post }: Props) {
   if (!post) return null
 
+  const shortExcerpt =
+    post.excerpt?.length > 220
+      ? post.excerpt.slice(0, 220) + '...'
+      : post.excerpt
+
   return (
     <Link
       href={`/${post.slug.current}`}
@@ -17,86 +22,64 @@ export default function FeaturedHero({ post }: Props) {
     >
       <div className="grid gap-8 lg:grid-cols-[1fr_340px]">
 
-        {/* LEFT */}
-
+        {/* TEXT */}
         <div>
-
-          <div className="mb-4">
-            <span className="rounded-full bg-zinc-100 px-4 py-1 text-sm text-black">
-              Všimnite si
-            </span>
-          </div>
 
           <div className="flex items-start gap-4">
 
             <span className="mt-3 h-4 w-4 shrink-0 bg-orange-500" />
 
-            <h1 className="text-5xl font-bold leading-tight tracking-tight text-black">
+            <h1
+              className="
+                text-4xl
+                font-bold
+                leading-tight
+                text-black
+                lg:text-5xl
+              "
+            >
               {post.title}
             </h1>
 
           </div>
 
-          <div className="mt-5 flex flex-wrap items-center gap-3 text-sm text-zinc-500">
-
-            {post.author && (
-              <span className="font-medium text-zinc-700">
-                {post.author}
-              </span>
-            )}
-
-            {post.author && post.publishedAt && (
-              <span>•</span>
-            )}
-
-            {post.publishedAt && (
-              <span>
-                {new Date(post.publishedAt).toLocaleDateString('sk-SK', {
-                  day: 'numeric',
-                  month: 'long',
-                  year: 'numeric',
-                })}
-              </span>
-            )}
-
-          </div>
-
-          {post.excerpt && (
-            <p className="mt-6 max-w-3xl text-xl leading-relaxed text-zinc-700">
-              {post.excerpt}
+          {shortExcerpt && (
+            <p
+              className="
+                mt-6
+                max-w-2xl
+                text-base
+                leading-8
+                text-zinc-700
+              "
+            >
+              {shortExcerpt}
             </p>
           )}
-
-          <div className="mt-6 inline-flex items-center text-sm font-medium text-black">
-
-            Čítať článok
-
-            <span className="ml-2 transition-transform group-hover:translate-x-1">
-              →
-            </span>
-
-          </div>
 
         </div>
 
         {/* FOTO */}
-
         {post.image && (
 
-          <Image
-            src={urlForImage(post.image)
-              .width(700)
-              .height(400)
-              .url()}
-            alt={post.title}
-            width={700}
-            height={400}
-            className="
-              w-full
-              rounded-lg
-              object-cover
-            "
-          />
+          <div className="w-full">
+
+            <Image
+              src={urlForImage(post.image)
+                .width(700)
+                .height(400)
+                .url()}
+              alt={post.title}
+              width={700}
+              height={400}
+              className="
+                w-full
+                rounded-xl
+                object-cover
+              "
+            />
+
+          </div>
 
         )}
 
