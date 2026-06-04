@@ -11,16 +11,23 @@ export default function FeaturedHero({ post }: Props) {
   if (!post) return null
 
   const shortExcerpt =
-    post.excerpt?.length > 220
-      ? post.excerpt.slice(0, 220) + '...'
+    post.excerpt?.length > 120
+      ? post.excerpt.slice(0, 120) + '...'
       : post.excerpt
 
   return (
     <Link
       href={`/${post.slug.current}`}
-      className="group mb-10 block"
+      className="group mb-8 block"
     >
-      <div className="grid gap-8 lg:grid-cols-[1fr_340px]">
+      <div
+        className="
+          grid
+          items-start
+          gap-3
+          lg:grid-cols-[1fr_360px]
+        "
+      >
 
         {/* TEXT */}
         <div>
@@ -46,10 +53,10 @@ export default function FeaturedHero({ post }: Props) {
           {shortExcerpt && (
             <p
               className="
-                mt-6
-                max-w-2xl
+                mt-3
+                max-w-xl
                 text-base
-                leading-8
+                leading-7
                 text-zinc-700
               "
             >
@@ -66,15 +73,15 @@ export default function FeaturedHero({ post }: Props) {
 
             <Image
               src={urlForImage(post.image)
-                .width(700)
-                .height(400)
+                .width(720)
+                .height(405)
                 .url()}
               alt={post.title}
-              width={700}
-              height={400}
+              width={720}
+              height={405}
               className="
                 w-full
-                rounded-xl
+                rounded-lg
                 object-cover
               "
             />
