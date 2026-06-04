@@ -33,7 +33,7 @@ export default function Header() {
   return (
     <header className="border-b border-gray-200 bg-white">
 
-      <div className="mx-auto max-w-7xl px-4">
+      <div className="mx-auto max-w-[1500px] px-4">
 
         <div className="grid items-center gap-10 lg:grid-cols-[320px_1fr]">
 
