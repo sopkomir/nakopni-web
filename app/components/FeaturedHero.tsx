@@ -12,7 +12,7 @@ export default function FeaturedHero({ post }: Props) {
 
   const shortExcerpt =
     post.excerpt?.length > 120
-      ? post.excerpt.slice(0, 140) + '...'
+      ? post.excerpt.slice(0, 150) + '...'
       : post.excerpt
 
   return (
@@ -38,7 +38,7 @@ export default function FeaturedHero({ post }: Props) {
 
             <h1
               className="
-                text-4xl
+                text-3xl
                 font-bold
                 leading-tight
                 text-black
