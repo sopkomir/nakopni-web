@@ -20,12 +20,12 @@ export default function FeaturedHero({ post }: Props) {
       href={`/${post.slug.current}`}
       className="group mb-8 block"
     >
-      <div className="grid items-start gap-1 lg:grid-cols-[minmax(0,5fr)_360px]">
+      <div className="grid items-start gap-1 lg:grid-cols-[minmax(0,2fr)_360px]">
 
         {/* TEXT */}
         <div>
 
-          <div className="flex items-start gap-4">
+          <div className="flex items-start gap-2">
 
             <span className="mt-3 h-4 w-4 shrink-0 bg-orange-500" />
 
