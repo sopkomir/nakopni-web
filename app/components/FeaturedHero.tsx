@@ -12,7 +12,7 @@ export default function FeaturedHero({ post }: Props) {
 
   const shortExcerpt =
     post.excerpt?.length > 120
-      ? post.excerpt.slice(0, 180) + '...'
+      ? post.excerpt.slice(0, 240) + '...'
       : post.excerpt
 
   return (
@@ -20,7 +20,7 @@ export default function FeaturedHero({ post }: Props) {
       href={`/${post.slug.current}`}
       className="group mb-8 block"
     >
-      <div className="grid items-start gap-1 lg:grid-cols-[minmax(0,3fr)_360px]">
+      <div className="grid items-start gap-1 lg:grid-cols-[minmax(0,5fr)_360px]">
 
         {/* TEXT */}
         <div>
