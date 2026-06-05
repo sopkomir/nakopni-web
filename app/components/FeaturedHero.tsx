@@ -11,34 +11,42 @@ export default function FeaturedHero({ post }: Props) {
   if (!post) return null
 
   const shortExcerpt =
-    post.excerpt?.length > 120
-      ? post.excerpt.slice(0, 240) + '...'
+    post.excerpt?.length > 90
+      ? post.excerpt.slice(0, 90) + '...'
       : post.excerpt
 
   return (
     <Link
       href={`/${post.slug.current}`}
-      className="group mb-8 block"
+      className="group mb-6 block"
     >
-      <div className="grid items-start gap-4 lg:grid-cols-[auto_360px]">
+      <div
+        className="
+          grid
+          items-start
+          gap-2
+          lg:grid-cols-[480px_360px]
+        "
+      >
 
         {/* TEXT */}
-        <div>
+        <div className="max-w-[480px]">
 
-          <div className="flex items-start gap-2">
+          <div className="flex items-start gap-3">
 
-            <span className="mt-3 h-4 w-4 shrink-0 bg-orange-500" />
+            <span className="mt-2 h-4 w-4 shrink-0 bg-orange-500" />
 
             <h1
               className="
-              text-2xl
-              font-bold
-              leading-tight
-              text-black
-              transition-colors
-              duration-200
-              group-hover:text-orange-500
-              lg:text-4xl"
+                text-2xl
+                lg:text-3xl
+                font-bold
+                leading-tight
+                text-black
+                transition-colors
+                duration-200
+                group-hover:text-orange-500
+              "
             >
               {post.title}
             </h1>
@@ -49,10 +57,12 @@ export default function FeaturedHero({ post }: Props) {
             <p
               className="
                 mt-3
-                max-w-xl
                 text-base
                 leading-7
                 text-zinc-700
+                transition-colors
+                duration-200
+                group-hover:text-orange-500
               "
             >
               {shortExcerpt}
@@ -63,7 +73,6 @@ export default function FeaturedHero({ post }: Props) {
 
         {/* FOTO */}
         {post.image && (
-
           <div className="w-full">
 
             <Image
@@ -82,7 +91,6 @@ export default function FeaturedHero({ post }: Props) {
             />
 
           </div>
-
         )}
 
       </div>
