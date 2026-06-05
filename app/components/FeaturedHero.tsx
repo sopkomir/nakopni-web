@@ -20,7 +20,7 @@ export default function FeaturedHero({ post }: Props) {
       href={`/${post.slug.current}`}
       className="group mb-8 block"
     >
-      <div className="grid items-start gap-1 lg:grid-cols-[minmax(0,2fr)_360px]">
+      <div className="grid items-start gap-4 lg:grid-cols-[auto_360px]">
 
         {/* TEXT */}
         <div>
