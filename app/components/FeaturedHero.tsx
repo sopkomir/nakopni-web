@@ -12,7 +12,7 @@ export default function FeaturedHero({ post }: Props) {
 
   const shortExcerpt =
     post.excerpt?.length > 200
-      ? post.excerpt.slice(0, 200) + '...'
+      ? post.excerpt.slice(0, 240) + '...'
       : post.excerpt
 
   return (
