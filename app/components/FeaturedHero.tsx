@@ -38,7 +38,7 @@ export default function FeaturedHero({ post }: Props) {
               transition-colors
               duration-200
               group-hover:text-orange-500
-              lg:text-3xl"
+              lg:text-4xl"
             >
               {post.title}
             </h1>
