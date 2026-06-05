@@ -20,7 +20,16 @@ export default function FeaturedHero({ post }: Props) {
       href={`/${post.slug.current}`}
       className="group mb-8 block"
     >
-      <div className="flex items-start gap-4">
+      <div
+        className="
+          flex
+          flex-col
+          gap-4
+          lg:flex-row
+          lg:items-start
+          lg:gap-2
+        "
+      >
 
         {/* TEXT */}
         <div className="flex-1 min-w-0">
@@ -34,13 +43,14 @@ export default function FeaturedHero({ post }: Props) {
               <h1
                 className="
                   max-w-[500px]
-                  text-2xl
+                  text-xl
                   font-bold
                   leading-tight
                   text-black
                   transition-colors
                   duration-200
                   group-hover:text-orange-500
+                  sm:text-2xl
                   lg:text-3xl
                 "
               >
@@ -69,7 +79,13 @@ export default function FeaturedHero({ post }: Props) {
 
         {/* FOTO */}
         {post.image && (
-          <div className="w-[360px] shrink-0">
+          <div
+            className="
+              w-full
+              shrink-0
+              lg:w-[360px]
+            "
+          >
 
             <Image
               src={urlForImage(post.image)
