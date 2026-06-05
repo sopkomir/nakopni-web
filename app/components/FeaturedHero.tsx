@@ -20,14 +20,7 @@ export default function FeaturedHero({ post }: Props) {
       href={`/${post.slug.current}`}
       className="group mb-8 block"
     >
-      <div
-        className="
-          grid
-          items-start
-          gap-3
-          lg:grid-cols-[1fr_360px]
-        "
-      >
+      <div className="grid items-start gap-1 lg:grid-cols-[minmax(0,1fr)_360px]">
 
         {/* TEXT */}
         <div>
@@ -38,12 +31,14 @@ export default function FeaturedHero({ post }: Props) {
 
             <h1
               className="
-                text-6xl
-                font-bold
-                leading-tight
-                text-black
-                lg:text-5xl
-              "
+              text-2xl
+              font-bold
+              leading-tight
+              text-black
+              transition-colors
+              duration-200
+              group-hover:text-orange-500
+              lg:text-3xl"
             >
               {post.title}
             </h1>
