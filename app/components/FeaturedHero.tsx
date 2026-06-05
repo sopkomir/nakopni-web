@@ -11,69 +11,65 @@ export default function FeaturedHero({ post }: Props) {
   if (!post) return null
 
   const shortExcerpt =
-    post.excerpt?.length > 90
-      ? post.excerpt.slice(0, 90) + '...'
+    post.excerpt?.length > 200
+      ? post.excerpt.slice(0, 200) + '...'
       : post.excerpt
 
   return (
     <Link
       href={`/${post.slug.current}`}
-      className="group mb-6 block"
+      className="group mb-8 block"
     >
-      <div
-        className="
-          grid
-          items-start
-          gap-2
-          lg:grid-cols-[480px_360px]
-        "
-      >
+      <div className="flex items-start gap-4">
 
         {/* TEXT */}
-        <div className="max-w-[480px]">
+        <div className="flex-1 min-w-0">
 
           <div className="flex items-start gap-3">
 
             <span className="mt-2 h-4 w-4 shrink-0 bg-orange-500" />
 
-            <h1
-              className="
-                text-2xl
-                lg:text-3xl
-                font-bold
-                leading-tight
-                text-black
-                transition-colors
-                duration-200
-                group-hover:text-orange-500
-              "
-            >
-              {post.title}
-            </h1>
+            <div>
+
+              <h1
+                className="
+                  max-w-[500px]
+                  text-2xl
+                  font-bold
+                  leading-tight
+                  text-black
+                  transition-colors
+                  duration-200
+                  group-hover:text-orange-500
+                  lg:text-3xl
+                "
+              >
+                {post.title}
+              </h1>
+
+              {shortExcerpt && (
+                <p
+                  className="
+                    mt-4
+                    max-w-[520px]
+                    text-base
+                    leading-8
+                    text-zinc-700
+                  "
+                >
+                  {shortExcerpt}
+                </p>
+              )}
+
+            </div>
 
           </div>
-
-          {shortExcerpt && (
-            <p
-              className="
-                mt-3
-                text-base
-                leading-7
-                text-zinc-700
-                transition-colors
-                duration-200
-                group-hover:text-orange-500
-              "
-            >
-              {shortExcerpt}
-            </p>
-          )}
 
         </div>
 
         {/* FOTO */}
         {post.image && (
-          <div className="w-full">
+          <div className="w-[360px] shrink-0">
 
             <Image
               src={urlForImage(post.image)
@@ -84,6 +80,7 @@ export default function FeaturedHero({ post }: Props) {
               width={720}
               height={405}
               className="
+                aspect-video
                 w-full
                 rounded-lg
                 object-cover
