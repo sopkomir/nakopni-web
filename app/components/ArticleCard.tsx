@@ -21,20 +21,28 @@ interface ArticleCardProps {
 export default function ArticleCard({
   post,
 }: ArticleCardProps) {
-
   return (
     <Link
       href={`/${post.slug.current}`}
-      className="group block border-b border-zinc-200 pb-10 transition-colors dark:border-zinc-800"
+      className="group block border-b border-zinc-200 pb-8"
     >
-
-      <article className="flex gap-6">
+      <article className="flex gap-5">
 
         {/* IMAGE */}
         {post.image && (
-
-          <div className="relative h-[160px] w-[160px] flex-shrink-0 overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-800 md:h-[180px] md:w-[180px]">
-
+          <div
+            className="
+              relative
+              h-[140px]
+              w-[140px]
+              shrink-0
+              overflow-hidden
+              rounded-xl
+              bg-zinc-100
+              md:h-[160px]
+              md:w-[160px]
+            "
+          >
             <Image
               src={urlForImage(post.image)
                 .width(600)
@@ -42,21 +50,25 @@ export default function ArticleCard({
                 .url()}
               alt={post.title}
               fill
-              className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+              className="
+                object-cover
+                object-top
+                transition-transform
+                duration-500
+                group-hover:scale-105
+              "
             />
-
           </div>
-
         )}
 
         {/* CONTENT */}
         <div className="min-w-0 flex-1">
 
           {/* META */}
-          <div className="mb-4 flex flex-wrap items-center gap-3 text-sm text-zinc-500 dark:text-zinc-400">
+          <div className="mb-3 flex flex-wrap items-center gap-3 text-sm text-zinc-500">
 
             {post.category && (
-              <span className="rounded-full bg-zinc-100 px-3 py-1 text-xs dark:bg-zinc-800">
+              <span className="rounded-full bg-zinc-100 px-3 py-1 text-xs">
                 {post.category}
               </span>
             )}
@@ -82,9 +94,20 @@ export default function ArticleCard({
           {/* TITLE */}
           <div className="flex items-start gap-3">
 
-            <span className="mt-3 h-3 w-3 flex-shrink-0 bg-orange-500" />
+            <span className="mt-2 h-3 w-3 shrink-0 bg-orange-500" />
 
-            <h2 className="text-3xl font-bold leading-tight tracking-tight transition-colors group-hover:text-zinc-600 dark:group-hover:text-zinc-300">
+            <h2
+              className="
+                text-2xl
+                font-bold
+                leading-tight
+                tracking-tight
+                text-black
+                transition-colors
+                duration-200
+                group-hover:text-orange-500
+              "
+            >
               {post.title}
             </h2>
 
@@ -92,28 +115,22 @@ export default function ArticleCard({
 
           {/* EXCERPT */}
           {post.excerpt && (
-            <p className="mt-4 line-clamp-4 text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
-
+            <p
+              className="
+                mt-3
+                line-clamp-3
+                text-base
+                leading-7
+                text-zinc-700
+              "
+            >
               {post.excerpt}
-
             </p>
           )}
-
-          {/* CTA */}
-          <div className="mt-6 inline-flex items-center text-sm font-medium">
-
-            Čítať článok
-
-            <span className="ml-2 transition-transform duration-300 group-hover:translate-x-1">
-              →
-            </span>
-
-          </div>
 
         </div>
 
       </article>
-
     </Link>
   );
 }
