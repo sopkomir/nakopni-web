@@ -39,68 +39,74 @@ export default async function ArticlePage({
           title={article.title}
         />
         {/* HERO */}
-        <article className="mb-16">
+          <article className="mb-16">
 
-          <div className="grid gap-10 lg:grid-cols-[420px_minmax(0,1fr)] items-start">
+            <div className="flex flex-wrap items-center gap-3 mb-6">
 
-            {/* LEFT IMAGE */}
-            {article.image && (
-              <div className="relative overflow-hidden rounded-3xl">
+              <span className="bg-black text-white text-sm px-3 py-1 rounded-full capitalize">
+                {article.category}
+              </span>
 
-                <Image
-                  src={urlFor(article.image)
-                    .width(900)
-                    .height(900)
-                    .url()}
-                  alt={article.title}
-                  width={900}
-                  height={900}
-                  className="w-full h-auto object-cover rounded-3xl"
-                />
-
-              </div>
-            )}
-
-            {/* RIGHT CONTENT */}
-            <div>
-
-              <div className="flex flex-wrap items-center gap-3 mb-5">
-
-                <span className="bg-black text-white dark:bg-white dark:text-black text-sm px-3 py-1 rounded-full capitalize">
-                  {article.category}
+              {article.publishedAt && (
+                <span className="text-zinc-500 text-sm">
+                  {new Date(article.publishedAt).toLocaleDateString("sk-SK")}
                 </span>
-
-                {article.publishedAt && (
-                  <span className="text-gray-500 text-sm">
-                    {new Date(article.publishedAt).toLocaleDateString("sk-SK")}
-                  </span>
-                )}
-
-                <span className="text-gray-400 text-sm">
-                  •
-                </span>
-
-                <span className="text-gray-500 text-sm">
-                  {article.views ?? 0} prečítaní
-                </span>
-
-              </div>
-
-              <h1 className="text-4xl md:text-6xl font-black leading-tight tracking-tight mb-8">
-                {article.title}
-              </h1>
-
-              {article.excerpt && (
-                <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed max-w-3xl">
-                  {article.excerpt}
-                </p>
               )}
+
+              <span className="text-zinc-400">
+                •
+              </span>
+
+              <span className="text-zinc-500 text-sm">
+                {article.views ?? 0} prečítaní
+              </span>
 
             </div>
 
-          </div>
+            <h1
+              className="
+                text-4xl
+                md:text-6xl
+                leading-[1.05]
+                tracking-[0.02em]
+                mb-8
+              "
+            >
+              {article.title}
+            </h1>
 
-        </article>
+            {article.excerpt && (
+              <p
+                className="
+                  text-lg
+                  md:text-2xl
+                  leading-relaxed
+                  text-zinc-700
+                  max-w-4xl
+                  mb-10
+                "
+              >
+                {article.excerpt}
+              </p>
+            )}
+
+            {article.image && (
+              <Image
+                src={urlFor(article.image)
+                  .width(1600)
+                  .url()}
+                alt={article.title}
+                width={1600}
+                height={1000}
+                className="
+                  w-full
+                  h-auto
+                  rounded-3xl
+                "
+              />
+            )}
+
+          </article>
 
         {/* CONTENT + SIDEBAR */}
         <div className="grid gap-16 lg:grid-cols-[minmax(0,1fr)_340px]">
