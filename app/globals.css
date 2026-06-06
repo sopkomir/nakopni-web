@@ -1,7 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+
 :root {
   --background: #ffffff;
   --foreground: #111111;
@@ -10,26 +9,35 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  background: white !important;
+  color: black !important;
 }
-
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
 
-@keyframes smoothImageReveal {
+/* NADPISY */
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-oswald);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+/* ANIMÁCIA OBRÁZKOV */
+
+@keyframes smoothImageReveal {
   from {
     opacity: 0;
     transform: scale(1.015);
@@ -41,26 +49,9 @@ body {
     transform: scale(1);
     filter: blur(0);
   }
-
 }
 
 .animate-imageReveal {
-  animation: smoothImageReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-oswald);
-  font-weight: normal;
-  letter-spacing: 0.04em;
-}
-
-html,
-body {
-  background: white !important;
-  color: black !important;
+  animation: smoothImageReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
 }
