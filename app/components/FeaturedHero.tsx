@@ -26,10 +26,8 @@ export default function FeaturedHero({ post }: Props) {
           flex-col
           gap-4
 
-          md:flex-row
-          md:items-start
-          md:gap-4
-
+          lg:flex-row
+          lg:items-start
           lg:gap-2
         "
       >
@@ -53,6 +51,7 @@ export default function FeaturedHero({ post }: Props) {
                   transition-colors
                   duration-200
                   group-hover:text-orange-500
+
                   sm:text-2xl
                   lg:text-3xl
                 "
@@ -85,9 +84,7 @@ export default function FeaturedHero({ post }: Props) {
           <div
             className="
               w-full
-
-              md:w-[280px]
-              md:flex-shrink-0
+              shrink-0
 
               lg:w-[360px]
             "
