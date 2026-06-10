@@ -25,8 +25,11 @@ export default function FeaturedHero({ post }: Props) {
           flex
           flex-col
           gap-4
-          lg:flex-row
-          lg:items-start
+
+          md:flex-row
+          md:items-start
+          md:gap-4
+
           lg:gap-2
         "
       >
@@ -82,11 +85,13 @@ export default function FeaturedHero({ post }: Props) {
           <div
             className="
               w-full
-              shrink-0
+
+              md:w-[280px]
+              md:flex-shrink-0
+
               lg:w-[360px]
             "
           >
-
             <Image
               src={urlForImage(post.image)
                 .width(720)
@@ -102,7 +107,6 @@ export default function FeaturedHero({ post }: Props) {
                 object-cover
               "
             />
-
           </div>
         )}
 
