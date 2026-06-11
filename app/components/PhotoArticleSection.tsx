@@ -41,7 +41,7 @@ export default function PhotoArticleSection({ posts }: Props) {
           <h2
             className="
               flex
-              items-right
+              ml-auto
               gap-4
               pl-8
               text-4xl
