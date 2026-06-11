@@ -23,24 +23,43 @@ export default function PhotoArticleSection({ posts }: Props) {
         className="group block"
       >
 
-        <h2
-          className="
-            mb-6
-            flex
-            items-center
-            gap-4
-            pl-8
-            text-4xl
-            font-bold
-            leading-tight
-            transition-colors
-            group-hover:text-orange-500
-          "
-        >
-          <span className="h-4 w-4 shrink-0 bg-orange-500" />
+        <div className="mb-4">
 
-          {mainPost.title}
-        </h2>
+          <div
+            className="
+              mb-4
+              text-sm
+              font-semibold
+              uppercase
+              tracking-[0.15em]
+              text-zinc-500
+            "
+          >
+            HUMOR
+          </div>
+
+          <h2
+            className="
+              flex
+              items-center
+              gap-4
+              pl-6
+              text-4xl
+              font-bold
+              leading-tight
+              transition-colors
+              duration-200
+              group-hover:text-orange-500
+            "
+          >
+
+            <span className="h-4 w-4 shrink-0 bg-orange-500" />
+
+            {mainPost.title}
+
+          </h2>
+
+        </div>
 
         {mainPost.image && (
 
@@ -68,7 +87,7 @@ export default function PhotoArticleSection({ posts }: Props) {
 
       </Link>
 
-      {/* DVA MENŠIE */}
+      {/* DVA MENŠIE FOTOČLÁNKY */}
 
       {secondaryPosts.length > 0 && (
 
@@ -92,12 +111,15 @@ export default function PhotoArticleSection({ posts }: Props) {
                   font-bold
                   leading-tight
                   transition-colors
+                  duration-200
                   group-hover:text-orange-500
                 "
               >
+
                 <span className="mt-2 h-3 w-3 shrink-0 bg-orange-500" />
 
-                {post.title}
+                <span>{post.title}</span>
+
               </h3>
 
               {post.image && (
