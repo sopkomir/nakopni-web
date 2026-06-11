@@ -43,7 +43,7 @@ export default function PhotoArticleSection({ posts }: Props) {
               flex
               items-center
               gap-4
-              pl-8
+              max-w-[70%]
               text-4xl
               font-bold
               leading-tight
