@@ -4,20 +4,22 @@ import Image from "next/image";
 import { urlForImage } from "../lib/image";
 
 interface Props {
-  post: any;
+  posts: any[];
 }
 
-export default function PhotoArticleSection({ post }: Props) {
-  if (!post) return null;
+export default function PhotoArticleSection({ posts }: Props) {
+  if (!posts?.length) return null;
 
-  const secondaryPosts = post.relatedPosts || [];
+  const mainPost = posts[0];
+  const secondaryPosts = posts.slice(1, 3);
 
   return (
     <section className="mt-16 border-t border-zinc-200 pt-12">
 
       {/* HLAVNÝ FOTOČLÁNOK */}
+
       <Link
-        href={`/fotoclanok/${post.slug.current}`}
+        href={`/fotoclanok/${mainPost.slug.current}`}
         className="group block"
       >
 
@@ -37,18 +39,19 @@ export default function PhotoArticleSection({ post }: Props) {
         >
           <span className="h-4 w-4 shrink-0 bg-orange-500" />
 
-          {post.title}
+          {mainPost.title}
         </h2>
 
-        {post.image && (
+        {mainPost.image && (
+
           <div className="overflow-hidden rounded-2xl">
 
             <Image
-              src={urlForImage(post.image)
+              src={urlForImage(mainPost.image)
                 .width(1600)
                 .height(900)
                 .url()}
-              alt={post.title}
+              alt={mainPost.title}
               width={1600}
               height={900}
               className="
@@ -60,20 +63,22 @@ export default function PhotoArticleSection({ post }: Props) {
             />
 
           </div>
+
         )}
 
       </Link>
 
-      {/* DVA MENŠIE POD TÝM */}
+      {/* DVA MENŠIE */}
+
       {secondaryPosts.length > 0 && (
 
         <div className="mt-10 grid gap-8 md:grid-cols-2">
 
-          {secondaryPosts.slice(0, 2).map((item: any) => (
+          {secondaryPosts.map((post) => (
 
             <Link
-              key={item._id}
-              href={`/fotoclanok/${item.slug.current}`}
+              key={post._id}
+              href={`/fotoclanok/${post.slug.current}`}
               className="group block"
             >
 
@@ -90,23 +95,21 @@ export default function PhotoArticleSection({ post }: Props) {
                   group-hover:text-orange-500
                 "
               >
-
                 <span className="mt-2 h-3 w-3 shrink-0 bg-orange-500" />
 
-                <span>{item.title}</span>
-
+                {post.title}
               </h3>
 
-              {item.image && (
+              {post.image && (
 
                 <div className="overflow-hidden rounded-xl">
 
                   <Image
-                    src={urlForImage(item.image)
+                    src={urlForImage(post.image)
                       .width(900)
                       .height(500)
                       .url()}
-                    alt={item.title}
+                    alt={post.title}
                     width={900}
                     height={500}
                     className="
