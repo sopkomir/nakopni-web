@@ -39,7 +39,7 @@ export default async function HomePage() {
           </div>
 
           <PhotoArticleSection
-            post={data.fotoclanok}
+            posts={data.fotoclanky}
           />
 
         </div>

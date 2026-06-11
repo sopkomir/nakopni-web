@@ -47,15 +47,14 @@ export const homepageQuery = groq`
     views
   },
 
-  "fotoclanok": *[
+  "fotoclanky": *[
     _type == "fotoclanok"
-  ]
-  | order(publishedAt desc)[0] {
+  ] | order(publishedAt desc)[0...3]
+  {
     _id,
     title,
     slug,
-    image,
-    publishedAt
+    image
   }
 }
 `
