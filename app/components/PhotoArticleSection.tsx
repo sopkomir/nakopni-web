@@ -43,7 +43,7 @@ export default function PhotoArticleSection({ posts }: Props) {
               flex
               items-center
               gap-4
-              pl-6
+              pl-8
               text-4xl
               font-bold
               leading-tight
@@ -52,11 +52,9 @@ export default function PhotoArticleSection({ posts }: Props) {
               group-hover:text-orange-500
             "
           >
-
             <span className="h-4 w-4 shrink-0 bg-orange-500" />
 
             {mainPost.title}
-
           </h2>
 
         </div>
@@ -115,11 +113,9 @@ export default function PhotoArticleSection({ posts }: Props) {
                   group-hover:text-orange-500
                 "
               >
-
                 <span className="mt-2 h-3 w-3 shrink-0 bg-orange-500" />
 
                 <span>{post.title}</span>
-
               </h3>
 
               {post.image && (
