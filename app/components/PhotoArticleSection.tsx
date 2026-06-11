@@ -4,21 +4,19 @@ import Image from "next/image";
 import { urlForImage } from "../lib/image";
 
 interface Props {
-  post: any;
+  posts: any[];
 }
 
-export default function PhotoArticleSection({ post }: Props) {
-  if (!post) return null;
+export default function PhotoArticleSection({ posts }: Props) {
+  if (!posts?.length) return null;
 
-  const mainPost = Array.isArray(post) ? post[0] : post;
-  const secondaryPosts = Array.isArray(post)
-    ? post.slice(1, 3)
-    : post.relatedPosts || [];
+  const mainPost = posts[0];
+  const secondaryPosts = posts.slice(1, 3);
 
   return (
     <section className="mt-16 border-t border-zinc-200 pt-12">
 
-      {/* SEKCIA */}
+      {/* NADPIS SEKCIE */}
       <div className="mb-5 text-xs font-semibold uppercase tracking-[0.25em] text-zinc-500">
         Humor
       </div>
@@ -28,8 +26,7 @@ export default function PhotoArticleSection({ post }: Props) {
         href={`/fotoclanok/${mainPost.slug.current}`}
         className="group block"
       >
-
-        <div className="mb-5 flex justify-end">
+        <div className="mb-6 flex justify-end">
 
           <h2
             className="
@@ -57,12 +54,12 @@ export default function PhotoArticleSection({ post }: Props) {
 
             <Image
               src={urlForImage(mainPost.image)
-                .width(2000)
+                .width(2200)
                 .fit("max")
                 .url()}
               alt={mainPost.title}
-              width={2000}
-              height={2000}
+              width={2200}
+              height={2200}
               className="
                 block
                 w-full
@@ -118,12 +115,12 @@ export default function PhotoArticleSection({ post }: Props) {
 
                   <Image
                     src={urlForImage(item.image)
-                      .width(1200)
+                      .width(1400)
                       .fit("max")
                       .url()}
                     alt={item.title}
-                    width={1200}
-                    height={1200}
+                    width={1400}
+                    height={1400}
                     className="
                       block
                       w-full
