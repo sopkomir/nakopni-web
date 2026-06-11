@@ -19,7 +19,7 @@ export default function PhotoArticleSection({
     <section className="mt-16 border-t border-zinc-200 pt-12">
 
       <h2 className="mb-8 text-sm font-semibold uppercase tracking-[0.25em] text-zinc-500">
-        Humor
+        HUMOR
       </h2>
 
       {/* HLAVNÝ ČLÁNOK */}
@@ -101,4 +101,4 @@ export default function PhotoArticleSection({
 
     </section>
   );
-}
+} 
