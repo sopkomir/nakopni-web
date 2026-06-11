@@ -38,24 +38,26 @@ export default function PhotoArticleSection({ posts }: Props) {
             HUMOR
           </div>
 
-          <h2
-            className="
-              flex
-              items-center
-              gap-4
-              max-w-[70%]
-              text-4xl
-              font-bold
-              leading-tight
-              transition-colors
-              duration-200
-              group-hover:text-orange-500
-            "
-          >
-            <span className="h-4 w-4 shrink-0 bg-orange-500" />
+          <div className="mb-6 flex justify-end">
 
-            {mainPost.title}
-          </h2>
+            <h2
+              className="
+                flex
+                items-center
+                gap-4
+                text-4xl
+                font-bold
+                leading-tight
+                transition-colors
+                duration-200
+                group-hover:text-orange-500
+              "
+            >
+              <span className="h-4 w-4 shrink-0 bg-orange-500" />
+              {mainPost.title}
+            </h2>
+
+          </div>
 
         </div>
 
