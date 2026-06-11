@@ -18,7 +18,8 @@ export default function PhotoArticleSection({ post }: Props) {
   return (
     <section className="mt-16 border-t border-zinc-200 pt-12">
 
-      <div className="mb-4 text-xs font-semibold uppercase tracking-[0.25em] text-zinc-500">
+      {/* SEKCIA */}
+      <div className="mb-5 text-xs font-semibold uppercase tracking-[0.25em] text-zinc-500">
         Humor
       </div>
 
@@ -28,7 +29,7 @@ export default function PhotoArticleSection({ post }: Props) {
         className="group block"
       >
 
-        <div className="mb-6 flex justify-end">
+        <div className="mb-5 flex justify-end">
 
           <h2
             className="
@@ -57,11 +58,13 @@ export default function PhotoArticleSection({ post }: Props) {
             <Image
               src={urlForImage(mainPost.image)
                 .width(2000)
+                .fit("max")
                 .url()}
               alt={mainPost.title}
               width={2000}
-              height={1400}
+              height={2000}
               className="
+                block
                 w-full
                 h-auto
                 transition-transform
@@ -76,10 +79,10 @@ export default function PhotoArticleSection({ post }: Props) {
 
       </Link>
 
-      {/* DVA MENŠIE POD TÝM */}
+      {/* DVA MENŠIE FOTOČLÁNKY */}
       {secondaryPosts.length > 0 && (
 
-        <div className="mt-10 grid gap-8 md:grid-cols-2">
+        <div className="mt-10 grid gap-10 md:grid-cols-2">
 
           {secondaryPosts.map((item: any) => (
 
@@ -99,6 +102,7 @@ export default function PhotoArticleSection({ post }: Props) {
                   font-bold
                   leading-tight
                   transition-colors
+                  duration-200
                   group-hover:text-orange-500
                 "
               >
@@ -115,11 +119,13 @@ export default function PhotoArticleSection({ post }: Props) {
                   <Image
                     src={urlForImage(item.image)
                       .width(1200)
+                      .fit("max")
                       .url()}
                     alt={item.title}
                     width={1200}
-                    height={800}
+                    height={1200}
                     className="
+                      block
                       w-full
                       h-auto
                       transition-transform
