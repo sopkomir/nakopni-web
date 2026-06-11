@@ -4,60 +4,49 @@ import Image from "next/image";
 import { urlForImage } from "../lib/image";
 
 interface Props {
-  posts: any[];
+  post: any;
 }
 
-export default function PhotoArticleSection({ posts }: Props) {
-  if (!posts?.length) return null;
+export default function PhotoArticleSection({ post }: Props) {
+  if (!post) return null;
 
-  const mainPost = posts[0];
-  const secondaryPosts = posts.slice(1, 3);
+  const mainPost = Array.isArray(post) ? post[0] : post;
+  const secondaryPosts = Array.isArray(post)
+    ? post.slice(1, 3)
+    : post.relatedPosts || [];
 
   return (
     <section className="mt-16 border-t border-zinc-200 pt-12">
 
-      {/* HLAVNÝ FOTOČLÁNOK */}
+      <div className="mb-4 text-xs font-semibold uppercase tracking-[0.25em] text-zinc-500">
+        Humor
+      </div>
 
+      {/* HLAVNÝ FOTOČLÁNOK */}
       <Link
         href={`/fotoclanok/${mainPost.slug.current}`}
         className="group block"
       >
 
-        <div className="mb-4">
+        <div className="mb-6 flex justify-end">
 
-          <div
+          <h2
             className="
-              mb-4
-              text-sm
-              font-semibold
-              uppercase
-              tracking-[0.15em]
-              text-zinc-500
+              flex
+              items-center
+              gap-4
+              text-4xl
+              font-bold
+              leading-tight
+              transition-colors
+              duration-200
+              group-hover:text-orange-500
             "
           >
-            HUMOR
-          </div>
+            <span className="h-4 w-4 shrink-0 bg-orange-500" />
 
-          <div className="mb-6 flex justify-end">
-
-            <h2
-              className="
-                flex
-                items-center
-                gap-4
-                text-4xl
-                font-bold
-                leading-tight
-                transition-colors
-                duration-200
-                group-hover:text-orange-500
-              "
-            >
-              <span className="h-4 w-4 shrink-0 bg-orange-500" />
-              {mainPost.title}
-            </h2>
-
-          </div>
+            {mainPost.title}
+          </h2>
 
         </div>
 
@@ -67,17 +56,17 @@ export default function PhotoArticleSection({ posts }: Props) {
 
             <Image
               src={urlForImage(mainPost.image)
-                .width(1600)
-                .height(900)
+                .width(2000)
                 .url()}
               alt={mainPost.title}
-              width={1600}
-              height={900}
+              width={2000}
+              height={1400}
               className="
                 w-full
+                h-auto
                 transition-transform
                 duration-500
-                group-hover:scale-[1.02]
+                group-hover:scale-[1.01]
               "
             />
 
@@ -87,17 +76,16 @@ export default function PhotoArticleSection({ posts }: Props) {
 
       </Link>
 
-      {/* DVA MENŠIE FOTOČLÁNKY */}
-
+      {/* DVA MENŠIE POD TÝM */}
       {secondaryPosts.length > 0 && (
 
         <div className="mt-10 grid gap-8 md:grid-cols-2">
 
-          {secondaryPosts.map((post) => (
+          {secondaryPosts.map((item: any) => (
 
             <Link
-              key={post._id}
-              href={`/fotoclanok/${post.slug.current}`}
+              key={item._id}
+              href={`/fotoclanok/${item.slug.current}`}
               className="group block"
             >
 
@@ -111,32 +99,32 @@ export default function PhotoArticleSection({ posts }: Props) {
                   font-bold
                   leading-tight
                   transition-colors
-                  duration-200
                   group-hover:text-orange-500
                 "
               >
                 <span className="mt-2 h-3 w-3 shrink-0 bg-orange-500" />
 
-                <span>{post.title}</span>
+                <span>{item.title}</span>
+
               </h3>
 
-              {post.image && (
+              {item.image && (
 
                 <div className="overflow-hidden rounded-xl">
 
                   <Image
-                    src={urlForImage(post.image)
-                      .width(900)
-                      .height(500)
+                    src={urlForImage(item.image)
+                      .width(1200)
                       .url()}
-                    alt={post.title}
-                    width={900}
-                    height={500}
+                    alt={item.title}
+                    width={1200}
+                    height={800}
                     className="
                       w-full
+                      h-auto
                       transition-transform
                       duration-500
-                      group-hover:scale-[1.03]
+                      group-hover:scale-[1.02]
                     "
                   />
 
