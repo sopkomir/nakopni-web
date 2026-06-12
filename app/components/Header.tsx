@@ -125,7 +125,7 @@ export default function Header() {
               <img
                 src="/partner-boka.webp"
                 alt="Bok Reklama"
-                className="max-w-[220px] h-auto"
+                className="max-w-[340px] h-auto"
               />
 
             </a>
