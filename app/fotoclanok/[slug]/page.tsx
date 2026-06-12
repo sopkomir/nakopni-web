@@ -18,6 +18,16 @@ const query = groq`
     publishedAt
   },
 
+  "allPosts": *[
+    _type == "fotoclanok"
+  ] | order(publishedAt desc){
+    _id,
+    title,
+    slug,
+    image,
+    publishedAt
+  },
+
   "related": *[
     _type == "fotoclanok" &&
     slug.current != $slug
@@ -53,6 +63,20 @@ export default async function PhotoPage({
     );
   }
 
+  const currentIndex = data.allPosts.findIndex(
+    (item: any) => item.slug.current === slug
+  );
+
+  const previousPost =
+    currentIndex < data.allPosts.length - 1
+      ? data.allPosts[currentIndex + 1]
+      : null;
+
+  const nextPost =
+    currentIndex > 0
+      ? data.allPosts[currentIndex - 1]
+      : null;
+
   return (
     <main className="mx-auto max-w-7xl px-4 py-10">
 
@@ -80,9 +104,62 @@ export default async function PhotoPage({
         />
       )}
 
+      {/* PREDCHÁDZAJÚCI / ĎALŠÍ */}
+
+      {(previousPost || nextPost) && (
+
+        <section className="mt-12 border-t border-zinc-200 pt-8">
+
+          <div className="grid gap-6 md:grid-cols-2">
+
+            <div>
+              {previousPost && (
+                <Link
+                  href={`/fotoclanok/${previousPost.slug.current}`}
+                  className="group block"
+                >
+
+                  <div className="mb-2 text-sm uppercase tracking-wider text-zinc-500">
+                    ← Predchádzajúci
+                  </div>
+
+                  <div className="text-xl font-bold transition-colors group-hover:text-orange-500">
+                    {previousPost.title}
+                  </div>
+
+                </Link>
+              )}
+            </div>
+
+            <div className="text-left md:text-right">
+              {nextPost && (
+                <Link
+                  href={`/fotoclanok/${nextPost.slug.current}`}
+                  className="group block"
+                >
+
+                  <div className="mb-2 text-sm uppercase tracking-wider text-zinc-500">
+                    Ďalší →
+                  </div>
+
+                  <div className="text-xl font-bold transition-colors group-hover:text-orange-500">
+                    {nextPost.title}
+                  </div>
+
+                </Link>
+              )}
+            </div>
+
+          </div>
+
+        </section>
+
+      )}
+
       {/* ĎALŠIE FOTOČLÁNKY */}
 
       {data.related?.length > 0 && (
+
         <section className="mt-20 border-t border-zinc-200 pt-12">
 
           <div className="mb-8 text-xs font-semibold uppercase tracking-[0.25em] text-zinc-500">
@@ -140,6 +217,7 @@ export default async function PhotoPage({
           </div>
 
         </section>
+
       )}
 
     </main>
