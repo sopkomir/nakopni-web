@@ -34,7 +34,7 @@ export default function Header() {
 
       <div className="mx-auto max-w-[1500px] px-4">
 
-        <div className="grid items-center gap-8 lg:grid-cols-[320px_1fr_420px]">
+        <div className="grid items-center gap-8 lg:grid-cols-[320px_1fr_280px]">
 
           {/* LOGO */}
           <div>
@@ -52,63 +52,68 @@ export default function Header() {
           </div>
 
           {/* STRED */}
-          <div className="flex flex-col justify-end">
+          <div className="flex flex-col items-start justify-end">
 
-            {/* SLOGAN */}
-            <div
-              className="
-                mb-3
-                uppercase
-                leading-[0.95]
-                tracking-tight
-                text-[#8e8e93]
-              "
-              style={{
-                fontFamily: "'Oswald', sans-serif",
-                fontSize: "clamp(1.2rem, 1.8vw, 2.2rem)",
-              }}
-            >
-              Hľadáme riešenia ako nakopnúť Slovensko
-            </div>
+            <div className="inline-block">
 
-            {/* DESKTOP MENU */}
-            <nav className="hidden md:block">
-
-              <ul
+              {/* SLOGAN */}
+              <div
                 className="
-                  flex
-                  flex-wrap
-                  gap-8
-                  text-lg
+                  mb-3
                   uppercase
-                  tracking-wide
+                  leading-[0.9]
+                  tracking-tight
+                  text-[#8e8e93]
                 "
                 style={{
                   fontFamily: "'Oswald', sans-serif",
+                  fontSize: "clamp(1rem, 1.4vw, 2rem)",
                 }}
               >
+                Hľadáme riešenia ako nakopnúť Slovensko
+              </div>
 
-                {links.map((link) => (
+              {/* DESKTOP MENU */}
+              <nav className="hidden md:block">
 
-                  <li key={link.href}>
+                <ul
+                  className="
+                    flex
+                    flex-nowrap
+                    gap-7
+                    text-base
+                    uppercase
+                    tracking-wide
+                  "
+                  style={{
+                    fontFamily: "'Oswald', sans-serif",
+                  }}
+                >
 
-                    <Link
-                      href={link.href}
-                      className="
-                        transition-colors
-                        hover:text-orange-500
-                      "
-                    >
-                      {link.label}
-                    </Link>
+                  {links.map((link) => (
 
-                  </li>
+                    <li key={link.href}>
 
-                ))}
+                      <Link
+                        href={link.href}
+                        className="
+                          whitespace-nowrap
+                          transition-colors
+                          hover:text-orange-500
+                        "
+                      >
+                        {link.label}
+                      </Link>
 
-              </ul>
+                    </li>
 
-            </nav>
+                  ))}
+
+                </ul>
+
+              </nav>
+
+            </div>
 
           </div>
 
@@ -116,15 +121,15 @@ export default function Header() {
           <div className="hidden lg:flex justify-end self-start">
 
             <a
-              href="https://www.michalovskenoviny.sk"             target="_blank"
+              href="https://www.michalovskenoviny.sk"
+              target="_blank"
               rel="noopener noreferrer"
-              className="block w-full"
             >
 
               <img
                 src="/partner-boka.webp"
                 alt="Bok Reklama"
-                className="w-full h-auto"
+                className="max-w-[260px] h-auto"
               />
 
             </a>
