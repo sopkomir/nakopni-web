@@ -34,7 +34,7 @@ export default function Header() {
 
       <div className="mx-auto max-w-[1500px] px-4">
 
-        <div className="grid items-center gap-8 lg:grid-cols-[320px_1fr_260px]">
+        <div className="grid items-center gap-8 lg:grid-cols-[320px_1fr_420px]">
 
           {/* LOGO */}
           <div>
@@ -51,7 +51,7 @@ export default function Header() {
 
           </div>
 
-          {/* CENTER */}
+          {/* STRED */}
           <div className="flex flex-col justify-end">
 
             {/* SLOGAN */}
@@ -59,13 +59,13 @@ export default function Header() {
               className="
                 mb-3
                 uppercase
-                leading-[0.9]
+                leading-[0.95]
                 tracking-tight
                 text-[#8e8e93]
               "
               style={{
                 fontFamily: "'Oswald', sans-serif",
-                fontSize: "clamp(1.5rem, 2.2vw, 2.8rem)",
+                fontSize: "clamp(1.2rem, 1.8vw, 2.2rem)",
               }}
             >
               Hľadáme riešenia ako nakopnúť Slovensko
@@ -112,20 +112,19 @@ export default function Header() {
 
           </div>
 
-          {/* PARTNER LOGO */}
-          <div className="hidden lg:flex items-start justify-end">
+          {/* PARTNER */}
+          <div className="hidden lg:flex justify-end self-start">
 
             <a
-              href="https://michalovskenovinysk"
-              target="_blank"
+              href="https://www.michalovskenoviny.sk             target="_blank"
               rel="noopener noreferrer"
-              className="transition-opacity hover:opacity-80"
+              className="block w-full"
             >
 
               <img
                 src="/partner-boka.webp"
                 alt="Bok Reklama"
-                className="max-h-[110px] w-auto"
+                className="w-full h-auto"
               />
 
             </a>
