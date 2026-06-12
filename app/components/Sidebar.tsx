@@ -45,8 +45,8 @@ export default async function Sidebar() {
       <div className="mt-10">
 
         <img
-          src="/boka-reklama.JPG"
-          alt="Partner"
+          src="/boka-kniha.webp"
+          alt="Kniha"
           className="block w-full h-auto rounded-2xl"
         />
 
