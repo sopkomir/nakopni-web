@@ -116,7 +116,7 @@ export default function Header() {
           <div className="hidden lg:flex justify-end self-start">
 
             <a
-              href="https://www.michalovskenoviny.sk             target="_blank"
+              href="https://www.michalovskenoviny.sk"             target="_blank"
               rel="noopener noreferrer"
               className="block w-full"
             >
