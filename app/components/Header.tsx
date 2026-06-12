@@ -34,7 +34,7 @@ export default function Header() {
 
       <div className="mx-auto max-w-[1500px] px-4">
 
-        <div className="grid items-center gap-8 lg:grid-cols-[320px_1fr_280px]">
+        <div className="grid items-center gap-6 lg:grid-cols-[320px_1fr_240px]">
 
           {/* LOGO */}
           <div>
@@ -52,73 +52,69 @@ export default function Header() {
           </div>
 
           {/* STRED */}
-          <div className="flex flex-col items-start justify-end">
+          <div className="flex flex-col justify-center">
 
-            <div className="inline-block">
+            {/* SLOGAN */}
+            <div
+              className="
+                mb-3
+                uppercase
+                leading-[0.9]
+                tracking-tight
+                text-[#8e8e93]
+              "
+              style={{
+                fontFamily: "'Oswald', sans-serif",
+                fontSize: "clamp(1.15rem, 1.6vw, 2.2rem)",
+              }}
+            >
+              Hľadáme riešenia ako nakopnúť Slovensko
+            </div>
 
-              {/* SLOGAN */}
-              <div
+            {/* DESKTOP MENU */}
+            <nav className="hidden md:block">
+
+              <ul
                 className="
-                  mb-3
+                  flex
+                  flex-nowrap
+                  gap-6
+                  text-base
                   uppercase
-                  leading-[0.9]
-                  tracking-tight
-                  text-[#8e8e93]
+                  tracking-wide
                 "
                 style={{
                   fontFamily: "'Oswald', sans-serif",
-                  fontSize: "clamp(1rem, 1.4vw, 2rem)",
                 }}
               >
-                Hľadáme riešenia ako nakopnúť Slovensko
-              </div>
 
-              {/* DESKTOP MENU */}
-              <nav className="hidden md:block">
+                {links.map((link) => (
 
-                <ul
-                  className="
-                    flex
-                    flex-nowrap
-                    gap-7
-                    text-base
-                    uppercase
-                    tracking-wide
-                  "
-                  style={{
-                    fontFamily: "'Oswald', sans-serif",
-                  }}
-                >
+                  <li key={link.href}>
 
-                  {links.map((link) => (
+                    <Link
+                      href={link.href}
+                      className="
+                        whitespace-nowrap
+                        transition-colors
+                        hover:text-orange-500
+                      "
+                    >
+                      {link.label}
+                    </Link>
 
-                    <li key={link.href}>
+                  </li>
 
-                      <Link
-                        href={link.href}
-                        className="
-                          whitespace-nowrap
-                          transition-colors
-                          hover:text-orange-500
-                        "
-                      >
-                        {link.label}
-                      </Link>
+                ))}
 
-                    </li>
+              </ul>
 
-                  ))}
-
-                </ul>
-
-              </nav>
-
-            </div>
+            </nav>
 
           </div>
 
           {/* PARTNER */}
-          <div className="hidden lg:flex justify-end self-start">
+          <div className="hidden lg:flex items-center justify-end">
 
             <a
               href="https://www.michalovskenoviny.sk"
@@ -129,7 +125,7 @@ export default function Header() {
               <img
                 src="/partner-boka.webp"
                 alt="Bok Reklama"
-                className="max-w-[260px] h-auto"
+                className="max-w-[220px] h-auto"
               />
 
             </a>
