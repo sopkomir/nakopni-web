@@ -4,7 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 
 export default function Header() {
-
   const [open, setOpen] = useState(false);
 
   const links = [
@@ -35,7 +34,7 @@ export default function Header() {
 
       <div className="mx-auto max-w-[1500px] px-4">
 
-        <div className="grid items-center gap-10 lg:grid-cols-[320px_1fr]">
+        <div className="grid items-center gap-8 lg:grid-cols-[320px_1fr_260px]">
 
           {/* LOGO */}
           <div>
@@ -52,13 +51,13 @@ export default function Header() {
 
           </div>
 
-          {/* RIGHT SIDE */}
+          {/* CENTER */}
           <div className="flex flex-col justify-end">
 
             {/* SLOGAN */}
             <div
               className="
-                mb-4
+                mb-3
                 uppercase
                 leading-[0.9]
                 tracking-tight
@@ -110,6 +109,26 @@ export default function Header() {
               </ul>
 
             </nav>
+
+          </div>
+
+          {/* PARTNER LOGO */}
+          <div className="hidden lg:flex items-start justify-end">
+
+            <a
+              href="https://michalovskenovinysk"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-opacity hover:opacity-80"
+            >
+
+              <img
+                src="/partner-boka.webp"
+                alt="Bok Reklama"
+                className="max-h-[110px] w-auto"
+              />
+
+            </a>
 
           </div>
 
