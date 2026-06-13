@@ -36,7 +36,7 @@ export const homepageQuery = groq`
     category == "komentar" &&
     featured != true
   ]
-  | order(publishedAt desc)[0...5] {
+  | order(publishedAt desc)[0...3] {
     _id,
     title,
     slug,
@@ -194,13 +194,13 @@ export const latestReportazeQuery = `
 }
 `;
 
-export const moreKomentareQuery = groq`
+export const moreKomentareQuery = `
 *[
   _type == "article" &&
   category == "komentar" &&
   featured != true
 ]
-| order(publishedAt desc)[5...13] {
+| order(publishedAt desc)[4...13] {
   _id,
   title,
   slug,
