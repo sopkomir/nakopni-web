@@ -200,7 +200,7 @@ export const moreKomentareQuery = `
   category == "komentar" &&
   featured != true
 ]
-| order(publishedAt desc)[4...13] {
+| order(publishedAt desc)[5...13] {
   _id,
   title,
   slug,
