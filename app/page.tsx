@@ -1,6 +1,6 @@
 import { client } from './lib/sanity'
 import { homepageQuery, latestReportazeQuery } from './lib/queries'
-
+import KomentareList from "./components/KomentareList";
 import PhotoArticleSection from './components/PhotoArticleSection'
 import FeaturedHero from './components/FeaturedHero'
 import ReportazeGrid from './components/ReportazeGrid'
@@ -35,6 +35,8 @@ export default async function HomePage() {
                 post={post}
               />
             ))}
+
+            <KomentareList posts={moreKomentare} />
 
           </div>
 

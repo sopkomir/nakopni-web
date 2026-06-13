@@ -193,3 +193,17 @@ export const latestReportazeQuery = `
   publishedAt
 }
 `;
+
+export const moreKomentareQuery = groq`
+*[
+  _type == "article" &&
+  category == "komentar" &&
+  featured != true
+]
+| order(publishedAt desc)[5...13] {
+  _id,
+  title,
+  slug,
+  author
+}
+`;
