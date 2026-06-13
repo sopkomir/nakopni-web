@@ -36,7 +36,7 @@ export const homepageQuery = groq`
     category == "komentar" &&
     featured != true
   ]
-  | order(publishedAt desc)[0...3] {
+  | order(publishedAt desc)[0...4] {
     _id,
     title,
     slug,
@@ -49,7 +49,7 @@ export const homepageQuery = groq`
 
   "fotoclanky": *[
     _type == "fotoclanok"
-  ] | order(publishedAt desc)[0...4]
+  ] | order(publishedAt desc)[0...3]
   {
     _id,
     title,
