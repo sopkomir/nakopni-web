@@ -1,6 +1,11 @@
 import { client } from './lib/sanity'
-import { homepageQuery, latestReportazeQuery } from './lib/queries'
-import KomentareList from "./components/KomentareList";
+import {
+  homepageQuery,
+  latestReportazeQuery,
+  moreKomentareQuery,
+} from './lib/queries'
+
+import KomentareList from './components/KomentareList'
 import PhotoArticleSection from './components/PhotoArticleSection'
 import FeaturedHero from './components/FeaturedHero'
 import ReportazeGrid from './components/ReportazeGrid'
@@ -10,10 +15,12 @@ import ArticleCard from './components/ArticleCard'
 export const revalidate = 60
 
 export default async function HomePage() {
-  const [data, reportaze] = await Promise.all([
-    client.fetch(homepageQuery),
-    client.fetch(latestReportazeQuery),
-  ])
+  const [data, reportaze, moreKomentare] =
+    await Promise.all([
+      client.fetch(homepageQuery),
+      client.fetch(latestReportazeQuery),
+      client.fetch(moreKomentareQuery),
+    ])
 
   return (
     <main className="mx-auto max-w-[1500px] px-6 py-10">
