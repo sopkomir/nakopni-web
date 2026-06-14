@@ -79,7 +79,22 @@ export default async function PhotoPage({
 
   return (
     <main className="mx-auto max-w-7xl px-4 py-10">
-
+      <Link
+        href="/"
+        className="
+          inline-block
+          mb-10
+          text-sm
+          font-bold
+          uppercase
+          tracking-wide
+          text-gray-500
+          transition-colors
+          hover:text-orange-500
+        "
+      >
+        ← Späť na hlavnú stránku
+      </Link>
       {/* HLAVNÝ FOTOČLÁNOK */}
 
       <h1 className="mb-8 flex items-center gap-4 text-5xl font-bold">
