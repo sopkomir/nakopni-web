@@ -18,7 +18,7 @@ export default async function KomentarePage() {
           href="/"
           className="inline-block text-sm uppercase tracking-wide font-bold text-gray-500 hover:text-orange-500 mb-10"
         >
-          ← Späť na homepage
+          ← Späť na hlavnú stránku
         </a>
 
         <div className="mb-12">

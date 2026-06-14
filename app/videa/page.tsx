@@ -64,7 +64,7 @@ export default async function VideaPage({
           mb-10
         "
       >
-        ← Späť na homepage
+        ← Späť na hlavnú stránku
       </a>
 
       <div className="mb-12">
