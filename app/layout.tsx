@@ -1,7 +1,7 @@
 import "./globals.css";
 
 import { Oswald, Inter } from "next/font/google";
-
+import CookieBanner from "./components/CookieBanner";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
@@ -36,6 +36,8 @@ export default function RootLayout({
           {children}
 
           <Footer />
+
+          <CookieBanner />
         </div>
       </body>
     </html>
