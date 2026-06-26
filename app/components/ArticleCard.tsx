@@ -38,8 +38,8 @@ export default function ArticleCard({
               overflow-hidden
               rounded-xl
               bg-zinc-100
-              md:h-[160px]
-              md:w-[160px]
+              md:h-[180px]
+              md:w-[180px]
               md:shrink-0
             "
           >
