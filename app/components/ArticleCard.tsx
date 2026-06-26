@@ -38,8 +38,8 @@ export default function ArticleCard({
               overflow-hidden
               rounded-xl
               bg-zinc-100
-              md:h-[180px]
-              md:w-[180px]
+              md:h-[160px]
+              md:w-[160px]
               md:shrink-0
             "
           >
@@ -67,24 +67,9 @@ export default function ArticleCard({
           {/* META */}
           <div className="mb-3 flex flex-wrap items-center gap-3 text-sm text-zinc-500">
 
-            {post.category && (
-              <Link
-                href="/komentare"
-                className="
-                  rounded-full
-                  bg-zinc-100
-                  px-3
-                  py-1
-                  text-xs
-                  transition-colors
-                  hover:bg-orange-500
-                  hover:text-white
-                "
-                onClick={(e) => e.stopPropagation()}
-              >
-                Komentár
-              </Link>
-            )}
+            <span className="rounded-full bg-zinc-100 px-3 py-1 text-xs">
+              Komentár
+            </span>
 
             {post.publishedAt && (
               <time>
