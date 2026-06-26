@@ -26,33 +26,33 @@ export default function ArticleCard({
       href={`/${post.slug.current}`}
       className="group block border-b border-zinc-200 pb-8"
     >
-      <article className="flex gap-5">
+      <article className="flex flex-col gap-4 md:flex-row md:gap-5">
 
         {/* IMAGE */}
         {post.image && (
           <div
             className="
               relative
-              h-[140px]
-              w-[140px]
-              shrink-0
+              h-[220px]
+              w-full
               overflow-hidden
               rounded-xl
               bg-zinc-100
               md:h-[160px]
               md:w-[160px]
+              md:shrink-0
             "
           >
             <Image
               src={urlForImage(post.image)
-                .width(600)
-                .height(600)
+                .width(800)
+                .height(800)
                 .url()}
               alt={post.title}
               fill
               className="
                 object-cover
-                object-top
+                object-center
                 transition-transform
                 duration-500
                 group-hover:scale-105
