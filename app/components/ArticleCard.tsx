@@ -32,27 +32,25 @@ export default function ArticleCard({
         {post.image && (
           <div
             className="
-              relative
-              h-[220px]
               w-full
               overflow-hidden
               rounded-xl
               bg-zinc-100
-              md:h-[160px]
               md:w-[160px]
               md:shrink-0
             "
           >
             <Image
               src={urlForImage(post.image)
-                .width(800)
-                .height(800)
+                .width(1200)
+                .fit("max")
                 .url()}
               alt={post.title}
-              fill
+              width={1200}
+              height={1200}
               className="
-                object-cover
-                object-center
+                w-full
+                h-auto
                 transition-transform
                 duration-500
                 group-hover:scale-105
