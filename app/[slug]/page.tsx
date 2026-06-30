@@ -113,6 +113,22 @@ export default async function ArticlePage({
                 </p>
               )}
 
+              {article.audio?.asset?.url && (
+                <div className="mt-8 rounded-2xl border border-zinc-200 bg-zinc-50 p-5">
+                  <div className="mb-3 flex items-center gap-2 text-lg font-semibold text-orange-600">
+                    🎧 Vypočujte si komentár
+                  </div>
+
+                  <audio controls className="w-full">
+                    <source
+                      src={article.audio.asset.url}
+                      type="audio/mpeg"
+                    />
+                    Váš prehliadač nepodporuje prehrávanie audia.
+                  </audio>
+                </div>
+              )}
+
             </div>
 
           </div>

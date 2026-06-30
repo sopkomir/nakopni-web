@@ -44,7 +44,12 @@ export const homepageQuery = groq`
     image,
     category,
     publishedAt,
-    views
+    views,
+    audio{
+    asset->{
+      url
+      }
+    }
   },
 
   "fotoclanky": *[
@@ -153,7 +158,12 @@ export const articleQuery = `
   featured,
   author,
   publishedAt,
-  views
+  views,
+  audio{
+    asset->{
+      url
+    }
+  }
 }
 `;
 

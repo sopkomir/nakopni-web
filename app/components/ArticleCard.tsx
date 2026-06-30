@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import AudioPlayer from "./AudioPlayer";
 
 import { urlForImage } from "../lib/image";
 
@@ -15,6 +16,11 @@ interface ArticleCardProps {
     image?: any;
     category?: string;
     views?: number;
+    audio?: {
+      asset?: {
+        url: string;
+      };
+    };
   };
 }
 
@@ -22,16 +28,16 @@ export default function ArticleCard({
   post,
 }: ArticleCardProps) {
   return (
-    <Link
-      href={`/${post.slug.current}`}
-      className="group block border-b border-zinc-200 pb-8"
-    >
-      <article className="flex flex-col gap-4 md:flex-row md:gap-5">
+    <article className="border-b border-zinc-200 pb-8">
+
+      <div className="flex flex-col gap-4 md:flex-row md:gap-5">
 
         {/* IMAGE */}
         {post.image && (
-          <div
+          <Link
+            href={`/${post.slug.current}`}
             className="
+              block
               w-full
               overflow-hidden
               rounded-xl
@@ -53,10 +59,10 @@ export default function ArticleCard({
                 h-auto
                 transition-transform
                 duration-500
-                group-hover:scale-105
+                hover:scale-105
               "
             />
-          </div>
+          </Link>
         )}
 
         {/* CONTENT */}
@@ -88,26 +94,31 @@ export default function ArticleCard({
           </div>
 
           {/* TITLE */}
-          <div className="flex items-start gap-3">
+          <Link
+            href={`/${post.slug.current}`}
+            className="group"
+          >
+            <div className="flex items-start gap-3">
 
-            <span className="mt-2 h-3 w-3 shrink-0 bg-orange-500" />
+              <span className="mt-2 h-3 w-3 shrink-0 bg-orange-500" />
 
-            <h2
-              className="
-                text-2xl
-                font-bold
-                leading-tight
-                tracking-tight
-                text-black
-                transition-colors
-                duration-200
-                group-hover:text-orange-500
-              "
-            >
-              {post.title}
-            </h2>
+              <h2
+                className="
+                  text-2xl
+                  font-bold
+                  leading-tight
+                  tracking-tight
+                  text-black
+                  transition-colors
+                  duration-200
+                  group-hover:text-orange-500
+                "
+              >
+                {post.title}
+              </h2>
 
-          </div>
+            </div>
+          </Link>
 
           {/* EXCERPT */}
           {post.excerpt && (
@@ -124,9 +135,13 @@ export default function ArticleCard({
             </p>
           )}
 
+          {/* AUDIO */}
+          <AudioPlayer url={post.audio?.asset?.url} />
+
         </div>
 
-      </article>
-    </Link>
+      </div>
+
+    </article>
   );
 }
