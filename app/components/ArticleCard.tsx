@@ -30,7 +30,7 @@ export default function ArticleCard({
   return (
     <article className="border-b border-zinc-200 pb-8">
 
-      <div className="flex flex-col gap-4 md:flex-row md:gap-5">
+      <div className="flex flex-col gap-4 md:flex-row md:items-start md:gap-5">
 
         {/* IMAGE */}
         {post.image && (
@@ -41,7 +41,6 @@ export default function ArticleCard({
               w-full
               overflow-hidden
               rounded-xl
-              bg-zinc-100
               md:w-[160px]
               md:shrink-0
             "
