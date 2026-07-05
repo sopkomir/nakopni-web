@@ -1,6 +1,11 @@
 import Link from "next/link";
+import { PortableText } from "@portabletext/react";
 
-export default function Footer() {
+interface FooterProps {
+  settings: any;
+}
+
+export default function Footer({ settings }: FooterProps) {
   return (
     <footer className="mt-20 border-t border-zinc-200 pt-8 pb-10 text-sm">
 
@@ -10,14 +15,14 @@ export default function Footer() {
         <div className="max-w-2xl">
 
           <h3 className="mb-3 text-lg font-bold">
-            Nakopni.sk
+            {settings?.siteTitle || "Nakopni.sk"}
           </h3>
 
-          <p className="leading-7 text-zinc-600">
-            Nezávislý regionálny spravodajský portál prinášajúci
-            reportáže, komentáre, videá a pozitívne príbehy
-            z regiónu Zemplína.
-          </p>
+          <div className="leading-7 text-zinc-600 prose prose-sm max-w-none">
+            {settings?.footerText && (
+              <PortableText value={settings.footerText} />
+            )}
+          </div>
 
           <div className="mt-5 flex flex-wrap gap-6 text-sm font-medium">
 
@@ -62,24 +67,50 @@ export default function Footer() {
           </div>
 
           <div>
-            Občianske združenie Nakopni
+            {settings?.publisher}
           </div>
 
-          <div>
-            Topolianska 2750/12
-            <br />
-            071 01 Michalovce
-          </div>
+          {settings?.address && (
+            <div className="whitespace-pre-line">
+              {settings.address}
+            </div>
+          )}
 
-          <div>
-            IČO: 57703779
-          </div>
+          {settings?.ico && (
+            <div>
+              IČO: {settings.ico}
+            </div>
+          )}
 
-          <div>
-            Registrácia:
-            <br />
-            VVS/1-900/90-74660
-          </div>
+          {settings?.registration && (
+            <div>
+              Registrácia:
+              <br />
+              {settings.registration}
+            </div>
+          )}
+
+         {settings?.editorEmail && (
+            <div className="mt-3">
+              <a
+                href={`mailto:${settings.editorEmail}`}
+                className="hover:text-orange-500"
+              >
+                {settings.editorEmail}
+              </a>
+            </div>
+          )}
+
+          {settings?.phone && (
+            <div>
+              <a
+                href={`tel:${settings.phone}`}
+                className="hover:text-orange-500"
+              >
+                {settings.phone}
+              </a>
+            </div>
+          )}
 
         </div>
 
@@ -87,7 +118,8 @@ export default function Footer() {
 
       <div className="mt-8 border-t border-zinc-200 pt-5 text-xs text-zinc-500">
 
-        © {new Date().getFullYear()} Nakopni.sk. Všetky práva vyhradené.
+        © {new Date().getFullYear()}{" "}
+        {settings?.copyright || "Nakopni.sk. Všetky práva vyhradené."}
 
       </div>
 

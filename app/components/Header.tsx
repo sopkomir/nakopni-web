@@ -3,7 +3,13 @@
 import { useState } from "react";
 import Link from "next/link";
 
-export default function Header() {
+interface HeaderProps {
+  settings: any;
+}
+
+export default function Header({
+  settings,
+}: HeaderProps) {
   const [open, setOpen] = useState(false);
 
   const links = [

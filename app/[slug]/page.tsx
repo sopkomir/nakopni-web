@@ -1,17 +1,22 @@
 import Image from "next/image";
 import ViewCounter from "../components/ViewCounter";
 import { client } from "../lib/sanity";
-import { articleQuery } from "../lib/queries";
+import { articleQuery, pageQuery } from "../lib/queries";
 import { urlFor } from "../lib/image";
 import Breadcrumbs from "../components/Breadcrumbs";
 import LightboxImage from "../components/LightboxImage";
 import DisqusComments from "../components/DisqusComments";
 
-import { PortableText } from "@portabletext/react";
+import PortableContent from "../components/PortableContent";
 
 async function getArticle(slug: string) {
   return await client.fetch(articleQuery, { slug });
 }
+
+async function getPage(slug: string) {
+  return await client.fetch(pageQuery, { slug });
+}
+
 
 export default async function ArticlePage({
   params,
@@ -21,11 +26,47 @@ export default async function ArticlePage({
   const { slug } = await params;
 
   const article = await getArticle(slug);
+  const page = await getPage(slug);
 
-  if (!article) {
-    return <div>Článok neexistuje.</div>;
-  }
-  <ViewCounter articleId={article._id} />
+  console.log("ARTICLE:", article);
+  console.log("PAGE:", page);
+
+  if (!article && !page) {
+  return <div>Stránka neexistuje.</div>;
+}
+
+if (!article && page) {
+  return (
+    <main className="bg-white text-black">
+      <div className="mx-auto max-w-5xl px-4 py-12">
+
+        <h1 className="mb-6 text-5xl font-bold">
+          {page.title}
+        </h1>
+
+        {page.excerpt && (
+          <p className="mb-10 text-xl leading-relaxed text-zinc-600">
+            {page.excerpt}
+          </p>
+        )}
+
+        {page.image && (
+          <Image
+            src={urlFor(page.image).width(1600).url()}
+            alt={page.title}
+            width={1600}
+            height={900}
+            className="mb-10 w-full rounded-3xl"
+          />
+        )}
+
+        <PortableContent value={page.content} />
+
+      </div>
+    </main>
+  );
+}
+
 
   return (
   <>
@@ -141,72 +182,7 @@ export default async function ArticlePage({
           {/* ARTICLE CONTENT */}
           <div>
 
-            <div className="prose prose-lg max-w-none prose-neutral text-black">
-
-              <PortableText
-                value={article.content}
-                components={{
-
-                  types: {
-
-                    image: ({ value }) => (
-                      <LightboxImage
-                        src={urlFor(value).width(1200).url()}
-                        alt=""
-                      />
-                    ),
-
-                    gallery: ({ value }) => (
-
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-10">
-
-                        {value.images?.map(
-                          (image: any, index: number) => (
-
-                            <Image
-                              key={index}
-                              src={urlFor(image).width(800).url()}
-                              alt=""
-                              width={800}
-                              height={600}
-                              className="rounded-2xl object-cover"
-                            />
-
-                          )
-                        )}
-
-                      </div>
-
-                    ),
-
-                    youtube: ({ value }) => {
-
-                      const videoId =
-                        value.url.split("v=")[1];
-
-                      return (
-
-                        <div className="my-10">
-
-                          <iframe
-                            width="100%"
-                            height="500"
-                            src={`https://www.youtube.com/embed/${videoId}`}
-                            allowFullScreen
-                            className="rounded-2xl"
-                          />
-
-                        </div>
-
-                      );
-                    },
-
-                  },
-
-                }}
-              />
-
-            </div>
+          <PortableContent value={article.content} />
 
             {/* COMMENTS */}
             <section className="mt-24 border-t border-zinc-200 dark:border-zinc-800 pt-12">

@@ -217,3 +217,40 @@ export const moreKomentareQuery = `
   author
 }
 `;
+
+export const siteSettingsQuery = groq`
+*[_type == "siteSettings"][0]{
+  siteTitle,
+  siteDescription,
+  footerText,
+  publisher,
+  editorEmail,
+  businessEmail,
+  phone,
+  address,
+  ico,
+  dic,
+  registration,
+  facebook,
+  instagram,
+  youtube,
+  linkedin,
+  copyright,
+  logo
+}
+`;
+
+export const pageQuery = groq`
+*[
+  _type == "page" &&
+  slug.current == $slug
+][0]{
+  _id,
+  title,
+  slug,
+  excerpt,
+  image,
+  content,
+  seo
+}
+`;
