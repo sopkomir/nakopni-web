@@ -1,9 +1,9 @@
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+export const revalidate = 300;
 import Comments from "../components/Comments";
 import Sidebar from "../components/Sidebar";
 import { client } from "../lib/sanity";
 import { commentsQuery } from "../lib/queries";
+
 
 export default async function KomentarePage() {
 

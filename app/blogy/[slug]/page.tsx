@@ -3,6 +3,8 @@ import Link from "next/link";
 import { blogs } from "../../data/blogs";
 import Sidebar from "../../components/Sidebar";
 
+export const revalidate = 300;
+
 type Props = {
   params: Promise<{
     slug: string;

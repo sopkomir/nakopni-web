@@ -1,5 +1,4 @@
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+export const revalidate = 300;
 import Interviews from "../components/Interviews";
 import Sidebar from "../components/Sidebar";
 import Pagination from "../components/Pagination";

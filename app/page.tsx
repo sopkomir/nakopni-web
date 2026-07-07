@@ -12,7 +12,7 @@ import ReportazeGrid from './components/ReportazeGrid'
 import Sidebar from './components/Sidebar'
 import ArticleCard from './components/ArticleCard'
 
-export const revalidate = 60
+export const revalidate = 300;
 
 export default async function HomePage() {
   const [data, reportaze, moreKomentare] =

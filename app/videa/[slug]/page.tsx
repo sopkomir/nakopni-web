@@ -1,6 +1,8 @@
 import { videos } from "../../data/videos";
 import Link from "next/link";
 
+export const revalidate = 300;
+
 export default async function VideoDetailPage({
     params,
   }: {

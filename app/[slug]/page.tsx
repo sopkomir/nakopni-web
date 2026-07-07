@@ -9,6 +9,8 @@ import DisqusComments from "../components/DisqusComments";
 
 import PortableContent from "../components/PortableContent";
 
+export const revalidate = 300;
+
 async function getArticle(slug: string) {
   return await client.fetch(articleQuery, { slug });
 }
