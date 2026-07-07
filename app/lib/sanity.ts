@@ -4,7 +4,7 @@ export const client = createClient({
   projectId: "ep9srwpt",
   dataset: "production",
   apiVersion: "2025-01-01",
-  useCdn: false,
+  useCdn: process.env.NODE_ENV === "production",
 });
 
 export const writeClient = createClient({
