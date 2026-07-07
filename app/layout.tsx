@@ -8,6 +8,7 @@ import Footer from "./components/Footer";
 
 import { client } from "./lib/sanity";
 import { siteSettingsQuery } from "./lib/queries";
+import type { Metadata } from "next";
 
 const oswald = Oswald({
   subsets: ["latin"],
@@ -18,6 +19,40 @@ const oswald = Oswald({
 const inter = Inter({
   subsets: ["latin"],
 });
+
+export const metadata: Metadata = {
+  metadataBase: new URL("https://www.nakopni.sk"),
+
+  title: {
+    default: "Nakopni.sk | Regionálny spravodajský portál",
+    template: "%s | Nakopni.sk",
+  },
+
+  description:
+    "Nezávislý regionálny spravodajský portál prinášajúci reportáže, komentáre, rozhovory a pozitívne príbehy zo Zemplína.",
+
+  openGraph: {
+    title: "Nakopni.sk",
+    description:
+      "Nezávislý regionálny spravodajský portál zo Zemplína.",
+    url: "https://www.nakopni.sk",
+    siteName: "Nakopni.sk",
+    locale: "sk_SK",
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Nakopni.sk",
+    description:
+      "Nezávislý regionálny spravodajský portál zo Zemplína.",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
 
 export default async function RootLayout({
   children,
