@@ -97,6 +97,8 @@ export default function FeaturedHero({ post }: Props) {
               alt={post.title}
               width={720}
               height={405}
+              priority
+              sizes="(max-width: 768px) 100vw, 360px"
               className="
                 aspect-video
                 w-full
