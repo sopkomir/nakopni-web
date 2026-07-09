@@ -19,7 +19,7 @@ export default async function ReportazePage() {
           href="/"
           className="mb-10 inline-block text-sm font-bold uppercase tracking-wide text-gray-500 hover:text-orange-500"
         >
-          ← Späť na hkavnú stránku
+          ← Späť na hlavnú stránku
         </a>
 
         <div className="mb-12">
