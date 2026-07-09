@@ -6,7 +6,11 @@ type CommentCardProps = {
   description: string;
   image: any;
   slug: string;
-  author: string;
+  author?: {
+    name?: string;
+    slug?: string;
+    photo?: any;
+  };
   date: string;
 };
 
@@ -46,7 +50,7 @@ export default function CommentCard({
           </h3>
 
           <div className="text-sm text-gray-500 mb-2">
-          {author} • {date}
+            {author?.name ?? "Redakcia"} • {date}
           </div>
 
           <p className="text-base md:text-xl text-gray-600 leading-relaxed">
