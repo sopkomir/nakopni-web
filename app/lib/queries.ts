@@ -301,7 +301,7 @@ export const latestReportazeQuery = groq`
 export const moreKomentareQuery = groq`
 *[
   _type == "article" &&
-  category->slug.current == "komentar" &&
+  category->slug.current == "komentare" &&
   featured != true
 ]
 | order(publishedAt desc)[5...13]{
