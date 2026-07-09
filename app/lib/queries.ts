@@ -18,51 +18,71 @@ export const homepageQuery = groq`
   "featured": *[
     _type == "article" &&
     featured == true
-  ]
-  | order(publishedAt desc)[0] {
+  ] | order(publishedAt desc)[0]{
     _id,
     title,
     slug,
     excerpt,
     image,
-    category,
+
+    category->{
+      title,
+      slug,
+      color
+    },
+
+    author->{
+      name,
+      slug,
+      photo
+    },
+
     publishedAt,
-    author,
     views
   },
 
   "komentare": *[
     _type == "article" &&
-    category == "komentar" &&
+    category->slug.current == "komentar" &&
     featured != true
-  ]
-  | order(publishedAt desc)[0...5] {
+  ] | order(publishedAt desc)[0...5]{
     _id,
     title,
     slug,
     excerpt,
     image,
-    category,
+
+    category->{
+      title,
+      slug,
+      color
+    },
+
+    author->{
+      name,
+      slug
+    },
+
     publishedAt,
     views,
+
     audio{
-    asset->{
-      url
+      asset->{
+        url
       }
     }
   },
 
   "fotoclanky": *[
     _type == "fotoclanok"
-  ] | order(publishedAt desc)[0...3]
-  {
+  ] | order(publishedAt desc)[0...3]{
     _id,
     title,
     slug,
     image
   }
 }
-`
+`;
 
 export const featuredQuery = `
 *[
@@ -83,82 +103,36 @@ export const featuredQuery = `
 }
 `;
 
-export const commentsQuery = `
+export const commentsQuery = groq`
 *[
   _type == "article" &&
-  category == "komentar" &&
+  category->slug.current == "komentar" &&
   featured != true
 ]
-| order(publishedAt desc) {
+| order(publishedAt desc){
   _id,
   title,
   slug,
   excerpt,
   content,
   image,
-  category,
-  featured,
-  author,
-  publishedAt
-}
-`;
 
-export const blogsQuery = `
-*[
-  _type == "article" &&
-  category == "blog" &&
-  featured != true
-]
-| order(publishedAt desc) {
-  _id,
-  title,
-  slug,
-  excerpt,
-  content,
-  image,
-  category,
-  featured,
-  author,
-  publishedAt
-}
-`;
+  category->{
+    title,
+    slug,
+    color
+  },
 
-export const rozhovoryQuery = `
-*[
-  _type == "article" &&
-  category == "rozhovor" &&
-  featured != true
-]
-| order(publishedAt desc) {
-  _id,
-  title,
-  slug,
-  excerpt,
-  content,
-  image,
-  category,
-  featured,
-  author,
-  publishedAt
-}
-`;
+  author->{
+    name,
+    slug,
+    photo
+  },
 
-export const articleQuery = `
-*[
-  _type == "article" &&
-  slug.current == $slug
-][0] {
-  _id,
-  title,
-  slug,
-  excerpt,
-  content,
-  image,
-  category,
   featured,
-  author,
   publishedAt,
   views,
+
   audio{
     asset->{
       url
@@ -167,54 +141,177 @@ export const articleQuery = `
 }
 `;
 
-export const reportazeQuery = `
+export const blogsQuery = groq`
 *[
   _type == "article" &&
-  category == "reportaze" &&
+  category->slug.current == "blog" &&
   featured != true
 ]
-| order(publishedAt desc) {
+| order(publishedAt desc){
   _id,
   title,
   slug,
   excerpt,
   content,
   image,
-  category,
+
+  category->{
+    title,
+    slug,
+    color
+  },
+
+  author->{
+    name,
+    slug,
+    photo
+  },
+
   featured,
-  author,
   publishedAt,
   views
 }
 `;
 
-export const latestReportazeQuery = `
+export const rozhovoryQuery = groq`
 *[
   _type == "article" &&
-  category == "reportaze" &&
+  category->slug.current == "rozhovor" &&
   featured != true
 ]
-| order(publishedAt desc)[0...3] {
+| order(publishedAt desc){
+  _id,
+  title,
+  slug,
+  excerpt,
+  content,
+  image,
+
+  category->{
+    title,
+    slug,
+    color
+  },
+
+  author->{
+    name,
+    slug,
+    photo
+  },
+
+  featured,
+  publishedAt,
+  views
+}
+`;
+
+export const articleQuery = groq`
+*[
+  _type == "article" &&
+  slug.current == $slug
+][0]{
+  _id,
+  title,
+  slug,
+  excerpt,
+  content,
+  image,
+
+  category->{
+    title,
+    slug,
+    color
+  },
+
+  author->{
+    name,
+    slug,
+    photo,
+    role
+  },
+
+  featured,
+  publishedAt,
+  views,
+
+  audio{
+    asset->{
+      url
+    }
+  },
+
+  seo
+}
+`;
+
+export const reportazeQuery = groq`
+*[
+  _type == "article" &&
+  category->slug.current == "reportaze" &&
+  featured != true
+]
+| order(publishedAt desc){
+  _id,
+  title,
+  slug,
+  excerpt,
+  content,
+  image,
+
+  category->{
+    title,
+    slug,
+    color
+  },
+
+  author->{
+    name,
+    slug,
+    photo
+  },
+
+  featured,
+  publishedAt,
+ views
+}
+`;
+
+export const latestReportazeQuery = groq`
+*[
+  _type == "article" &&
+  category->slug.current == "reportaze" &&
+  featured != true
+]
+| order(publishedAt desc)[0...3]{
   _id,
   title,
   slug,
   excerpt,
   image,
+
+  category->{
+    title,
+    slug
+  },
+
   publishedAt
 }
 `;
 
-export const moreKomentareQuery = `
+export const moreKomentareQuery = groq`
 *[
   _type == "article" &&
-  category == "komentar" &&
+  category->slug.current == "komentar" &&
   featured != true
 ]
-| order(publishedAt desc)[5...13] {
+| order(publishedAt desc)[5...13]{
   _id,
   title,
   slug,
-  author
+
+  author->{
+    name
+  }
 }
 `;
 

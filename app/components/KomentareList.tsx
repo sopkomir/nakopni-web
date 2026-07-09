@@ -35,8 +35,8 @@ export default function KomentareList({ posts }: Props) {
                   group-hover:text-orange-500
                 "
               >
-                {post.author
-                  ? `${post.author}: ${post.title}`
+                {post.author?.name
+                  ? `${post.author.name}: ${post.title}`
                   : post.title}
               </h3>
 

@@ -14,7 +14,17 @@ interface ArticleCardProps {
     excerpt?: string;
     publishedAt?: string;
     image?: any;
-    category?: string;
+    category?: {
+        title: string;
+        slug: {
+          current: string;
+        };
+        color?: string;
+      };
+
+      author?: {
+        name: string;
+      };
     views?: number;
     audio?: {
       asset?: {
@@ -71,7 +81,7 @@ export default function ArticleCard({
           <div className="mb-3 flex flex-wrap items-center gap-3 text-sm text-zinc-500">
 
             <span className="rounded-full bg-zinc-100 px-3 py-1 text-xs">
-              Komentár
+              {post.category?.title ?? "Komentár"}
             </span>
 
             {post.publishedAt && (

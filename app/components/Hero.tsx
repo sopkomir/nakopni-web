@@ -19,7 +19,7 @@ export default function Hero({ article }: Props) {
         <div className="flex flex-col">
 
           <div className="uppercase text-xs tracking-widest text-gray-500 font-bold mb-4">
-            {article.category}
+            {article.category?.title}
           </div>
 
           <h2 className="text-4xl lg:text-5xl leading-[0.95] leading-tight mb-6 group-hover:text-orange-500 transition-colors">

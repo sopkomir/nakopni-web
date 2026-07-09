@@ -78,7 +78,7 @@ if (!article && page) {
 
       <div className="mx-auto max-w-7xl px-4 py-10">
         <Breadcrumbs
-          category={article.category}
+          category={article.category?.title}
           title={article.title}
         />
         {/* HERO */}
@@ -113,7 +113,7 @@ if (!article && page) {
               <div className="flex flex-wrap items-center gap-3 mb-4">
 
                 <span className="bg-black text-white text-sm px-3 py-1 rounded-full capitalize">
-                  {article.category}
+                  {article.category?.title}
                 </span>
 
                 {article.publishedAt && (
@@ -221,7 +221,7 @@ if (!article && page) {
                     </div>
 
                     <div className="capitalize">
-                      {article.category}
+                      {article.category?.title}
                     </div>
                   </div>
 
