@@ -22,6 +22,8 @@ export default async function HomePage() {
       client.fetch(moreKomentareQuery),
     ])
 
+    console.log("Homepage:", JSON.stringify(data, null, 2));
+
   return (
     <main className="mx-auto max-w-[1500px] px-6 py-10">
 
