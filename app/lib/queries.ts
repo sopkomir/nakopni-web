@@ -43,7 +43,7 @@ export const homepageQuery = groq`
 
   "komentare": *[
     _type == "article" &&
-    category->slug.current == "komentar" &&
+    category->slug.current == "komentare" &&
     featured != true
   ] | order(publishedAt desc)[0...5]{
     _id,
@@ -106,7 +106,7 @@ export const featuredQuery = `
 export const commentsQuery = groq`
 *[
   _type == "article" &&
-  category->slug.current == "komentar" &&
+  category->slug.current == "komentare" &&
   featured != true
 ]
 | order(publishedAt desc){
