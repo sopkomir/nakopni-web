@@ -351,3 +351,46 @@ export const pageQuery = groq`
   seo
 }
 `;
+
+export const authorsQuery = groq`
+*[_type == "author"] | order(name asc){
+  _id,
+  name,
+  slug,
+  photo,
+  role,
+  bio
+}
+`;
+
+export const authorQuery = groq`
+*[
+  _type=="author" &&
+  slug.current==$slug
+][0]{
+  _id,
+  name,
+  slug,
+  role,
+  bio,
+  photo,
+
+  "articles": *[
+    _type=="article" &&
+    author._ref==^._id
+  ]
+  | order(publishedAt desc){
+    _id,
+    title,
+    slug,
+    excerpt,
+    image,
+    publishedAt,
+
+    category->{
+      title,
+      slug
+    }
+  }
+}
+`;
