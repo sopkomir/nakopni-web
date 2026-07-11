@@ -2,20 +2,14 @@
 
 Oficiálny web spravodajského portálu Nakopni.sk.
 
-Nakopni.sk prináša komentáre, reportáže, rozhovory, fotoreportáže a publicistiku z regiónov Slovenska.
-
 ## Hlavné sekcie
 
-- Domov: https://www.nakopni.sk/
-- Komentáre: https://www.nakopni.sk/komentare
-- Reportáže: https://www.nakopni.sk/reportaze
-- Rozhovory: https://www.nakopni.sk/rozhovory
-- Autori: https://www.nakopni.sk/autori
+- [Domov](https://www.nakopni.sk/)
+- [Komentáre](https://www.nakopni.sk/komentare)
+- [Reportáže](https://www.nakopni.sk/reportaze)
+- [Rozhovory](https://www.nakopni.sk/rozhovory)
+- [Autori](https://www.nakopni.sk/autori)
 
 ## O webe
 
 Nakopni.sk je nezávislý slovenský online magazín zameraný na aktuálne spoločenské dianie, regionálne témy, analýzy a názory.
-
-## Kontakt
-
-https://www.nakopni.sk/kontakt
