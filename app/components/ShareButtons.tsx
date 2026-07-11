@@ -1,32 +1,30 @@
 "use client";
 
-import {
-  FacebookShareButton,
-  LinkedinShareButton,
-  TwitterShareButton,
-  WhatsappShareButton,
-  TelegramShareButton,
-  EmailShareButton,
-
-  FacebookIcon,
-  LinkedinIcon,
-  TwitterIcon,
-  WhatsappIcon,
-  TelegramIcon,
-  EmailIcon,
-} from "react-share";
-
 interface Props {
   title: string;
   url: string;
 }
 
-export default function ShareButtons({
-  title,
-  url,
-}: Props) {
-  return (
+export default function ShareButtons({ title, url }: Props) {
 
+  const encodedUrl = encodeURIComponent(url);
+  const encodedTitle = encodeURIComponent(title);
+
+  const share = {
+    facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
+    x: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`,
+    linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
+    whatsapp: `https://wa.me/?text=${encodedTitle}%20${encodedUrl}`,
+    telegram: `https://t.me/share/url?url=${encodedUrl}&text=${encodedTitle}`,
+    email: `mailto:?subject=${encodedTitle}&body=${encodedUrl}`,
+  };
+
+  async function copyLink() {
+    await navigator.clipboard.writeText(url);
+    alert("Odkaz bol skopírovaný.");
+  }
+
+  return (
     <div className="mt-8">
 
       <div className="mb-3 text-sm font-semibold uppercase tracking-wider text-zinc-500">
@@ -35,33 +33,47 @@ export default function ShareButtons({
 
       <div className="flex flex-wrap gap-3">
 
-        <FacebookShareButton url={url}>
-          <FacebookIcon size={42} round />
-        </FacebookShareButton>
+        <ShareLink href={share.facebook}>f</ShareLink>
 
-        <TwitterShareButton url={url} title={title}>
-          <TwitterIcon size={42} round />
-        </TwitterShareButton>
+        <ShareLink href={share.x}>𝕏</ShareLink>
 
-        <LinkedinShareButton url={url}>
-          <LinkedinIcon size={42} round />
-        </LinkedinShareButton>
+        <ShareLink href={share.linkedin}>in</ShareLink>
 
-        <WhatsappShareButton url={url} title={title}>
-          <WhatsappIcon size={42} round />
-        </WhatsappShareButton>
+        <ShareLink href={share.whatsapp}>WA</ShareLink>
 
-        <TelegramShareButton url={url} title={title}>
-          <TelegramIcon size={42} round />
-        </TelegramShareButton>
+        <ShareLink href={share.telegram}>TG</ShareLink>
 
-        <EmailShareButton url={url} subject={title}>
-          <EmailIcon size={42} round />
-        </EmailShareButton>
+        <ShareLink href={share.email}>✉</ShareLink>
+
+        <button
+          onClick={copyLink}
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-zinc-300 transition hover:border-orange-500 hover:text-orange-500"
+          title="Kopírovať odkaz"
+        >
+          🔗
+        </button>
 
       </div>
 
     </div>
+  );
+}
 
+function ShareLink({
+  href,
+  children,
+}: {
+  href: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="flex h-10 w-10 items-center justify-center rounded-full border border-zinc-300 font-bold transition hover:border-orange-500 hover:text-orange-500"
+    >
+      {children}
+    </a>
   );
 }
