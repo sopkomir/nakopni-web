@@ -6,7 +6,7 @@ import { urlFor } from "../lib/image";
 import Breadcrumbs from "../components/Breadcrumbs";
 import LightboxImage from "../components/LightboxImage";
 import DisqusComments from "../components/DisqusComments";
-
+import ShareButtons from "../components/ShareButtons";
 import PortableContent from "../components/PortableContent";
 
 export const revalidate = 300;
@@ -155,6 +155,11 @@ if (!article && page) {
                   {article.excerpt}
                 </p>
               )}
+
+              <ShareButtons
+                title={article.title}
+                url={`https://www.nakopni.sk/${article.slug.current}`}
+              />
 
               {article.audio?.asset?.url && (
                 <div className="mt-8 rounded-2xl border border-zinc-200 bg-zinc-50 p-5">
