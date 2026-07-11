@@ -91,8 +91,10 @@ export default function FeaturedHero({ post }: Props) {
           >
             <Image
               src={urlForImage(post.image)
-                .width(720)
-                .height(405)
+                .width(480)
+                .height(270)
+                .auto("format")
+                .quality(80)
                 .url()}
               alt={post.title}
               width={720}
