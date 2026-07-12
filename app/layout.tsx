@@ -39,6 +39,13 @@ export const metadata: Metadata = {
     siteName: "Nakopni.sk",
     locale: "sk_SK",
     type: "website",
+
+    images: [
+      {
+        url: "/og-image.jpng",
+        alt: "Nakopni.sk",
+      },
+    ],
   },
 
   twitter: {
@@ -46,6 +53,7 @@ export const metadata: Metadata = {
     title: "Nakopni.sk",
     description:
       "Nezávislý regionálny spravodajský portál zo Zemplína.",
+      images: ["/og-image.jpg"],
   },
 
   robots: {
