@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import ViewCounter from "../components/ViewCounter";
 import { client } from "../lib/sanity";
@@ -18,6 +19,64 @@ async function getArticle(slug: string) {
 async function getPage(slug: string) {
   return await client.fetch(pageQuery, { slug });
 }
+
+// ← SEM vlož generateMetadata
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+
+  const { slug } = await params;
+
+  const article = await getArticle(slug);
+
+  if (!article) {
+    return {
+      title: "Nakopni.sk",
+    };
+  }
+
+  const image =
+    article.image
+      ? urlFor(article.image)
+          .width(1200)
+          .height(630)
+          .url()
+      : "https://www.nakopni.sk/og-image.jpg";
+
+  return {
+    title: article.title,
+    description: article.excerpt,
+
+    openGraph: {
+      title: article.title,
+      description: article.excerpt,
+      url: `https://www.nakopni.sk/${article.slug.current}`,
+      siteName: "Nakopni.sk",
+      images: [
+        {
+          url: image,
+          width: 1200,
+          height: 630,
+        },
+      ],
+      locale: "sk_SK",
+      type: "article",
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title: article.title,
+      description: article.excerpt,
+      images: [image],
+    },
+  };
+}
+
+// ↓ až potom pokračuje
+
 
 
 export default async function ArticlePage({
