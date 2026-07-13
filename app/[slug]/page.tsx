@@ -140,6 +140,7 @@ if (!article && page) {
       <div className="mx-auto max-w-7xl px-4 py-10">
         <Breadcrumbs
           category={article.category?.title}
+          categorySlug={article.category?.slug?.current}
           title={article.title}
         />
         {/* HERO */}

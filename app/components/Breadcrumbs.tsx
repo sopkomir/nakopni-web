@@ -2,69 +2,56 @@ import Link from "next/link";
 
 interface BreadcrumbsProps {
   category?: string;
+  categorySlug?: string;
   title: string;
 }
 
 export default function Breadcrumbs({
   category,
+  categorySlug,
   title,
 }: BreadcrumbsProps) {
-
-  const categoryMap: Record<string, string> = {
-    komentar: "Komentáre",
-    blog: "Blog",
-    rozhovor: "Rozhovory",
-  };
-
-  const categoryHrefMap: Record<string, string> = {
-    komentar: "/komentare",
-    blog: "/blogy",
-    rozhovor: "/rozhovory",
-  };
-
   return (
     <nav
       aria-label="Breadcrumb"
       className="mb-8 text-sm text-zinc-500"
     >
-
       <ol className="flex flex-wrap items-center gap-2">
 
-        {/* HOME */}
+        {/* DOMOV */}
         <li>
           <Link
             href="/"
-            className="transition-colors hover:text-black dark:hover:text-white"
+            className="transition-colors hover:text-black"
           >
             Domov
           </Link>
         </li>
 
-        {/* CATEGORY */}
-        {category && (
+        {/* KATEGÓRIA */}
+        {category && categorySlug && (
           <>
             <li>/</li>
 
             <li>
               <Link
-                href={categoryHrefMap[category] || "#"}
-                className="transition-colors hover:text-black dark:hover:text-white"
+                href={`/${categorySlug}`}
+                className="transition-colors hover:text-black"
               >
-                {categoryMap[category] || category}
+                {category}
               </Link>
             </li>
           </>
         )}
 
-        {/* TITLE */}
+        {/* NÁZOV ČLÁNKU */}
         <li>/</li>
 
-        <li className="text-black dark:text-white font-medium truncate max-w-[240px]">
+        <li className="max-w-[260px] truncate font-medium text-black">
           {title}
         </li>
 
       </ol>
-
     </nav>
   );
 }
