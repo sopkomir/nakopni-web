@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getReadingTime } from "../lib/readingTime";
 import Image from "next/image";
 import ViewCounter from "../components/ViewCounter";
 import { client } from "../lib/sanity";
@@ -88,6 +89,7 @@ export default async function ArticlePage({
 
   const article = await getArticle(slug);
   const page = await getPage(slug);
+  const readingTime = article ? getReadingTime(article.content) : 1;
 
   console.log("ARTICLE:", article);
   console.log("PAGE:", page);
@@ -185,6 +187,12 @@ if (!article && page) {
 
                 <span className="text-zinc-500 text-sm">
                   {article.views ?? 0} prečítaní
+                </span>
+
+                <span className="text-zinc-400">•</span>
+
+                <span className="text-zinc-500 text-sm">
+                  {readingTime} min čítania
                 </span>
 
               </div>
