@@ -34,9 +34,9 @@ export default async function Image({
 
   const imageUrl = post?.image
     ? urlForImage(post.image)
-        .width(1200)
-        .height(630)
-        .fit("crop")
+        .fit("max")
+        .width(1000)
+        .height(1000)
         .url()
     : null;
 
@@ -44,97 +44,41 @@ export default async function Image({
     (
       <div
         style={{
-          width: "100%",
-          height: "100%",
-          position: "relative",
+          width: "1200px",
+          height: "630px",
+          background: "#ffffff",
           display: "flex",
-          overflow: "hidden",
-          background: "#FFF",
+          justifyContent: "center",
+          alignItems: "center",
+          position: "relative",
         }}
       >
-        {imageUrl && (
-        <div
-            style={{
-            width: "100%",
-            height: "100%",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            background: "#ffffff",
-            padding: 40,
-            }}
-        >
-            <img
-            src={imageUrl}
-            alt=""
-            style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "contain",
-            }}
-            />
-        </div>
-        )}
-        
-
         {/* Logo */}
         <img
           src="https://www.nakopni.sk/logo-og.png"
           alt=""
           style={{
             position: "absolute",
-            top: 40,
-            left: 40,
-            width: 260,
+            top: 25,
+            left: 25,
+            width: 210,
           }}
         />
 
-        {/* Označenie */}
-        <div
-          style={{
-            position: "absolute",
-            top: 42,
-            right: 40,
-            background: "#000",
-            color: "#fff",
-            padding: "12px 24px",
-            borderRadius: 999,
-            fontSize: 28,
-            fontWeight: 700,
-          }}
-        >
-          FOTOČLÁNOK
-        </div>
-
-        {/* Titulok */}
-        <div
-          style={{
-            position: "absolute",
-            left: 50,
-            bottom: 95,
-            right: 50,
-            color: "white",
-            fontSize: 58,
-            fontWeight: 800,
-            lineHeight: 1.1,
-          }}
-        >
-          {post.title}
-        </div>
-
-        {/* slogan */}
-        <div
-          style={{
-            position: "absolute",
-            left: 50,
-            bottom: 40,
-            color: "#ff7a00",
-            fontSize: 28,
-            fontWeight: 600,
-          }}
-        >
-          Hľadáme riešenia ako nakopnúť Slovensko
-        </div>
+        {imageUrl && (
+          <img
+            src={imageUrl}
+            alt=""
+            style={{
+              maxWidth: "1080px",
+              maxHeight: "540px",
+              width: "auto",
+              height: "auto",
+              objectFit: "contain",
+              border: "1px solid #e5e5e5",
+            }}
+          />
+        )}
       </div>
     ),
     size
