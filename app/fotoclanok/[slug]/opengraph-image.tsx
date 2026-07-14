@@ -49,32 +49,33 @@ export default async function Image({
           position: "relative",
           display: "flex",
           overflow: "hidden",
-          background: "#111",
+          background: "#FFF",
         }}
       >
         {imageUrl && (
-          <img
+        <div
+            style={{
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            background: "#ffffff",
+            padding: 40,
+            }}
+        >
+            <img
             src={imageUrl}
             alt=""
             style={{
-              position: "absolute",
-              inset: 0,
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
+                width: "100%",
+                height: "100%",
+                objectFit: "contain",
             }}
-          />
+            />
+        </div>
         )}
-
-        {/* Gradient */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "linear-gradient(to top, rgba(0,0,0,.88), rgba(0,0,0,.15))",
-          }}
-        />
+        
 
         {/* Logo */}
         <img
