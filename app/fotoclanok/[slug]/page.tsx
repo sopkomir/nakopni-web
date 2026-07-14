@@ -182,6 +182,11 @@ export default async function PhotoPage({
         />
       )}
 
+      <ShareButtons
+        title={post.title}
+        url={`https://www.nakopni.sk/fotoclanok/${post.slug.current}`}
+      />
+
       {/* PREDCHÁDZAJÚCI / ĎALŠÍ */}
 
       {(previousPost || nextPost) && (
