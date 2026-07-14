@@ -33,12 +33,12 @@ export default async function Image({
   );
 
   const imageUrl = post?.image
-    ? urlForImage(post.image)
-        .fit("max")
-        .width(1000)
-        .height(1000)
-        .url()
-    : null;
+  ? urlForImage(post.image)
+      .width(1000)
+      .url()
+  : null;
+
+    console.log(imageUrl);
 
   return new ImageResponse(
     (
