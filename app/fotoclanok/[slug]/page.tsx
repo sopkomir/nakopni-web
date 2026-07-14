@@ -1,3 +1,5 @@
+import ShareButtons from "@/app/components/ShareButtons";
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { groq } from "next-sanity";
@@ -6,6 +8,7 @@ import { client } from "@/app/lib/sanity";
 import { urlForImage } from "@/app/lib/image";
 
 const query = groq`
+
 {
   "post": *[
     _type == "fotoclanok" &&
@@ -41,6 +44,66 @@ const query = groq`
   }
 }
 `;
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+
+  const { slug } = await params;
+
+  const post = await client.fetch(
+    groq`
+      *[
+        _type == "fotoclanok" &&
+        slug.current == $slug
+      ][0]{
+        title,
+        slug,
+        image
+      }
+    `,
+    { slug }
+  );
+
+  if (!post) {
+    return {
+      title: "Fotočlánok | Nakopni.sk",
+    };
+  }
+
+  const image = post.image
+    ? urlForImage(post.image)
+        .width(1200)
+        .height(630)
+        .url()
+    : "https://www.nakopni.sk/og-image.jpg";
+
+  return {
+    title: post.title,
+
+    openGraph: {
+      title: post.title,
+      url: `https://www.nakopni.sk/fotoclanok/${post.slug.current}`,
+      siteName: "Nakopni.sk",
+      type: "article",
+
+      images: [
+        {
+          url: image,
+          width: 1200,
+          height: 630,
+        },
+      ],
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      images: [image],
+    },
+  };
+}
 
 export default async function PhotoPage({
   params,
