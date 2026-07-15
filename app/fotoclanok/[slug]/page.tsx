@@ -78,7 +78,7 @@ export async function generateMetadata({
       .width(1200)
       .height(630)
       .fit("fill")
-      .background("ffffff")
+      .bg("ffffff")
       .auto("format")
       .url()
   : "https://www.nakopni.sk/og-image.jpg";
