@@ -39,13 +39,16 @@ export async function generateMetadata({
     };
   }
 
-  const image =
-    article.image
-      ? urlFor(article.image)
-          .width(1200)
-          .height(630)
-          .url()
-      : "https://www.nakopni.sk/og-image.jpg";
+  const image = article.image
+  ? urlFor(article.image)
+      .ignoreImageParams()
+      .width(1200)
+      .height(630)
+      .fit("fill")
+      .bg("fff")
+      .auto("format")
+      .url()
+  : "https://www.nakopni.sk/og-image.jpg";
 
   return {
     title: article.title,
@@ -61,6 +64,7 @@ export async function generateMetadata({
           url: image,
           width: 1200,
           height: 630,
+          alt: article.title,
         },
       ],
       locale: "sk_SK",
