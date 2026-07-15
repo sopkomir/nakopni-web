@@ -73,11 +73,15 @@ export async function generateMetadata({
   }
 
   const image = post.image
-    ? urlForImage(post.image)
-        .width(1200)
-        .height(630)
-        .url()
-    : "https://www.nakopni.sk/og-image.jpg";
+  ? urlForImage(post.image)
+      .ignoreImageParams()
+      .width(1200)
+      .height(630)
+      .fit("fill")
+      .background("ffffff")
+      .auto("format")
+      .url()
+  : "https://www.nakopni.sk/og-image.jpg";
 
   return {
     title: post.title,
