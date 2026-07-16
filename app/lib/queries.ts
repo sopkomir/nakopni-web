@@ -333,10 +333,13 @@ export const siteSettingsQuery = groq`
   youtube,
   linkedin,
   copyright,
+
   logo{
-  asset->{
-    url
+    asset->{
+      url
+    }
   }
+
 }
 `;
 
