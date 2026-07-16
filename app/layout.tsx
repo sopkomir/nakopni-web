@@ -68,9 +68,44 @@ export default async function RootLayout({
 
   const settings = await client.fetch(siteSettingsQuery);
 
+  const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+
+  name: settings?.siteTitle ?? "Nakopni.sk",
+
+  url: "https://www.nakopni.sk",
+
+  logo: settings?.logo
+    ? {
+        "@type": "ImageObject",
+        url: settings.logo.asset.url,
+      }
+    : {
+        "@type": "ImageObject",
+        url: "https://www.nakopni.sk/logo-og.png",
+      },
+
+  description: settings?.siteDescription,
+
+  email: settings?.businessEmail,
+
+  telephone: settings?.phone,
+
+  address: settings?.address,
+
+  sameAs: [
+    settings?.facebook,
+    settings?.instagram,
+    settings?.youtube,
+    settings?.linkedin,
+  ].filter(Boolean),
+};
+
   return (
     <html lang="sk">
       <body
+        
         className={`
           ${inter.className}
           ${oswald.variable}
@@ -78,6 +113,12 @@ export default async function RootLayout({
           text-black
         `}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationSchema),
+          }}
+        />
         <div className="max-w-[1400px] mx-auto px-4 md:px-6 py-6 bg-white">
 
           <Header settings={settings} />
