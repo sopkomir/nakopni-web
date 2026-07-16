@@ -1,11 +1,9 @@
+import GoogleAnalytics from "./components/GoogleAnalytics";
 import "./globals.css";
-
 import { Oswald, Inter } from "next/font/google";
-
 import CookieBanner from "./components/CookieBanner";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-
 import { client } from "./lib/sanity";
 import { siteSettingsQuery } from "./lib/queries";
 import type { Metadata } from "next";
@@ -89,6 +87,8 @@ export default async function RootLayout({
           <Footer settings={settings} />
 
           <CookieBanner />
+
+          <GoogleAnalytics />
 
         </div>
       </body>
