@@ -94,6 +94,53 @@ export default async function ArticlePage({
   const article = await getArticle(slug);
   const page = await getPage(slug);
   const readingTime = article ? getReadingTime(article.content) : 1;
+  const schema = article
+  ? {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+
+      headline: article.title,
+
+      description: article.excerpt,
+
+      datePublished: article.publishedAt,
+
+      dateModified: article.publishedAt,
+
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": `https://www.nakopni.sk/${article.slug.current}`,
+      },
+
+      image: article.image
+        ? [
+            urlFor(article.image)
+              .width(1200)
+              .height(630)
+              .fit("fill")
+              .bg("fff")
+              .auto("format")
+              .url(),
+          ]
+        : [],
+
+      author: {
+        "@type": "Person",
+        name: article.author?.name ?? "Redakcia Nakopni.sk",
+      },
+
+      publisher: {
+        "@type": "Organization",
+
+        name: "Nakopni.sk",
+
+        logo: {
+          "@type": "ImageObject",
+          url: "https://www.nakopni.sk/logo-og.png",
+        },
+      },
+    }
+  : null;
 
   console.log("ARTICLE:", article);
   console.log("PAGE:", page);
@@ -137,6 +184,14 @@ if (!article && page) {
 
   return (
   <>
+    {schema && (
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(schema),
+        }}
+      />
+    )}
     <ViewCounter articleId={article._id} />
 
     <main className="bg-white text-black">
