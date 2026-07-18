@@ -40,7 +40,7 @@ export const metadata: Metadata = {
 
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/og-image.JPG",
         alt: "Nakopni.sk",
       },
     ],
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     title: "Nakopni.sk",
     description:
       "Nezávislý regionálny spravodajský portál zo Zemplína.",
-      images: ["/og-image.jpg"],
+      images: ["/og-image.JPG"],
   },
 
   robots: {
