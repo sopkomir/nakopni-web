@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     title: "Nakopni.sk",
     description:
       "Nezávislý regionálny spravodajský portál zo Zemplína.",
-      images: ["/og-image.png"],
+      images: ["/og-image.jpg"],
   },
 
   robots: {
