@@ -90,10 +90,11 @@ export default function ShareButtons({ title, url }: Props) {
     try {
       await navigator.share({
         title,
+        text: `${title}\n\n${url}`,
         url,
       });
-    } catch {
-      // používateľ zrušil zdieľanie
+    } catch (error) {
+      console.error("Share failed:", error);
     }
   }
 
