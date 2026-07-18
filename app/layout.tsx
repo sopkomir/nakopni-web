@@ -40,7 +40,7 @@ export const metadata: Metadata = {
 
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-image.jpg",
         alt: "Nakopni.sk",
       },
     ],
