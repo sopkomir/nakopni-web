@@ -97,7 +97,7 @@ export default function ArticleCard({
             <span>•</span>
 
             <span>
-              {post.views ?? 0} prečítaní
+              Prečítaní: {post.views ?? 0}
             </span>
 
           </div>
