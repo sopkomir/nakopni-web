@@ -304,7 +304,7 @@ export const moreKomentareQuery = groq`
   category->slug.current == "komentare" &&
   featured != true
 ]
-| order(publishedAt desc)[5...8]{
+| order(publishedAt desc)[5...9]{
   _id,
   title,
   slug,
