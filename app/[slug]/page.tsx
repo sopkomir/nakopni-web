@@ -246,7 +246,7 @@ if (!article && page) {
                 <span className="text-zinc-400">•</span>
 
                 <span className="text-zinc-500 text-sm">
-                  {article.views ?? 0} prečítaní
+                  Prečítaní: {article.views ?? 0} 
                 </span>
 
                 <span className="text-zinc-400">•</span>
