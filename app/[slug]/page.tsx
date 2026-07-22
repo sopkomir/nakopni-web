@@ -10,7 +10,7 @@ import LightboxImage from "../components/LightboxImage";
 import DisqusComments from "../components/DisqusComments";
 import ShareButtons from "../components/ShareButtons";
 import PortableContent from "../components/PortableContent";
-
+import SupportCard from "../components/SupportCard";
 export const revalidate = 300;
 
 async function getArticle(slug: string) {
@@ -317,6 +317,8 @@ if (!article && page) {
           <div>
 
           <PortableContent value={article.content} />
+          
+          <SupportCard />
 
             {/* COMMENTS */}
             <section className="mt-24 border-t border-zinc-200 dark:border-zinc-800 pt-12">
