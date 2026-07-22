@@ -45,7 +45,7 @@ export default function SupportCard() {
 
           <button
             onClick={copyIBAN}
-            className="rounded-xl bg-orange-500 hover:bg-orange-600 transition px-6 py-3 font-semibold text-white shadow-lg"
+            className="w-full sm:w-auto rounded-xl bg-orange-500 hover:bg-orange-600 transition px-8 py-4 font-semibold text-white shadow-lg"
           >
             📋 Skopírovať IBAN
           </button>
