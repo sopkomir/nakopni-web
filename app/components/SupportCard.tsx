@@ -52,7 +52,7 @@ export default function SupportCard() {
 
         </div>
 
-        <div className="text-center">
+        <div className="text-center self-start pt-4">
 
           <Image
             src="/pay-by-square-5eur.jpg"
