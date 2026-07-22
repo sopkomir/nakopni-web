@@ -39,7 +39,7 @@ export default function SupportCard({
           <p className="text-zinc-600 leading-relaxed mb-5">
             Ak vám naša práca dáva zmysel,
             pomôžte nám prinášať nezávislé
-            správy zo Zemplína.
+            správy zo Zemplína i celého Slovenska.
           </p>
 
           <Image
@@ -74,12 +74,12 @@ export default function SupportCard({
             <p className="text-lg text-zinc-700 leading-relaxed mb-6">
               Dočítali ste až sem. Ak bol tento článok pre vás prínosný,
               pomôžte nám prinášať ďalšie overené správy zo Zemplína
-              a východného Slovenska.
+              a celého Slovenska.
             </p>
 
             <p className="text-zinc-600 leading-relaxed mb-8">
-              Nakopni.sk prináša nezávislé správy zo Zemplína a
-              východného Slovenska. Ak vám naša práca dáva zmysel,
+              Nakopni.sk prináša nezávislé správy zo Zemplína i
+              celého Slovenska. Ak vám naša práca dáva zmysel,
               môžete nás podporiť jednorazovým príspevkom vo výške
               <strong> 5 €</strong> alebo ľubovoľnou sumou
               prostredníctvom transparentného účtu.
