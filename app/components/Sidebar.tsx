@@ -1,5 +1,5 @@
 import VideoCard from "./VideoCard";
-
+import SupportCard from "./SupportCard";
 import { getLatestVideos } from "../lib/youtube";
 
 export default async function Sidebar() {
@@ -40,6 +40,9 @@ export default async function Sidebar() {
 
         ))}
 
+      </div>
+      <div className="mt-10">
+        <SupportCard variant="sidebar" />
       </div>
       {/* PARTNER */}
       <div className="mt-10">
