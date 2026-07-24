@@ -24,6 +24,9 @@ interface ArticleCardProps {
 
       author?: {
         name: string;
+        slug: {
+          current: string;
+        };
       };
     views?: number;
     audio?: {
@@ -99,6 +102,19 @@ export default function ArticleCard({
             <span>
               Prečítaní: {post.views ?? 0}
             </span>
+
+            {post.author && (
+              <>
+                <span>•</span>
+
+                <Link
+                  href={`/autori/${post.author.slug.current}`}
+                  className="hover:text-orange-500 transition-colors font-medium"
+                >
+                  {post.author.name}
+                </Link>
+              </>
+            )}
 
           </div>
 
