@@ -90,7 +90,7 @@ export default function ShareButtons({ title, url }: Props) {
     try {
       await navigator.share({
         title,
-        text: `${title}\n\n${url}`,
+        text: title,
         url,
       });
     } catch (error) {
