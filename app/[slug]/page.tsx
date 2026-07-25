@@ -41,11 +41,9 @@ export async function generateMetadata({
 
   const image = article.image
   ? urlFor(article.image)
-      .ignoreImageParams()
       .width(1200)
       .height(630)
-      .fit("fill")
-      .bg("fff")
+      .fit("clip")
       .auto("format")
       .url()
   : "https://www.nakopni.sk/og-image.jpg";
