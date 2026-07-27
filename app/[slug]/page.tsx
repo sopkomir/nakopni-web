@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { getReadingTime } from "../lib/readingTime";
 import Image from "next/image";
 import ViewCounter from "../components/ViewCounter";
@@ -268,23 +269,52 @@ if (!article && page) {
               </h1>
 
               {article.excerpt && (
-                <p
-                  className="
-                    text-lg
-                    md:text-xl
-                    leading-relaxed
-                    text-zinc-700
-                    max-w-3xl
-                  "
-                >
-                  {article.excerpt}
-                </p>
-              )}
+  <p
+    className="
+      text-lg
+      md:text-xl
+      leading-relaxed
+      text-zinc-700
+      max-w-3xl
+    "
+  >
+    {article.excerpt}
+          </p>
+        )}
 
-              <ShareButtons
-                title={article.title}
-                url={`https://www.nakopni.sk/${article.slug.current}`}
+        {article.author && (
+          <div className="mt-8 flex items-center gap-4 border-y border-zinc-200 py-5">
+            {article.author.photo && (
+              <Image
+                src={urlFor(article.author.photo).width(120).height(120).url()}
+                alt={article.author.name}
+                width={64}
+                height={64}
+                className="h-16 w-16 rounded-full object-cover"
               />
+            )}
+
+            <div>
+              <Link
+                href={`/autori/${article.author.slug.current}`}
+                className="text-lg font-semibold hover:text-orange-600 transition-colors"
+              >
+                {article.author.name}
+              </Link>
+
+              {article.author.role && (
+                <div className="text-sm text-zinc-500">
+                  {article.author.role}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        <ShareButtons
+          title={article.title}
+          url={`https://www.nakopni.sk/${article.slug.current}`}
+        />
 
               {article.audio?.asset?.url && (
                 <div className="mt-8 rounded-2xl border border-zinc-200 bg-zinc-50 p-5">
