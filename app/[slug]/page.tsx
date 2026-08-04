@@ -311,10 +311,7 @@ if (!article && page) {
           </div>
         )}
 
-        <ShareButtons
-          title={article.title}
-          url={`https://www.nakopni.sk/${article.slug.current}`}
-        />
+        
 
               {article.audio?.asset?.url && (
                 <div className="mt-8 rounded-2xl border border-zinc-200 bg-zinc-50 p-5">
@@ -345,6 +342,11 @@ if (!article && page) {
           <div>
 
           <PortableContent value={article.content} />
+
+          <ShareButtons
+            title={article.title}
+            url={`https://www.nakopni.sk/${article.slug.current}`}
+          />
           
           <SupportCard />
 
