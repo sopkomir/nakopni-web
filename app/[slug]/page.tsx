@@ -377,7 +377,7 @@ if (!article && page) {
                   O článku
                 </h3>
 
-                <div className="space-y-4 text-sm text-zinc-600 dark:text-zinc-400">
+                <div className="space-y-4 text-sm text-zinc-700 dark:text-zinc-400">
 
                   <div>
                     <div className="font-medium text-black dark:text-white mb-1">
