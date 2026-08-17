@@ -367,7 +367,7 @@ if (!article && page) {
           </div>
 
           {/* SIDEBAR */}
-          <aside className="hidden lg:block">
+          <aside className="hidden lg:block text-zinc-800 dark:text-zinc-200">
 
             <div className="sticky top-24 space-y-8">
 
@@ -377,7 +377,7 @@ if (!article && page) {
                   O článku
                 </h3>
 
-                <div className="space-y-4 text-sm text-zinc-700 dark:text-zinc-400">
+                <div className="space-y-4 text-sm text-zinc-800 dark:text-zinc-400">
 
                   <div>
                     <div className="font-medium text-black dark:text-white mb-1">
