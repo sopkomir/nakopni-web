@@ -351,7 +351,7 @@ if (!article && page) {
           <SupportCard />
 
             {/* COMMENTS */}
-            <section className="mt-24 border-t border-zinc-200 dark:border-zinc-800 pt-12">
+            <section className="mt-24 border-t border-zinc-200 pt-12">
 
               <h2 className="text-3xl font-black mb-8">
                 Diskusia
@@ -367,20 +367,20 @@ if (!article && page) {
           </div>
 
           {/* SIDEBAR */}
-          <aside className="hidden lg:block text-zinc-800 dark:text-zinc-200">
+          <aside className="hidden lg:block text-zinc-800">
 
             <div className="sticky top-24 space-y-8">
 
-              <div className="rounded-3xl border border-zinc-200 dark:border-zinc-800 p-6">
+              <div className="rounded-3xl border border-zinc-200 p-6">
 
                 <h3 className="text-xl font-bold mb-4">
                   O článku
                 </h3>
 
-                <div className="space-y-4 text-sm text-zinc-800 dark:text-zinc-400">
+                <div className="space-y-4 text-sm text-zinc-800">
 
                   <div>
-                    <div className="font-medium text-black dark:text-white mb-1">
+                    <div className="font-medium text-black mb-1">
                       Kategória
                     </div>
 
@@ -391,7 +391,7 @@ if (!article && page) {
 
                   {article.publishedAt && (
                     <div>
-                      <div className="font-medium text-black dark:text-white mb-1">
+                      <div className="font-medium text-black mb-1">
                         Publikované
                       </div>
 
@@ -402,7 +402,7 @@ if (!article && page) {
                   )}
 
                   <div>
-                    <div className="font-medium text-black dark:text-white mb-1">
+                    <div className="font-medium text-black mb-1">
                       Prečítania
                     </div>
 
