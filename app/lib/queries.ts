@@ -224,6 +224,7 @@ export const articleQuery = groq`
   },
 
   author->{
+    _id,
     name,
     slug,
     photo,
@@ -241,6 +242,22 @@ export const articleQuery = groq`
   },
 
   seo
+}
+`;
+
+export const relatedArticlesByAuthorQuery = groq`
+*[
+  _type == "article" &&
+  author._ref == $authorId &&
+  _id != $articleId
+]
+| order(publishedAt desc)[0...3]{
+  _id,
+  title,
+  slug,
+  excerpt,
+  image,
+  publishedAt
 }
 `;
 
@@ -272,7 +289,7 @@ export const reportazeQuery = groq`
 
   featured,
   publishedAt,
- views
+  views
 }
 `;
 

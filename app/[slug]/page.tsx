@@ -4,7 +4,11 @@ import { getReadingTime } from "../lib/readingTime";
 import Image from "next/image";
 import ViewCounter from "../components/ViewCounter";
 import { client } from "../lib/sanity";
-import { articleQuery, pageQuery } from "../lib/queries";
+import {
+  articleQuery,
+  pageQuery,
+  relatedArticlesByAuthorQuery,
+} from "../lib/queries";
 import { urlFor } from "../lib/image";
 import Breadcrumbs from "../components/Breadcrumbs";
 import LightboxImage from "../components/LightboxImage";
@@ -91,8 +95,16 @@ export default async function ArticlePage({
   const { slug } = await params;
 
   const article = await getArticle(slug);
-  const page = await getPage(slug);
-  const readingTime = article ? getReadingTime(article.content) : 1;
+const page = await getPage(slug);
+const readingTime = article ? getReadingTime(article.content) : 1;
+
+const relatedArticles =
+  article?.author?._id
+    ? await client.fetch(relatedArticlesByAuthorQuery, {
+        authorId: article.author._id,
+        articleId: article._id,
+      })
+    : [];
   const schema = article
   ? {
       "@context": "https://schema.org",
@@ -344,11 +356,75 @@ if (!article && page) {
           <PortableContent value={article.content} />
 
           <ShareButtons
-            title={article.title}
-            url={`https://www.nakopni.sk/${article.slug.current}`}
-          />
-          
-          <SupportCard />
+  title={article.title}
+  url={`https://www.nakopni.sk/${article.slug.current}`}
+/>
+
+{relatedArticles.length > 0 && (
+  <section className="mt-16">
+    <div className="mb-6">
+      <h2 className="text-2xl font-bold">
+        Ďalšie články od autora
+      </h2>
+
+      {article.author?.name && (
+        <p className="mt-2 text-sm text-zinc-500">
+          Ďalšie články autora {article.author.name}
+        </p>
+      )}
+    </div>
+
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {relatedArticles.slice(0, 2).map((related: any) => (
+        <Link
+          key={related._id}
+          href={`/${related.slug.current}`}
+          className="group overflow-hidden rounded-3xl border border-zinc-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+        >
+          {related.image && (
+            <div className="relative aspect-[16/9] overflow-hidden">
+              <Image
+                src={urlFor(related.image)
+                  .width(800)
+                  .height(450)
+                  .url()}
+                alt={related.title}
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+          )}
+
+          <div className="p-6">
+
+            {related.publishedAt && (
+              <div className="mb-3 text-xs uppercase tracking-widest text-zinc-500">
+                {new Date(related.publishedAt).toLocaleDateString("sk-SK")}
+              </div>
+            )}
+
+            <h3 className="text-xl font-bold leading-tight transition-colors duration-300 group-hover:text-orange-500">
+              {related.title}
+            </h3>
+
+            {related.excerpt && (
+              <p className="mt-3 text-sm leading-relaxed text-zinc-600 line-clamp-3">
+                {related.excerpt}
+              </p>
+            )}
+
+            <div className="mt-5 text-sm font-semibold text-orange-500 transition-transform duration-300 group-hover:translate-x-1">
+              Čítať článok →
+            </div>
+
+          </div>
+        </Link>
+      ))}
+    </div>
+  </section>
+)}
+
+<SupportCard />
 
             {/* COMMENTS */}
             <section className="mt-24 border-t border-zinc-200 pt-12">
