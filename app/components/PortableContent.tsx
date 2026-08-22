@@ -56,6 +56,20 @@ export default function PortableContent({ value }: Props) {
             },
 
           },
+
+          marks: {
+            link: ({ value, children }) => (
+              <a
+                href={value?.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#F28C28] underline decoration-2 underline-offset-4 transition-all duration-200 hover:text-[#D96F00] hover:decoration-[3px] hover:underline-offset-2"
+              >
+                {children}
+              </a>
+            ),
+          },
+
         }}
       />
 
